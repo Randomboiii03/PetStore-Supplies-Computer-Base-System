@@ -1,2 +1,3 @@
-cout << "yey" << flush;
-    system("CLS");
+nt i = 1; i < emailList.size(); i++) {
+        
+    // }

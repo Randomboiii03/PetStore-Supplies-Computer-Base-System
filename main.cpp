@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <windows.h>
+#include <vector>
 
 using namespace std;
 
@@ -23,42 +24,56 @@ void viewItem();
 void cart();
 void checkout();
 
-string accountType = "";
+vector<string> usernameList;  // Vector to store usernames
+vector<string> emailList;     // Vector to store email addresses
+vector<string> passwordList;  // Vector to store passwords
+
+bool loginStatus = false;
+int accountNumber = -1;
 
 void displayMenu() {
     system("cls");
 
-    cout << "+============================================================+" << endl;
-    cout << "\t [S] Search \t [A] Account \t [C] Cart" << endl;
-    cout << "+============================================================+" << endl;
-    cout << "\t [F] FOODS \t [Q] EQUIPMENT \t [M] MEDICINE" << endl;
-    cout << "+============================================================+" << endl;
+    if(accountNumber != 0) {
+        cout << "+============================================================+" << endl;
+        cout << "\t [S] Search \t [A] Account \t [C] Cart" << endl;
+        cout << "+============================================================+" << endl;
+        cout << "\t [F] Foods \t [Q] Equipment \t [M] Medicine" << endl;
+        cout << "+============================================================+" << endl;
+
+    } else {
+        cout << "+============================================================+" << endl;
+        cout << "\t [S] Search \t [A] Account" << endl;
+        cout << "+============================================================+" << endl;
+        cout << "\t [C] Accounts \t [I] Items \t [O] Checkouts" << endl;
+        cout << "+============================================================+" << endl;
+    }
 }
 
 bool checkAccount(string accountType) {
     return accountType.empty();
 }
 
-void menu(string choose) {
+void menuCustomer(string choose) {
 
-    if(choose == "S") {
+    if(choose == "S" || choose == "s") {
         search();
 
-    } else if(choose == "A") {
-        if(checkAccount) login();
+    } else if(choose == "A" || choose == "a") {
+        if(!loginStatus) login();
         else accountProfile();
 
-    } else if(choose == "C") {
-        if(checkAccount) login();
+    } else if(choose == "C" || choose == "c") {
+        if(!loginStatus) login();
         else cart();
 
-    } else if(choose == "F") {
+    } else if(choose == "F" || choose == "f") {
         foods();
 
-    } else if(choose == "Q") {
+    } else if(choose == "Q" || choose == "q") {
         equipments();
 
-    } else if(choose == "M") {
+    } else if(choose == "M" || choose == "m") {
         medicine();
 
     } else {
@@ -67,12 +82,34 @@ void menu(string choose) {
 
         displayMenu();
 
-        if(accountType == "" || accountType == "customer") {
-            homeCustomer();
+        homeCustomer();
+    }
+}
 
-        } else if(accountType == "admin") {
-            homeAdmin();
-        }
+void menuAdmin(string choose) {
+
+    if(choose == "S" || choose == "s") {
+        search();
+
+    } else if(choose == "A" || choose == "a") {
+        accountProfile();
+
+    } else if(choose == "C" || choose == "c") {
+        viewAccounts();
+
+    } else if(choose == "I" || choose == "i") {
+        viewInventory();
+
+    } else if(choose == "O" || choose == "o") {
+        viewCheckouts();
+
+    } else {
+        cout << "Invalid input, please try again";
+        Sleep(3000);
+
+        displayMenu();
+
+        homeAdmin();
     }
 }
 
@@ -87,17 +124,17 @@ void login() {
     cout << "Email: ";
     cin >> email;
 
-    if(email == "R") {
+    if(email == "R" || email == "r") {
         registration();
 
     } else if(email.length() == 1) {
-        menu(email);
+        menuCustomer(email);
 
     } else {
         cout << "Password: ";
         cin >> password;
         cout << "+============================================================+" << endl;
-        cout << "[1] Login \t [0] Clear" << endl;
+        cout << "\t\t [1] Login \t [0] Clear" << endl;
         cin >> temp;
         cout << "+============================================================+" << endl;
 
@@ -110,10 +147,37 @@ void login() {
                 break;
             
             case 1:
-                cout << "Logging In...";
-                Sleep(3000);
+                {
+                    cout << "Logging In..." << endl;
+                    Sleep(3000);
 
-                //check if valid acc, if valid acc check if customer or admin, then proceed to their home
+                    // Loop through the list of registered users to find a match
+                    bool found = false;
+                    for (int i = 0; i < usernameList.size(); i++) {
+                        if (email == emailList[i] && password == passwordList[i]) {
+                            accountNumber = i;
+                            found = true;
+                            break;  
+                        }
+                    }
+
+                    if (!found) {
+                        // User's credentials did not match any registered users
+                        cout << "Invalid email address or password." << endl;
+                        Sleep(2000);
+
+                        login();
+
+                    } else {
+                        loginStatus = true;
+
+                        cout << "Login successful!";
+                        Sleep(2000);
+
+                        if(accountNumber != 0) homeCustomer();
+                        else homeAdmin();
+                    }
+                }
                 break;
             
             default:
@@ -121,7 +185,7 @@ void login() {
                 Sleep(1000);
 
                 cout << "Clearing fields...";
-                Sleep(3000);
+                Sleep(2000);
 
                 login();
                 break;
@@ -140,15 +204,15 @@ void registration() {
     cin >> username;
 
     if(username.length() == 1) {
-        menu(username);
+        menuCustomer(username);
 
     } else {
         cout << "Email: ";
         cin >> email;
-        cout << "Password";
+        cout << "Password: ";
         cin >> password;
         cout << "+============================================================+" << endl;
-        cout << "[1] Register \t [0] Clear" << endl;
+        cout << "\t\t [1] Register \t [0] Clear" << endl;
         cin >> temp;
         cout << "+============================================================+" << endl;
 
@@ -161,68 +225,115 @@ void registration() {
                 break;
             
             case 1:
-                cout << "Registering...";
-                Sleep(3000);
+                {
+                    cout << "Registering..." << endl;
+                    Sleep(3000);
 
-                //check there is same email, if none proceed registering and go to login()!
+                    // Check if the email address is already registered
+                    bool found = false;
+                    for (int i = 0; i < emailList.size(); i++) {
+                        if (email == emailList[i]) {
+                            // Email address is already registered
+                            cout << "That email address is already registered. Please try again." << endl;
+                            found = true;
+                            break;
+                        }
+                    }
+
+                    // Email address is not registered, so allow the user to enter a password
+                    if (!found) {
+                        // Add the user's information to the vectors
+                        usernameList.push_back(username);
+                        emailList.push_back(email);
+                        passwordList.push_back(password);
+
+                        cout << "Registration successful!";
+                        Sleep(2000);
+
+                        login();
+
+                    } else {
+                        Sleep(2000);
+                        registration();
+                    }
+                }
                 break;
             
             default:
-                cout << "Invalid input";
+                cout << "Invalid input...";
                 Sleep(1000);
 
                 cout << "Clearing fields...";
-                Sleep(3000);
+                Sleep(2000);
 
                 registration();
                 break;
         }
     }
-
-
-
 }
 
 void accountProfile() {
     displayMenu();
 
-    cout << "account"; 
+    cout << "\t\t\t PROFILE" << endl; 
+    cout << "Username: " << usernameList[accountNumber] << endl;
+    cout << "Email: " << emailList[accountNumber] << endl;
+    cout << "Password: " << passwordList[accountNumber] << endl;
 
 }
 
 void homeAdmin() {
-    displayMenu();
-
-    cout << "homeAdmin"; 
-
-}
-
-void menuAdmin() {
-    displayMenu();
-
-    cout << "menuAdmin"; 
-
+    viewAccounts();
 }
 
 void viewAccounts() {
+    string choose;
+
     displayMenu();
 
-    cout << "viewAccounts"; 
+    cout << "\t\t\t LIST OF ACCOUNTS" << endl;
 
+    if(emailList.size() > 1) {
+        for (int i = 1; i < emailList.size(); i++) {
+            cout << "[" << i << "] " << emailList[i] << endl;
+        }
+
+    } else {
+        cout << "No account is registered yet!";
+    }
+
+    cin >> choose;
+    menuAdmin(choose);
 }
 
 void viewInventory() {
+    string choose;
+
     displayMenu();
 
-    cout << "viewInventory"; 
+    cout << "\t\t\t LIST OF ITEMS" << endl;
 
+    // for (int i = 1; i < emailList.size(); i++) {
+    //     cout << "[" << i << "] " << emailList[i];
+    // }
+
+    cin >> choose;
+    menuAdmin(choose);
 }
 
 void viewCheckouts() {
+    string choose;
+
     displayMenu();
 
-    cout << "viewCheckouts"; 
+    cout << "\t\t\t LIST OF CHECKOUTS" << endl;
 
+    // for (int i = 1; i < emailList.size(); i++) {
+    //     cout << "[" << i << "] " << emailList[i];
+    // }
+
+    cin >> choose;
+    menuAdmin(choose);
 }
 
 void homeCustomer() {
@@ -232,7 +343,7 @@ void homeCustomer() {
 
     cout << "homeCustomer"; 
     cin >> choose;
-    menu(choose);
+    menuCustomer(choose);
 
 }
 
@@ -286,6 +397,11 @@ void checkout() {
 }
 
 int main() {
+
+    // Add the admin account to the vectors
+    usernameList.push_back("admin");
+    emailList.push_back("admin");
+    passwordList.push_back("admin");
 
     homeCustomer();
 }
