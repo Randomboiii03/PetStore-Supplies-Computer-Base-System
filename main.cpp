@@ -163,7 +163,7 @@ void registration() {
                 cout << "Registering...";
                 Sleep(3000);
 
-                //check there is same email, if none proceed registering and go to login()
+                //check there is same email, if none proceed registering and go to login()!
                 break;
             
             default:
