@@ -6,7 +6,6 @@ using namespace std;
 
 void displayMenu();
 void menu();
-bool checkAccount();
 void login();
 void registration();
 void accountProfile();
@@ -34,6 +33,10 @@ void displayMenu() {
     cout << "+============================================================+" << endl;
     cout << "\t [F] FOODS \t [Q] EQUIPMENT \t [M] MEDICINE" << endl;
     cout << "+============================================================+" << endl;
+}
+
+bool checkAccount(string accountType) {
+    return accountType.empty();
 }
 
 void menu(string choose) {
@@ -71,10 +74,6 @@ void menu(string choose) {
             homeAdmin();
         }
     }
-}
-
-bool checkAccount(string accountType) {
-    return accountType.empty();
 }
 
 void login() {
