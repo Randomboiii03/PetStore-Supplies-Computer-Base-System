@@ -4,9 +4,9 @@
 
 using namespace std;
 
-string accountType = "";
-
+void displayMenu();
 void menu();
+bool checkAccount();
 void login();
 void registration();
 void accountProfile();
@@ -24,9 +24,7 @@ void viewItem();
 void cart();
 void checkout();
 
-bool checkAccount(string accountType) {
-    return accountType.empty();
-}
+string accountType = "";
 
 void displayMenu() {
     system("cls");
@@ -73,6 +71,10 @@ void menu(string choose) {
             homeAdmin();
         }
     }
+}
+
+bool checkAccount(string accountType) {
+    return accountType.empty();
 }
 
 void login() {
