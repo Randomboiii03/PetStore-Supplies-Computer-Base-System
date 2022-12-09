@@ -24,28 +24,41 @@ void viewItem();
 void cart();
 void checkout();
 
-vector<string> usernameList;  // Vector to store usernames
-vector<string> emailList;     // Vector to store email addresses
-vector<string> passwordList;  // Vector to store passwords
+struct Account {
+    string username;
+    string email;
+    string password;
+};
+
+struct Product {
+    string name;
+    string category;
+    string description;
+    double price;
+    int stock;
+};
+
+vector<Account> accounts;
+vector<Product> products;
 
 bool loginStatus = false;
-int accountNumber = -1;
+string loginEmail = "";
 
 void displayMenu() {
     system("cls");
 
-    if(accountNumber != 0) {
-        cout << "+============================================================+" << endl;
-        cout << "\t [S] Search \t [A] Account \t [C] Cart" << endl;
-        cout << "+============================================================+" << endl;
-        cout << "\t [F] Foods \t [Q] Equipment \t [M] Medicine" << endl;
-        cout << "+============================================================+" << endl;
-
-    } else {
+    if (loginEmail == "admin") {
         cout << "+============================================================+" << endl;
         cout << "\t [S] Search \t [A] Account" << endl;
         cout << "+============================================================+" << endl;
         cout << "\t [C] Accounts \t [I] Items \t [O] Checkouts" << endl;
+        cout << "+============================================================+" << endl;
+        
+    } else {
+        cout << "+============================================================+" << endl;
+        cout << "\t [S] Search \t [A] Account \t [C] Cart" << endl;
+        cout << "+============================================================+" << endl;
+        cout << "\t [F] Foods \t [Q] Equipment \t [M] Medicine" << endl;
         cout << "+============================================================+" << endl;
     }
 }
@@ -56,24 +69,24 @@ bool checkAccount(string accountType) {
 
 void menuCustomer(string choose) {
 
-    if(choose == "S" || choose == "s") {
+    if (choose == "S" || choose == "s") {
         search();
 
-    } else if(choose == "A" || choose == "a") {
-        if(!loginStatus) login();
+    } else if (choose == "A" || choose == "a") {
+        if (!loginStatus) login();
         else accountProfile();
 
-    } else if(choose == "C" || choose == "c") {
-        if(!loginStatus) login();
+    } else if (choose == "C" || choose == "c") {
+        if (!loginStatus) login();
         else cart();
 
-    } else if(choose == "F" || choose == "f") {
+    } else if (choose == "F" || choose == "f") {
         foods();
 
-    } else if(choose == "Q" || choose == "q") {
+    } else if (choose == "Q" || choose == "q") {
         equipments();
 
-    } else if(choose == "M" || choose == "m") {
+    } else if (choose == "M" || choose == "m") {
         medicine();
 
     } else {
@@ -88,19 +101,19 @@ void menuCustomer(string choose) {
 
 void menuAdmin(string choose) {
 
-    if(choose == "S" || choose == "s") {
+    if (choose == "S" || choose == "s") {
         search();
 
-    } else if(choose == "A" || choose == "a") {
+    } else if (choose == "A" || choose == "a") {
         accountProfile();
 
-    } else if(choose == "C" || choose == "c") {
+    } else if (choose == "C" || choose == "c") {
         viewAccounts();
 
-    } else if(choose == "I" || choose == "i") {
+    } else if (choose == "I" || choose == "i") {
         viewInventory();
 
-    } else if(choose == "O" || choose == "o") {
+    } else if (choose == "O" || choose == "o") {
         viewCheckouts();
 
     } else {
@@ -124,10 +137,10 @@ void login() {
     cout << "Email: ";
     cin >> email;
 
-    if(email == "R" || email == "r") {
+    if (email == "R" || email == "r") {
         registration();
 
-    } else if(email.length() == 1) {
+    } else if (email.length() == 1) {
         menuCustomer(email);
 
     } else {
@@ -151,13 +164,12 @@ void login() {
                     cout << "Logging In..." << endl;
                     Sleep(3000);
 
-                    // Loop through the list of registered users to find a match
+                    // Iterate over registered users to find a match
                     bool found = false;
-                    for (int i = 0; i < usernameList.size(); i++) {
-                        if (email == emailList[i] && password == passwordList[i]) {
-                            accountNumber = i;
+                    for (const auto& account : accounts) {
+                        if (email == account.email && password == account.password) {
                             found = true;
-                            break;  
+                            break;
                         }
                     }
 
@@ -170,12 +182,13 @@ void login() {
 
                     } else {
                         loginStatus = true;
+                        loginEmail = email;
 
                         cout << "Login successful!";
                         Sleep(2000);
 
-                        if(accountNumber != 0) homeCustomer();
-                        else homeAdmin();
+                        if (loginEmail == "admin") homeAdmin();
+                        else homeCustomer();
                     }
                 }
                 break;
@@ -203,7 +216,7 @@ void registration() {
     cout << "Username: ";
     cin >> username;
 
-    if(username.length() == 1) {
+    if (username.length() == 1) {
         menuCustomer(username);
 
     } else {
@@ -231,8 +244,8 @@ void registration() {
 
                     // Check if the email address is already registered
                     bool found = false;
-                    for (int i = 0; i < emailList.size(); i++) {
-                        if (email == emailList[i]) {
+                    for (const auto& account : accounts) {
+                        if (email == account.email) {
                             // Email address is already registered
                             cout << "That email address is already registered. Please try again." << endl;
                             found = true;
@@ -240,12 +253,9 @@ void registration() {
                         }
                     }
 
-                    // Email address is not registered, so allow the user to enter a password
                     if (!found) {
-                        // Add the user's information to the vectors
-                        usernameList.push_back(username);
-                        emailList.push_back(email);
-                        passwordList.push_back(password);
+                        // Add the user's information to the vector
+                        accounts.push_back({username, email, password});
 
                         cout << "Registration successful!";
                         Sleep(2000);
@@ -275,10 +285,16 @@ void registration() {
 void accountProfile() {
     displayMenu();
 
-    cout << "\t\t\t PROFILE" << endl; 
-    cout << "Username: " << usernameList[accountNumber] << endl;
-    cout << "Email: " << emailList[accountNumber] << endl;
-    cout << "Password: " << passwordList[accountNumber] << endl;
+    cout << "\t\t\t PROFILE" << endl;
+    for (const auto& account : accounts) {
+        if (loginEmail == account.email) {
+            cout << "Username: " << account.username << endl;
+            cout << "Email: " << account.email << endl;
+            cout << "Password: " << account.password << endl;
+            break;
+        }
+    }
+    
 
 }
 
@@ -293,9 +309,9 @@ void viewAccounts() {
 
     cout << "\t\t\t LIST OF ACCOUNTS" << endl;
 
-    if(emailList.size() > 1) {
-        for (int i = 1; i < emailList.size(); i++) {
-            cout << "[" << i << "] " << emailList[i] << endl;
+    if (accounts.size() > 1) {
+        for (int i = 1; i < accounts.size(); i++) {
+            cout << "[" << i << "] " << accounts[i].email;
         }
 
     } else {
@@ -398,10 +414,8 @@ void checkout() {
 
 int main() {
 
-    // Add the admin account to the vectors
-    usernameList.push_back("admin");
-    emailList.push_back("admin");
-    passwordList.push_back("admin");
+    // Add the admin account to the vector
+    accounts.push_back({"admin", "admin", "admin"});
 
     homeCustomer();
 }
