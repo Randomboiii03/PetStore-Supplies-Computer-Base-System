@@ -2,6 +2,8 @@
 #include <string>
 #include <windows.h>
 #include <vector>
+#include <limits>
+#include <algorithm>
 
 using namespace std;
 
@@ -67,6 +69,11 @@ bool checkAccount(string accountType) {
     return accountType.empty();
 }
 
+void invalidInput() {
+    cout << "Invalid input, please try again" << endl;
+    Sleep(3000);
+}
+
 void menuCustomer(string choose) {
 
     if (choose == "S" || choose == "s") {
@@ -90,10 +97,7 @@ void menuCustomer(string choose) {
         medicine();
 
     } else {
-        cout << "Invalid input, please try again";
-        Sleep(3000);
-
-        displayMenu();
+        invalidInput();
 
         homeCustomer();
     }
@@ -117,10 +121,7 @@ void menuAdmin(string choose) {
         viewCheckouts();
 
     } else {
-        cout << "Invalid input, please try again";
-        Sleep(3000);
-
-        displayMenu();
+        invalidInput();
 
         homeAdmin();
     }
@@ -128,7 +129,7 @@ void menuAdmin(string choose) {
 
 void login() {
     string email, password;
-    int temp;
+    int choose;
 
     displayMenu();
 
@@ -148,67 +149,82 @@ void login() {
         cin >> password;
         cout << "+============================================================+" << endl;
         cout << "\t\t [1] Login \t [0] Clear" << endl;
-        cin >> temp;
+        cin >> choose;
         cout << "+============================================================+" << endl;
 
-        switch(temp) {
-            case 0:
-                cout << "Clearing fields...";
-                Sleep(3000);
+        //check if a letter or a symbol is inputted
+        if (cin.fail()) {
+            invalidInput();
 
-                login();
-                break;
-            
-            case 1:
-                {
-                    cout << "Logging In..." << endl;
+            cout << "Clearing fields...";
+            Sleep(2000);
+
+            cin.clear();
+            cin.ignore(LONG_MAX, '\n');
+
+            login();
+
+        } else {
+            switch(choose) {
+                case 0:
+                    cout << "Clearing fields...";
                     Sleep(3000);
 
-                    // Iterate over registered users to find a match
-                    bool found = false;
-                    for (const auto& account : accounts) {
-                        if (email == account.email && password == account.password) {
-                            found = true;
-                            break;
+                    login();
+                    break;
+                    
+                case 1:
+                    {
+                        cout << "Logging In..." << endl;
+                        Sleep(3000);
+
+                        // Iterate over registered users to find a match
+                        bool found = false;
+                        for (const auto& account : accounts) {
+                            if (email == account.email && password == account.password) {
+                                found = true;
+                                break;
+                            }
                         }
-                    }
 
-                    if (!found) {
-                        // User's credentials did not match any registered users
-                        cout << "Invalid email address or password." << endl;
-                        Sleep(2000);
+                        if (!found) {
+                            // User's credentials did not match any registered users
+                            cout << "Invalid email address or password." << endl;
+                            Sleep(2000);
 
-                        login();
+                            login();
 
-                    } else {
-                        loginStatus = true;
-                        loginEmail = email;
+                        } else {
+                            loginStatus = true;
+                            loginEmail = email;
 
-                        cout << "Login successful!";
-                        Sleep(2000);
+                            cout << "Login successful!";
+                            Sleep(2000);
 
                         if (loginEmail == "admin") homeAdmin();
-                        else homeCustomer();
+                            else homeCustomer();
+                        }
                     }
-                }
-                break;
-            
-            default:
-                cout << "Invalid input";
-                Sleep(1000);
+                    break;
+                    
+                default:
+                    invalidInput();
 
-                cout << "Clearing fields...";
-                Sleep(2000);
+                    cout << "Clearing fields...";
+                    Sleep(2000);
 
-                login();
-                break;
+                    login();
+                    break;
+            }
         }
     }
 }
 
 void registration() {
     string email, username, password;
-    int temp;
+    int choose;
+
+    cout << username;
 
     displayMenu();
 
@@ -226,58 +242,71 @@ void registration() {
         cin >> password;
         cout << "+============================================================+" << endl;
         cout << "\t\t [1] Register \t [0] Clear" << endl;
-        cin >> temp;
+        cin >> choose;
         cout << "+============================================================+" << endl;
 
-        switch(temp) {
-            case 0:
-                cout << "Clearing fields...";
-                Sleep(3000);
-
-                registration();
-                break;
+        //check if a letter or a symbol is inputted
+        if (cin.fail()) {
+            invalidInput();
             
-            case 1:
-                {
-                    cout << "Registering..." << endl;
+            cout << "Clearing fields...";
+            Sleep(2000);
+
+            cin.clear();
+            cin.ignore(LONG_MAX, '\n');
+
+            registration();
+
+        } else {
+            switch(choose) {
+                case 0:
+                    cout << "Clearing fields...";
                     Sleep(3000);
 
-                    // Check if the email address is already registered
-                    bool found = false;
-                    for (const auto& account : accounts) {
-                        if (email == account.email) {
-                            // Email address is already registered
-                            cout << "That email address is already registered. Please try again." << endl;
-                            found = true;
-                            break;
+                    registration();
+                    break;
+                
+                case 1:
+                    {
+                        cout << "Registering..." << endl;
+                        Sleep(3000);
+
+                        // Check if the email address is already registered
+                        bool found = false;
+                        for (const auto& account : accounts) {
+                            if (email == account.email) {
+                                // Email address is already registered
+                                cout << "That email address is already registered. Please try again." << endl;
+                                found = true;
+                                break;
+                            }
+                        }
+
+                        if (!found) {
+                            // Add the user's information to the vector
+                            accounts.push_back({username, email, password});
+
+                            cout << "Registration successful!";
+                            Sleep(2000);
+
+                            login();
+
+                        } else {
+                            Sleep(2000);
+                            registration();
                         }
                     }
+                    break;
+                
+                default:
+                    invalidInput();
 
-                    if (!found) {
-                        // Add the user's information to the vector
-                        accounts.push_back({username, email, password});
+                    cout << "Clearing fields...";
+                    Sleep(2000);
 
-                        cout << "Registration successful!";
-                        Sleep(2000);
-
-                        login();
-
-                    } else {
-                        Sleep(2000);
-                        registration();
-                    }
-                }
-                break;
-            
-            default:
-                cout << "Invalid input...";
-                Sleep(1000);
-
-                cout << "Clearing fields...";
-                Sleep(2000);
-
-                registration();
-                break;
+                    registration();
+                    break;
+            }
         }
     }
 }
