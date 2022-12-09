@@ -6,12 +6,12 @@
 using namespace std;
 
 void displayMenu();
-void menu();
+void menuCustomer(string choose);
+void menuAdmin(string choose);
 void login();
 void registration();
 void accountProfile();
 void homeAdmin();
-void menuAdmin();
 void viewAccounts();
 void viewInventory();
 void viewCheckouts();
@@ -283,19 +283,33 @@ void registration() {
 }
 
 void accountProfile() {
+    string choose;
+
     displayMenu();
 
     cout << "\t\t\t PROFILE" << endl;
     for (const auto& account : accounts) {
         if (loginEmail == account.email) {
-            cout << "Username: " << account.username << endl;
-            cout << "Email: " << account.email << endl;
-            cout << "Password: " << account.password << endl;
+            cout << "[0] Username: " << account.username << endl;
+            cout << "[1] Email: " << account.email << endl;
+            cout << "[2] Password: " << account.password << endl;
             break;
         }
     }
     
+    cout << "[L] Logout" << endl;
+    cin >> choose;
 
+    if (choose == "L" || choose == "l") {
+        loginStatus = false;
+        loginEmail = "";
+
+        homeCustomer();
+
+    } else {
+        if (loginEmail == "admin") menuAdmin(choose);
+        else menuCustomer(choose);
+    }
 }
 
 void homeAdmin() {
