@@ -4,10 +4,14 @@
 #include <vector>
 #include <limits>
 #include <algorithm>
+#include <cctype>
 
 using namespace std;
 
 void displayMenu();
+bool checkAccount(string accountType);
+string checkInput(string choose);
+void invalidInput();
 void menuCustomer(string choose);
 void menuAdmin(string choose);
 void login();
@@ -22,7 +26,7 @@ void search();
 void foods();
 void equipments();
 void medicine();
-void viewItem();
+void viewItem(int p_num);
 void cart();
 void checkout();
 
@@ -35,6 +39,7 @@ struct Account {
 struct Product {
     string name;
     string category;
+    string animal;
     string description;
     double price;
     int stock;
@@ -53,7 +58,7 @@ void displayMenu() {
         cout << "+============================================================+" << endl;
         cout << "\t [S] Search \t [A] Account" << endl;
         cout << "+============================================================+" << endl;
-        cout << "\t [C] Accounts \t [I] Items \t [O] Checkouts" << endl;
+        cout << "\t [C] Accounts \t [I] Products \t [O] Checkouts" << endl;
         cout << "+============================================================+" << endl;
         
     } else {
@@ -67,6 +72,29 @@ void displayMenu() {
 
 bool checkAccount(string accountType) {
     return accountType.empty();
+}
+
+string checkInput(string choose) {
+    bool only_alpha = false, only_digit = false;
+
+    for (char c : choose) {
+        if (isalpha(c)) {
+            only_alpha = true;  // The character is not alphabetical
+        }
+        else if (isdigit(c)) {
+            only_digit = true;  // The character is not a digit
+        }
+    }
+
+    if (only_alpha && only_digit) {
+        return "invalid";
+        
+    } else if (only_alpha) {
+        return "alpha";
+        
+    } else if (only_digit) {
+        return "number";
+    }
 }
 
 void invalidInput() {
@@ -135,7 +163,8 @@ void login() {
 
     cout << "[R] No Account? Register Now!" << endl;
     cout << "\t\t\t LOGIN" << endl;
-    cout << "Email: ";
+    
+    cout << "Email (action): ";
     cin >> email;
 
     if (email == "R" || email == "r") {
@@ -149,7 +178,10 @@ void login() {
         cin >> password;
         cout << "+============================================================+" << endl;
         cout << "\t\t [1] Login \t [0] Clear" << endl;
+
+        cout << "Input action: ";
         cin >> choose;
+
         cout << "+============================================================+" << endl;
 
         //check if a letter or a symbol is inputted
@@ -229,7 +261,7 @@ void registration() {
     displayMenu();
 
     cout << "\t\t\t REGISTRATION" << endl;
-    cout << "Username: ";
+    cout << "Username (action): ";
     cin >> username;
 
     if (username.length() == 1) {
@@ -242,7 +274,10 @@ void registration() {
         cin >> password;
         cout << "+============================================================+" << endl;
         cout << "\t\t [1] Register \t [0] Clear" << endl;
+
+        cout << "Input action: ";
         cin >> choose;
+
         cout << "+============================================================+" << endl;
 
         //check if a letter or a symbol is inputted
@@ -313,31 +348,87 @@ void registration() {
 
 void accountProfile() {
     string choose;
+    int accNumber;
 
     displayMenu();
 
     cout << "\t\t\t PROFILE" << endl;
-    for (const auto& account : accounts) {
-        if (loginEmail == account.email) {
-            cout << "[0] Username: " << account.username << endl;
-            cout << "[1] Email: " << account.email << endl;
-            cout << "[2] Password: " << account.password << endl;
+    for (int i = 0; i < accounts.size(); i++) {
+        if (loginEmail == accounts[i].email) {
+            cout << "[0] Username: " << accounts[i].username << endl;
+            cout << "       Email: " << accounts[i].email << endl;
+            cout << "[1] Password: " << accounts[i].password << endl;
+
+            accNumber = i;
             break;
         }
     }
     
-    cout << "[L] Logout" << endl;
+    cout << "+============================================================+" << endl;
+
+    if (loginEmail != "admin") {
+        cout << "\t [+] Add In-Store Money";
+    }
+
+    cout << "\t\t\t [L] Logout" << endl;
+
+    cout << "+============================================================+" << endl;
+
+    cout << "Input action: ";
     cin >> choose;
 
-    if (choose == "L" || choose == "l") {
-        loginStatus = false;
-        loginEmail = "";
+    if (loginEmail != "admin" || choose == "+") {
+        //add in-store money
+        
+    } else if (checkInput(choose) == "alpha" && choose.length() == 1) {
+        if (choose == "L" || choose == "l") {
+            cout << "Logging out...";
+            Sleep(3000);
 
-        homeCustomer();
+            loginStatus = false;
+            loginEmail = "";
+
+            homeCustomer();
+
+        } else {
+            if (loginEmail == "admin") menuAdmin(choose);
+            else menuCustomer(choose);
+        }
+
+    } else if (checkInput(choose) == "number" && stoi(choose) <= 3 && stoi(choose) >= 0) {
+        cout << "+============================================================+" << endl;
+
+        switch(stoi(choose)) {
+            case 0:
+                cout << "\t\t\t Edit Username" << endl;
+                cout << "Old username:" << accounts[accNumber].username << endl;
+                cout << "Enter new username: ";
+                cin >> choose;
+
+                accounts[accNumber].username = choose;
+
+                break;
+            case 1:
+                cout << "\t\t\t Edit Password" << endl;
+                cout << "Old password:" << accounts[accNumber].password << endl;
+                cout << "Enter new password: ";
+                cin >> choose;
+
+                accounts[accNumber].password = choose;
+
+                break;
+        }
+
+        cout << "+============================================================+" << endl;
+        cout << "Applying changes...";
+        Sleep(3000);
+
+        accountProfile();
 
     } else {
-        if (loginEmail == "admin") menuAdmin(choose);
-        else menuCustomer(choose);
+        invalidInput();
+
+        accountProfile();
     }
 }
 
@@ -354,14 +445,20 @@ void viewAccounts() {
 
     if (accounts.size() > 1) {
         for (int i = 1; i < accounts.size(); i++) {
-            cout << "[" << i << "] " << accounts[i].email;
+            cout << "[" << i << "] " << accounts[i].email << endl;
         }
 
     } else {
-        cout << "No account is registered yet!";
+        cout << "No account is registered yet!" << endl;
     }
 
+    cout << "+============================================================+" << endl;
+    cout << "\t [+] Add \t [D] Delete \t [E] Edit" << endl;
+    cout << "+============================================================+" << endl;
+
+    cout << "Input action: ";
     cin >> choose;
+
     menuAdmin(choose);
 }
 
@@ -370,13 +467,24 @@ void viewInventory() {
 
     displayMenu();
 
-    cout << "\t\t\t LIST OF ITEMS" << endl;
+    cout << "\t\t\t LIST OF PRODUCTS" << endl;
 
-    // for (int i = 1; i < emailList.size(); i++) {
-    //     cout << "[" << i << "] " << emailList[i];
-    // }
+    if (products.size() > 0) {
+        for (int i = 0; i < products.size(); i++) {
+            cout << "[" << i << "] " << products[i].name << endl;
+        }
 
+    } else {
+        cout << "No product is added yet!" << endl;
+    }
+
+    cout << "+============================================================+" << endl;
+    cout << "\t [+] Add \t [D] Delete \t [E] Edit" << endl;
+    cout << "+============================================================+" << endl;
+
+    cout << "Input action: ";
     cin >> choose;
+
     menuAdmin(choose);
 }
 
@@ -387,11 +495,20 @@ void viewCheckouts() {
 
     cout << "\t\t\t LIST OF CHECKOUTS" << endl;
 
-    // for (int i = 1; i < emailList.size(); i++) {
-    //     cout << "[" << i << "] " << emailList[i];
+    // if (products.size() > 0) {
+    //     for (int i = 0; i < products.size(); i++) {
+    //         cout << "[" << i << "] " << products[i].name << endl;
+    //     }
+
+    // } else {
+    //     cout << "No checkouts yet!" << endl;
     // }
 
+    cout << "+============================================================+" << endl;
+
+    cout << "Input action: ";
     cin >> choose;
+    
     menuAdmin(choose);
 }
 
@@ -414,30 +531,112 @@ void search() {
 }
 
 void foods() {
+    string choose;
+
     displayMenu();
 
-    cout << "foods"; 
+    cout << "\t\t Product Name \t\t\t Price" << endl;
+    cout << "+============================================================+" << endl;
 
+    for (int i = 0; i < products.size(); i++) {
+        if (products[i].category == "Food") {
+            cout << "\t[" << i << "] " << products[i].name << "\t\t";
+
+            if (products[i].name.length() <= 10) {
+                cout << "\t";
+            }
+            
+            if (products[i].name.length() <= 18 || (products[i].name.length() <= 19 && i < 10)) {
+                cout << "\t";
+            }
+
+            cout << products[i].price << " php" << endl;
+        }
+    }
+
+    cout << "+============================================================+" << endl;
+
+    cout << "Input action: ";
+    cin >> choose; 
+
+    menuCustomer(choose);
 }
 
 void equipments() {
+    string choose;
+
     displayMenu();
+    
+    cout << "\t\t Product Name \t\t\t Price" << endl;
+    cout << "+============================================================+" << endl;
 
-    cout << "equipments"; 
+    for (int i = 0; i < products.size(); i++) {
+        if (products[i].category == "Equipment") {
+            cout << "\t[" << i << "] " << products[i].name << "\t\t";
 
+            if (products[i].name.length() <= 10) {
+                cout << "\t";
+            }
+            
+            if (products[i].name.length() <= 18 || (products[i].name.length() <= 19 && i < 10)) {
+                cout << "\t";
+            }
+
+            cout << products[i].price << " php" << endl;
+        }
+    }
+
+    cout << "+============================================================+" << endl;
+
+    cout << "Input action: ";
+    cin >> choose; 
+
+    menuCustomer(choose);
 }
 
 void medicine() {
+    string choose;
+
     displayMenu();
 
-    cout << "medicine"; 
+    cout << "\t\t Product Name \t\t\t Price" << endl;
+    cout << "+============================================================+" << endl;
 
+    for (int i = 0; i < products.size(); i++) {
+        if (products[i].category == "Medicine") {
+            cout << "\t[" << i << "] " << products[i].name << "\t\t";
+
+            if (products[i].name.length() <= 10) {
+                cout << "\t";
+            }
+            
+            if (products[i].name.length() <= 18 || (products[i].name.length() <= 19 && i < 10)) {
+                cout << "\t";
+            }
+
+            cout << products[i].price << " php" << endl;
+        }
+    }
+
+    cout << "+============================================================+" << endl;
+
+    cout << "Input action: ";
+    cin >> choose; 
+
+    menuCustomer(choose);
 }
 
-void viewItem() {
+void viewItem(int p_num) {
+    string choose;
+
     displayMenu();
 
-    cout << "viewItem"; 
+    cout << products[p_num].name << endl;
+
+    cout << "Input action: ";
+    cin >> choose; 
+
+    menuCustomer(choose);
 
 }
 
@@ -459,6 +658,84 @@ int main() {
 
     // Add the admin account to the vector
     accounts.push_back({"admin", "admin", "admin"});
+
+    // Add products for "cat" to the vector
+    products.push_back({"Maxime (1 kilo)", "Food", "Cat", "5-6 weeks old higher", 90, 30});
+    products.push_back({"Whiskas (1 kilo)", "Food", "Cat", "5-6 weeks old higher", 155, 30});
+    products.push_back({"Cuties (1 kilo)", "Food", "Cat", "5-6 weeks old higher", 130, 30});
+    products.push_back({"Smartheart (1 kilo)", "Food", "Cat", "5-6 weeks old higher", 165, 30});
+    products.push_back({"Kitcat (1 kilo)", "Food", "Cat", "5-6 weeks old higher", 52, 30});
+    products.push_back({"Whiskas (400 g)", "Food", "Cat", "1 Years above", 99, 30});
+    products.push_back({"Goodest (85 g)", "Food", "Cat", "6 Months above", 28, 30});
+    products.push_back({"Aozi (430 g)", "Food", "Cat", "7 Months above", 82, 30});
+    products.push_back({"Lc Vit Plus (120ml)", "Medicine", "Cat", "12 weeks higher", 150, 30});
+    products.push_back({"Pneumex (60ml)", "Medicine", "Cat", "3 months", 167, 30});
+    products.push_back({"Advocate (4 kg)", "Medicine", "Cat", "9 weeks higher", 499, 30});
+    products.push_back({"Wormeze (8 oz)", "Medicine", "Cat", "6 months higher", 719, 30});
+    products.push_back({"Drontal (18.2 mg)", "Medicine", "Cat", "1 month higher", 313, 30});
+    products.push_back({"Capstar (57 mg)", "Medicine", "Cat", "4 weeks higher", 475, 30});
+    products.push_back({"Capaction (11.4 mg)", "Medicine", "Cat", "4 weeks higher", 137, 30});
+    products.push_back({"Flea Guard (2.5 ml)", "Medicine", "Cat", "8 weeks higher", 125, 30});
+    products.push_back({"Litter Box", "Equipment", "Cat", "Splash proof cat litter box", 260, 30});
+    products.push_back({"Bed", "Equipment", "Cat", "Cat Bed House", 120, 30});
+    products.push_back({"Scratching Posts", "Equipment", "Cat", "Cat Scratch Post ", 66, 30});
+    products.push_back({"Toy Bell", "Equipment", "Cat", "Wiggly Ball Cat Bells", 57, 30});
+    products.push_back({"Food/Water Bowl", "Equipment", "Cat", "2 in 1 Cat Bowl", 119, 30});
+    products.push_back({"Collar ", "Equipment", "Cat", "Adjustable w/ bell", 48, 30});
+    products.push_back({"Cage", "Equipment", "Cat", "Collapsible cage", 399, 30});
+    products.push_back({"Litter Sand (10 L)", "Equipment", "Cat", "Lavender scent", 250, 30});
+
+    // Add products for "dog" to the vector
+    products.push_back({"Nutrichunks (500 g)", "Food", "Dog", "", 250, 30});
+    products.push_back({"Vitalamb (1kg)", "Food", "Dog", "", 102, 30});
+    products.push_back({"Pedigree (1kg)", "Food", "Dog", "", 146, 30});
+    products.push_back({"Top Breed (1kg)", "Food", "Dog", "", 99, 30});
+    products.push_back({"Royal Canin (500g)", "Food", "Dog", "", 179, 30});
+    products.push_back({"Pedigree Pouch (30g)", "Food", "Dog", "", 32, 30});
+    products.push_back({"Jerhigh Pouch (120g)", "Food", "Dog", "", 50, 30});
+    products.push_back({"SmartHeart Pouch (80g)", "Food", "Dog", "", 39, 30});
+    products.push_back({"Himalayan (100ml)", "Medicine", "Dog", "", 265, 30});
+    products.push_back({"Multivitamins (120 ml)", "Medicine", "Dog", "", 118, 30});
+    products.push_back({"Nematocide (15ml)", "Medicine", "Dog", "", 115, 30});
+    products.push_back({"Papi Doxy (60 ml)", "Medicine", "Dog", "", 107, 30});
+    products.push_back({"Nexgard (260 g)", "Medicine", "Dog", "", 419, 30});
+    products.push_back({"Wormgard (150 mg)", "Medicine", "Dog", "", 165, 30});
+    products.push_back({"Simparica trio (120 mg)", "Medicine", "Dog", "", 495, 30});
+    products.push_back({"Bravecto (98 mg)", "Medicine", "Dog", "", 394, 30});
+    products.push_back({"Dog bowl", "Equipment", "Dog", "", 75, 30});
+    products.push_back({"Dog bed", "Equipment", "Dog", "", 181, 30});
+    products.push_back({"Dog backpack ", "Equipment", "Dog", "", 189, 30});
+    products.push_back({"Dog collar", "Equipment", "Dog", "", 98, 30});
+    products.push_back({"Clothes", "Equipment", "Dog", "", 125, 30});
+    products.push_back({"Diaper", "Equipment", "Dog", "", 65, 30});
+    products.push_back({"Muzzles", "Equipment", "Dog", "", 89, 30});
+    products.push_back({"Dog crate", "Equipment", "Dog", "", 120, 30});
+
+    // Add products for "fish" to the vector
+    products.push_back({"Fish flakes (20 g)", "Food", "Fish", "", 160, 30});
+    products.push_back({"Fish pellets (50 g)", "Food", "Fish", "", 67, 30});
+    products.push_back({"Pimafix (16 oz)", "Medicine", "Fish", "", 370, 30});
+    products.push_back({"Aqua Guard (1L)", "Medicine", "Fish", "", 93, 30});
+    products.push_back({"API Melafix (16 oz)", "Medicine", "Fish", "", 350, 30});
+    products.push_back({"Paracidol-Fw (100ml)", "Medicine", "Fish", "", 124, 30});
+    products.push_back({"Air pump", "Equipment", "Fish", "", 135, 30});
+    products.push_back({"Aquarium (5 gal)", "Equipment", "Fish", "", 290, 30});
+    products.push_back({"Aquarium heater (50w)", "Equipment", "Fish", "", 199, 30});
+
+    // Add products for "bird" to the vector
+    products.push_back({"Bird seed mix (1k)", "Food", "Bird", "", 30, 30});
+    products.push_back({"African mix (1k)", "Food", "Bird", "", 75, 30});
+    products.push_back({"Parakeet (500 g)", "Food", "Bird", "", 245, 30});
+    products.push_back({"Premium mix (1k)", "Food", "Bird", "", 68, 30});
+    products.push_back({"Mynah bird food (1kg)", "Food", "Bird", "", 195, 30});
+    products.push_back({"Baytril (12,5 ml)", "Medicine", "Bird", "", 240, 30});
+    products.push_back({"Amtyl (500 g)", "Medicine", "Bird", "", 150, 30});
+    products.push_back({"Enrofloxacin (20 ml)", "Medicine", "Bird", "", 279, 30});
+    products.push_back({"Pikoy BACTI Bird (10 ml)", "Medicine", "Bird", "", 148, 30});
+    products.push_back({"Aviator Harness & Leash", "Equipment", "Bird", "", 143, 30});
+    products.push_back({"Bird cage", "Equipment", "Bird", "", 500, 30});
+    products.push_back({"Bird feeder", "Equipment", "Bird", "", 113, 30});
+
 
     homeCustomer();
 }
