@@ -428,9 +428,30 @@ void equipments() {
 }
 
 void medicine() {
+    char category, med. price;
+    
     displayMenu();
+    
+    //pa check kung tama ginagwa ko --Vladimer
+    
+    cout <<"Medicine Category: \n";
+    cout <<" ======================================================\n";
+    cout <<"  [1] Dog  \t\t [2] Fish\n  [3] Cat \t\t [4] Bird\n";
+    cout <<" ======================================================\n";
+    cout <<" Choose what category you want: ";
+    cin >> category;
 
-    cout << "medicine"; 
+        if (category == 1) {cout <<" Dog...";}
+
+    else if (category == 2) {cout <<" Fish...";}
+
+    else if (category == 3) {cout <<" Cat...";}
+
+    else if (category == 4) {cout <<" Bird...";}
+
+    else:
+    {cout<<"Invalid Category: "<< category;}
+     
 
 }
 
