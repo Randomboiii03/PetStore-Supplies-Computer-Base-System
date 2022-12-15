@@ -15,6 +15,7 @@ struct Account {
     string username;
     string email;
     string password;
+    string status;
 };
 
 struct Product {
@@ -60,8 +61,8 @@ void invalidInput();
 int main() {
 
     // Add the admin account to the vector
-    accounts.push_back({"admin", "admin", "admin"});
-    accounts.push_back({"gab", "gab", "gab"});
+    accounts.push_back({"admin", "admin", "admin", "Active"});
+    accounts.push_back({"gab", "gab", "gab", "Active"});
 
     // Add products for "cat" to the vector
     products.push_back({"Maxime (1 kilo)", "Food", "Cat", "5-6 weeks old higher", 90, 30});
@@ -244,9 +245,11 @@ void login() {
 
                         // Iterate over registered users to find a match
                         bool found = false;
+                        string status;
                         for (const auto& account : accounts) {
                             if (email == account.email && password == account.password) {
                                 found = true;
+                                status = account.status;
                                 break;
                             }
                         }
@@ -258,6 +261,13 @@ void login() {
 
                             login();
 
+                        } else if (status == "Banned") {
+                            // User's account is banned
+                            cout << "Your account is banned." << endl;
+                            Sleep(2000);
+
+                            login();
+                            
                         } else {
                             loginStatus = true;
                             loginEmail = email;
@@ -265,7 +275,7 @@ void login() {
                             cout << "Login successful!";
                             Sleep(2000);
 
-                        if (loginEmail == "admin") homeAdmin();
+                            if (loginEmail == "admin") homeAdmin();
                             else homeCustomer();
                         }
                     }
@@ -351,7 +361,7 @@ void registration() {
 
                         if (!found) {
                             // Add the user's information to the vector
-                            accounts.push_back({username, email, password});
+                            accounts.push_back({username, email, password, "Active"});
 
                             cout << "Registration successful!";
                             Sleep(2000);
