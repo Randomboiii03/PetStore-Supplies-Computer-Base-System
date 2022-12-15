@@ -25,6 +25,7 @@ struct Product {
     string description;
     double price;
     int stock;
+    string status;
 };
 
 vector<Account> accounts;
@@ -65,81 +66,81 @@ int main() {
     accounts.push_back({"gab", "gab", "gab", "Active"});
 
     // Add products for "cat" to the vector
-    products.push_back({"Maxime (1 kilo)", "Food", "Cat", "5-6 weeks old higher", 90, 30});
-    products.push_back({"Whiskas (1 kilo)", "Food", "Cat", "5-6 weeks old higher", 155, 30});
-    products.push_back({"Cuties (1 kilo)", "Food", "Cat", "5-6 weeks old higher", 130, 30});
-    products.push_back({"Smartheart (1 kilo)", "Food", "Cat", "5-6 weeks old higher", 165, 30});
-    products.push_back({"Kitcat (1 kilo)", "Food", "Cat", "5-6 weeks old higher", 52, 30});
-    products.push_back({"Whiskas (400 g)", "Food", "Cat", "1 Years above", 99, 30});
-    products.push_back({"Goodest (85 g)", "Food", "Cat", "6 Months above", 28, 30});
-    products.push_back({"Aozi (430 g)", "Food", "Cat", "7 Months above", 82, 30});
-    products.push_back({"Lc Vit Plus (120ml)", "Medicine", "Cat", "12 weeks higher", 150, 30});
-    products.push_back({"Pneumex (60ml)", "Medicine", "Cat", "3 months", 167, 30});
-    products.push_back({"Advocate (4 kg)", "Medicine", "Cat", "9 weeks higher", 499, 30});
-    products.push_back({"Wormeze (8 oz)", "Medicine", "Cat", "6 months higher", 719, 30});
-    products.push_back({"Drontal (18.2 mg)", "Medicine", "Cat", "1 month higher", 313, 30});
-    products.push_back({"Capstar (57 mg)", "Medicine", "Cat", "4 weeks higher", 475, 30});
-    products.push_back({"Capaction (11.4 mg)", "Medicine", "Cat", "4 weeks higher", 137, 30});
-    products.push_back({"Flea Guard (2.5 ml)", "Medicine", "Cat", "8 weeks higher", 125, 30});
-    products.push_back({"Litter Box", "Equipment", "Cat", "Splash proof cat litter box", 260, 30});
-    products.push_back({"Bed", "Equipment", "Cat", "Cat Bed House", 120, 30});
-    products.push_back({"Scratching Posts", "Equipment", "Cat", "Cat Scratch Post ", 66, 30});
-    products.push_back({"Toy Bell", "Equipment", "Cat", "Wiggly Ball Cat Bells", 57, 30});
-    products.push_back({"Food/Water Bowl", "Equipment", "Cat", "2 in 1 Cat Bowl", 119, 30});
-    products.push_back({"Collar ", "Equipment", "Cat", "Adjustable w/ bell", 48, 30});
-    products.push_back({"Cage", "Equipment", "Cat", "Collapsible cage", 399, 30});
-    products.push_back({"Litter Sand (10 L)", "Equipment", "Cat", "Lavender scent", 250, 30});
+    products.push_back({"Maxime (1 kilo)", "Food", "Cat", "5-6 weeks old higher", 90, 30, "Display"});
+    products.push_back({"Whiskas (1 kilo)", "Food", "Cat", "5-6 weeks old higher", 155, 30, "Not Display"});
+    products.push_back({"Cuties (1 kilo)", "Food", "Cat", "5-6 weeks old higher", 130, 30, "Display"});
+    products.push_back({"Smartheart (1 kilo)", "Food", "Cat", "5-6 weeks old higher", 165, 30, "Display"});
+    products.push_back({"Kitcat (1 kilo)", "Food", "Cat", "5-6 weeks old higher", 52, 30, "Display"});
+    products.push_back({"Whiskas (400 g)", "Food", "Cat", "1 Years above", 99, 30, "Display"});
+    products.push_back({"Goodest (85 g)", "Food", "Cat", "6 Months above", 28, 30, "Display"});
+    products.push_back({"Aozi (430 g)", "Food", "Cat", "7 Months above", 82, 30, "Display"});
+    products.push_back({"Lc Vit Plus (120ml)", "Medicine", "Cat", "12 weeks higher", 150, 30, "Display"});
+    products.push_back({"Pneumex (60ml)", "Medicine", "Cat", "3 months", 167, 30, "Display"});
+    products.push_back({"Advocate (4 kg)", "Medicine", "Cat", "9 weeks higher", 499, 30, "Display"});
+    products.push_back({"Wormeze (8 oz)", "Medicine", "Cat", "6 months higher", 719, 30, "Display"});
+    products.push_back({"Drontal (18.2 mg)", "Medicine", "Cat", "1 month higher", 313, 30, "Display"});
+    products.push_back({"Capstar (57 mg)", "Medicine", "Cat", "4 weeks higher", 475, 30, "Display"});
+    products.push_back({"Capaction (11.4 mg)", "Medicine", "Cat", "4 weeks higher", 137, 30, "Display"});
+    products.push_back({"Flea Guard (2.5 ml)", "Medicine", "Cat", "8 weeks higher", 125, 30, "Display"});
+    products.push_back({"Litter Box", "Equipment", "Cat", "Splash proof cat litter box", 260, 30, "Display"});
+    products.push_back({"Bed", "Equipment", "Cat", "Cat Bed House", 120, 30, "Display"});
+    products.push_back({"Scratching Posts", "Equipment", "Cat", "Cat Scratch Post ", 66, 30, "Display"});
+    products.push_back({"Toy Bell", "Equipment", "Cat", "Wiggly Ball Cat Bells", 57, 30, "Display"});
+    products.push_back({"Food/Water Bowl", "Equipment", "Cat", "2 in 1 Cat Bowl", 119, 30, "Display"});
+    products.push_back({"Collar ", "Equipment", "Cat", "Adjustable w/ bell", 48, 30, "Display"});
+    products.push_back({"Cage", "Equipment", "Cat", "Collapsible cage", 399, 30, "Display"});
+    products.push_back({"Litter Sand (10 L)", "Equipment", "Cat", "Lavender scent", 250, 30, "Display"});
 
     // Add products for "dog" to the vector
-    products.push_back({"Nutrichunks (500 g)", "Food", "Dog", "", 250, 30});
-    products.push_back({"Vitalamb (1kg)", "Food", "Dog", "", 102, 30});
-    products.push_back({"Pedigree (1kg)", "Food", "Dog", "", 146, 30});
-    products.push_back({"Top Breed (1kg)", "Food", "Dog", "", 99, 30});
-    products.push_back({"Royal Canin (500g)", "Food", "Dog", "", 179, 30});
-    products.push_back({"Pedigree Pouch (30g)", "Food", "Dog", "", 32, 30});
-    products.push_back({"Jerhigh Pouch (120g)", "Food", "Dog", "", 50, 30});
-    products.push_back({"SmartHeart Pouch (80g)", "Food", "Dog", "", 39, 30});
-    products.push_back({"Himalayan (100ml)", "Medicine", "Dog", "", 265, 30});
-    products.push_back({"Multivitamins (120 ml)", "Medicine", "Dog", "", 118, 30});
-    products.push_back({"Nematocide (15ml)", "Medicine", "Dog", "", 115, 30});
-    products.push_back({"Papi Doxy (60 ml)", "Medicine", "Dog", "", 107, 30});
-    products.push_back({"Nexgard (260 g)", "Medicine", "Dog", "", 419, 30});
-    products.push_back({"Wormgard (150 mg)", "Medicine", "Dog", "", 165, 30});
-    products.push_back({"Simparica trio (120 mg)", "Medicine", "Dog", "", 495, 30});
-    products.push_back({"Bravecto (98 mg)", "Medicine", "Dog", "", 394, 30});
-    products.push_back({"Dog bowl", "Equipment", "Dog", "", 75, 30});
-    products.push_back({"Dog bed", "Equipment", "Dog", "", 181, 30});
-    products.push_back({"Dog backpack ", "Equipment", "Dog", "", 189, 30});
-    products.push_back({"Dog collar", "Equipment", "Dog", "", 98, 30});
-    products.push_back({"Clothes", "Equipment", "Dog", "", 125, 30});
-    products.push_back({"Diaper", "Equipment", "Dog", "", 65, 30});
-    products.push_back({"Muzzles", "Equipment", "Dog", "", 89, 30});
-    products.push_back({"Dog crate", "Equipment", "Dog", "", 120, 30});
+    products.push_back({"Nutrichunks (500 g)", "Food", "Dog", "", 250, 30, "Display"});
+    products.push_back({"Vitalamb (1kg)", "Food", "Dog", "", 102, 30, "Display"});
+    products.push_back({"Pedigree (1kg)", "Food", "Dog", "", 146, 30, "Display"});
+    products.push_back({"Top Breed (1kg)", "Food", "Dog", "", 99, 30, "Display"});
+    products.push_back({"Royal Canin (500g)", "Food", "Dog", "", 179, 30, "Display"});
+    products.push_back({"Pedigree Pouch (30g)", "Food", "Dog", "", 32, 30, "Display"});
+    products.push_back({"Jerhigh Pouch (120g)", "Food", "Dog", "", 50, 30, "Display"});
+    products.push_back({"SmartHeart Pouch (80g)", "Food", "Dog", "", 39, 30, "Display"});
+    products.push_back({"Himalayan (100ml)", "Medicine", "Dog", "", 265, 30, "Display"});
+    products.push_back({"Multivitamins (120 ml)", "Medicine", "Dog", "", 118, 30, "Display"});
+    products.push_back({"Nematocide (15ml)", "Medicine", "Dog", "", 115, 30, "Display"});
+    products.push_back({"Papi Doxy (60 ml)", "Medicine", "Dog", "", 107, 30, "Display"});
+    products.push_back({"Nexgard (260 g)", "Medicine", "Dog", "", 419, 30, "Display"});
+    products.push_back({"Wormgard (150 mg)", "Medicine", "Dog", "", 165, 30, "Display"});
+    products.push_back({"Simparica trio (120 mg)", "Medicine", "Dog", "", 495, 30, "Display"});
+    products.push_back({"Bravecto (98 mg)", "Medicine", "Dog", "", 394, 30, "Display"});
+    products.push_back({"Dog bowl", "Equipment", "Dog", "", 75, 30, "Display"});
+    products.push_back({"Dog bed", "Equipment", "Dog", "", 181, 30, "Display"});
+    products.push_back({"Dog backpack ", "Equipment", "Dog", "", 189, 30, "Display"});
+    products.push_back({"Dog collar", "Equipment", "Dog", "", 98, 30, "Display"});
+    products.push_back({"Clothes", "Equipment", "Dog", "", 125, 30, "Display"});
+    products.push_back({"Diaper", "Equipment", "Dog", "", 65, 30, "Display"});
+    products.push_back({"Muzzles", "Equipment", "Dog", "", 89, 30, "Display"});
+    products.push_back({"Dog crate", "Equipment", "Dog", "", 120, 30, "Display"});
 
     // Add products for "fish" to the vector
-    products.push_back({"Fish flakes (20 g)", "Food", "Fish", "", 160, 30});
-    products.push_back({"Fish pellets (50 g)", "Food", "Fish", "", 67, 30});
-    products.push_back({"Pimafix (16 oz)", "Medicine", "Fish", "", 370, 30});
-    products.push_back({"Aqua Guard (1L)", "Medicine", "Fish", "", 93, 30});
-    products.push_back({"API Melafix (16 oz)", "Medicine", "Fish", "", 350, 30});
-    products.push_back({"Paracidol-Fw (100ml)", "Medicine", "Fish", "", 124, 30});
-    products.push_back({"Air pump", "Equipment", "Fish", "", 135, 30});
-    products.push_back({"Aquarium (5 gal)", "Equipment", "Fish", "", 290, 30});
-    products.push_back({"Aquarium heater (50w)", "Equipment", "Fish", "", 199, 30});
+    products.push_back({"Fish flakes (20 g)", "Food", "Fish", "", 160, 30, "Display"});
+    products.push_back({"Fish pellets (50 g)", "Food", "Fish", "", 67, 30, "Display"});
+    products.push_back({"Pimafix (16 oz)", "Medicine", "Fish", "", 370, 30, "Display"});
+    products.push_back({"Aqua Guard (1L)", "Medicine", "Fish", "", 93, 30, "Display"});
+    products.push_back({"API Melafix (16 oz)", "Medicine", "Fish", "", 350, 30, "Display"});
+    products.push_back({"Paracidol-Fw (100ml)", "Medicine", "Fish", "", 124, 30, "Display"});
+    products.push_back({"Air pump", "Equipment", "Fish", "", 135, 30, "Display"});
+    products.push_back({"Aquarium (5 gal)", "Equipment", "Fish", "", 290, 30, "Display"});
+    products.push_back({"Aquarium heater (50w)", "Equipment", "Fish", "", 199, 30, "Display"});
 
     // Add products for "bird" to the vector
-    products.push_back({"Bird seed mix (1k)", "Food", "Bird", "", 30, 30});
-    products.push_back({"African mix (1k)", "Food", "Bird", "", 75, 30});
-    products.push_back({"Parakeet (500 g)", "Food", "Bird", "", 245, 30});
-    products.push_back({"Premium mix (1k)", "Food", "Bird", "", 68, 30});
-    products.push_back({"Mynah bird food (1kg)", "Food", "Bird", "", 195, 30});
-    products.push_back({"Baytril (12,5 ml)", "Medicine", "Bird", "", 240, 30});
-    products.push_back({"Amtyl (500 g)", "Medicine", "Bird", "", 150, 30});
-    products.push_back({"Enrofloxacin (20 ml)", "Medicine", "Bird", "", 279, 30});
-    products.push_back({"Pikoy BACTI Bird (10 ml)", "Medicine", "Bird", "", 148, 30});
-    products.push_back({"Aviator Harness & Leash", "Equipment", "Bird", "", 143, 30});
-    products.push_back({"Bird cage", "Equipment", "Bird", "", 500, 30});
-    products.push_back({"Bird feeder", "Equipment", "Bird", "", 113, 30});
+    products.push_back({"Bird seed mix (1k)", "Food", "Bird", "", 30, 30, "Display"});
+    products.push_back({"African mix (1k)", "Food", "Bird", "", 75, 30, "Display"});
+    products.push_back({"Parakeet (500 g)", "Food", "Bird", "", 245, 30, "Display"});
+    products.push_back({"Premium mix (1k)", "Food", "Bird", "", 68, 30, "Display"});
+    products.push_back({"Mynah bird food (1kg)", "Food", "Bird", "", 195, 30, "Display"});
+    products.push_back({"Baytril (12,5 ml)", "Medicine", "Bird", "", 240, 30, "Display"});
+    products.push_back({"Amtyl (500 g)", "Medicine", "Bird", "", 150, 30, "Display"});
+    products.push_back({"Enrofloxacin (20 ml)", "Medicine", "Bird", "", 279, 30, "Display"});
+    products.push_back({"Pikoy BACTI Bird (10 ml)", "Medicine", "Bird", "", 148, 30, "Display"});
+    products.push_back({"Aviator Harness & Leash", "Equipment", "Bird", "", 143, 30, "Display"});
+    products.push_back({"Bird cage", "Equipment", "Bird", "", 500, 30, "Display"});
+    products.push_back({"Bird feeder", "Equipment", "Bird", "", 113, 30, "Display"});
 
 
     homeCustomer();
@@ -502,7 +503,7 @@ void viewAccounts() {
     }
 
     cout << "+-------------------------------------------------------------------------------+" << endl;
-    cout << "\t [+] Add \t [D] Delete \t [E] Edit" << endl;
+    cout << "\t [+] Add \t [E] Edit" << endl;
     cout << "+-------------------------------------------------------------------------------+" << endl;
 
     cout << "Input action: ";
@@ -593,6 +594,13 @@ void menuCustomer(string choose) {
     }
 }
 
+void searchCustomer() {
+    displayMenu();
+
+    cout << "search"; 
+
+}
+
 void homeCustomer() {
     string choose;
 
@@ -603,7 +611,7 @@ void homeCustomer() {
 
     cout << "\t     Product Name \t\t       Animal \t\t Price" << endl;
 
-    cout << "+-------------------------------------------------------------------------------+" << "\u263A" << endl;
+    cout << "+-------------------------------------------------------------------------------+" << endl;
 
     for (int i = 0; i < 10; ++i) {
         int index = getRandomNumber(products);
@@ -614,17 +622,21 @@ void homeCustomer() {
 
         selected.insert(index);
 
-        cout << "\t[" << index << "] " << products[index].name << "\t\t";
+        if (products[index].status == "Display") {
+            cout << "\t[" << index << "] " << products[index].name << "\t\t";
 
             if (products[index].name.length() <= 10) {
+                cout << "\t\t";
+
+            } else if (products[index].name.length() <= 19 && index < 10) {
                 cout << "\t";
-            }
-            
-            if (products[index].name.length() <= 18 || (products[index].name.length() <= 19 && i < 10)) {
+                
+            } else if (products[index].name.length() <= 18 && index >= 10) {
                 cout << "\t";
             }
 
             cout << products[index].animal << "\t\t" << products[index].price << " php" << endl;
+        }
     }
 
     cout << "+-------------------------------------------------------------------------------+" << endl;
@@ -649,13 +661,6 @@ void homeCustomer() {
     }
 }
 
-void searchCustomer() {
-    displayMenu();
-
-    cout << "search"; 
-
-}
-
 void foods() {
     string choose;
 
@@ -665,14 +670,16 @@ void foods() {
     cout << "+-------------------------------------------------------------------------------+" << endl;
 
     for (int i = 0; i < products.size(); i++) {
-        if (products[i].category == "Food") {
+        if (products[i].category == "Food" && products[i].status == "Display") {
             cout << "\t[" << i << "] " << products[i].name << "\t\t";
 
             if (products[i].name.length() <= 10) {
+                cout << "\t\t";
+
+            } else if (products[i].name.length() <= 19 && i < 10) {
                 cout << "\t";
-            }
-            
-            if (products[i].name.length() <= 18 || (products[i].name.length() <= 19 && i < 10)) {
+                
+            } else if (products[i].name.length() <= 18 && i >= 10) {
                 cout << "\t";
             }
 
@@ -711,14 +718,16 @@ void equipments() {
     cout << "+-------------------------------------------------------------------------------+" << endl;
 
     for (int i = 0; i < products.size(); i++) {
-        if (products[i].category == "Equipment") {
+        if (products[i].category == "Equipment" && products[i].status == "Display") {
             cout << "\t[" << i << "] " << products[i].name << "\t\t";
 
             if (products[i].name.length() <= 10) {
+                cout << "\t\t";
+
+            } else if (products[i].name.length() <= 19 && i < 10) {
                 cout << "\t";
-            }
-            
-            if (products[i].name.length() <= 18 || (products[i].name.length() <= 19 && i < 10)) {
+                
+            } else if (products[i].name.length() <= 18 && i >= 10) {
                 cout << "\t";
             }
 
@@ -756,14 +765,16 @@ void medicine() {
     cout << "+-------------------------------------------------------------------------------+" << endl;
 
     for (int i = 0; i < products.size(); i++) {
-        if (products[i].category == "Medicine") {
+        if (products[i].category == "Medicine" && products[i].status == "Display") {
             cout << "\t[" << i << "] " << products[i].name << "\t\t";
 
             if (products[i].name.length() <= 10) {
+                cout << "\t\t";
+
+            } else if (products[i].name.length() <= 19 && i < 10) {
                 cout << "\t";
-            }
-            
-            if (products[i].name.length() <= 18 || (products[i].name.length() <= 19 && i < 10)) {
+                
+            } else if (products[i].name.length() <= 18 && i >= 10) {
                 cout << "\t";
             }
 
