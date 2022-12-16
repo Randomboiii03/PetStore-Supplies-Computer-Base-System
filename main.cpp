@@ -43,7 +43,10 @@ void accountProfile();
 void homeAdmin();
 void searchAdmin();
 void viewAccounts();
+void editAccount(int accNumber);
 void viewInventory();
+void addItem();
+void editItem(int p_num);
 void viewCheckouts();
 void menuCustomer(string choose);
 void homeCustomer();
@@ -63,7 +66,7 @@ int main() {
 
     // Add the admin account to the vector
     accounts.push_back({"admin", "admin", "admin", "Active"});
-    accounts.push_back({"gab", "gab", "gab", "Active"});
+    accounts.push_back({"gab", "gabrielleramos@gmail.com", "gab", "Active"});
 
     // Add products for "cat" to the vector
     products.push_back({"Maxime (1 kilo)", "Food", "Cat", "5-6 weeks old higher", 90, 30, "Display"});
@@ -149,43 +152,19 @@ int main() {
 void displayMenu() {
     system("cls");
 
-    if (loginEmail == "admin") {
-        cout << "+-------------------------------------------------------------------------------+" << endl;
-        cout << "\t\t\t [S] Search \t [A] Account" << endl;
-        cout << "+-------------------------------------------------------------------------------+" << endl;
-        cout << "\t\t\t [C] Accounts \t [I] Products \t [O] Checkouts" << endl;
-        cout << "+-------------------------------------------------------------------------------+" << endl;
+    if (loginEmail == "admin") {//menu of admin-----+---------------+
+        cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+        cout << "|\t\t\t [S] Search\t\t|\t\t[A] Account\t\t\t|" << endl;
+        cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+        cout << "|\t\t[C] Accounts \t|\t   [I] Products    \t|\t[O] Checkouts\t\t|" << endl;
+        cout << "+-----------------------------------------------------------------------------------------------+" << endl;
         
-    } else {
-        cout << "+-------------------------------------------------------------------------------+" << endl;
-        cout << "\t      [H] Home \t [S] Search \t [A] Account \t [C] Cart" << endl;
-        cout << "+-------------------------------------------------------------------------------+" << endl;
-        cout << "\t\t\t [F] Foods \t [Q] Equipment \t [M] Medicine" << endl;
-        cout << "+-------------------------------------------------------------------------------+" << endl;
-    }
-}
-
-void menuAdmin(string choose) {
-
-    if (choose == "S" || choose == "s") {
-        searchAdmin();
-
-    } else if (choose == "A" || choose == "a") {
-        accountProfile();
-
-    } else if (choose == "C" || choose == "c") {
-        viewAccounts();
-
-    } else if (choose == "I" || choose == "i") {
-        viewInventory();
-
-    } else if (choose == "O" || choose == "o") {
-        viewCheckouts();
-
-    } else {
-        invalidInput();
-
-        homeAdmin();
+    } else {//menu of  customer
+        cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+        cout << "|\t[H] Home   \t|\t[S] Search\t|\t[A] Account\t|\t[C] Cart   \t|" << endl;
+        cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+        cout << "|\t\t[F] Foods    \t|\t    [Q] Equipment    \t|\t[M] Medicine \t\t|" << endl;
+        cout << "+-----------------------------------------------------------------------------------------------+" << endl;
     }
 }
 
@@ -194,11 +173,12 @@ void login() {
     int choose;
 
     displayMenu();
-
-    cout << "[R] No Account? Register Now!" << endl;
-    cout << "\t\t\t LOGIN" << endl;
     
-    cout << "Email (action): ";
+    cout << "|\t\t\t\t    [R] No Account? Register Now!    \t\t\t\t|" << endl;
+    cout << "|\t\t\t\t\t\tLOGIN\t\t\t\t\t\t|" << endl;
+    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+
+    cout << "\t\t\t\t(action) Email: ";
     cin >> email;
 
     if (email == "R" || email == "r") {
@@ -206,33 +186,34 @@ void login() {
 
     } else if (email.length() == 1) {
         menuCustomer(email);
+        login();
 
     } else {
-        cout << "Password: ";
+        cout << "\t\t\t\t      Password: ";
         cin >> password;
-        cout << "+-------------------------------------------------------------------------------+" << endl;
-        cout << "\t\t [1] Login \t [0] Clear" << endl;
+        cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+        cout << "|\t\t\t[1] Login\t\t|\t\t[0] Clear\t\t\t|" << endl;
+        cout << "+-----------------------------------------------------------------------------------------------+" << endl;
 
-        cout << "Input action: ";
+        cout << "\t\t\t\t  Input action: ";
         cin >> choose;
 
-        cout << "+-------------------------------------------------------------------------------+" << endl;
-
-        //check if a letter or a symbol is inputted
+        //check if string is inputted in an int variable
         if (cin.fail()) {
             invalidInput();
 
             cout << "Clearing fields...";
             Sleep(2000);
 
-            cin.clear();
-            cin.ignore(LONG_MAX, '\n');
+            cin.clear();//clear input
+            cin.ignore(LONG_MAX, '\n');//ignore any error
 
             login();
 
         } else {
             switch(choose) {
                 case 0:
+                    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
                     cout << "Clearing fields...";
                     Sleep(3000);
 
@@ -241,6 +222,7 @@ void login() {
                     
                 case 1:
                     {
+                        cout << "+-----------------------------------------------------------------------------------------------+" << endl;
                         cout << "Logging In..." << endl;
                         Sleep(3000);
 
@@ -250,7 +232,7 @@ void login() {
                         for (const auto& account : accounts) {
                             if (email == account.email && password == account.password) {
                                 found = true;
-                                status = account.status;
+                                status = account.status;//check account's status
                                 break;
                             }
                         }
@@ -264,7 +246,7 @@ void login() {
 
                         } else if (status == "Banned") {
                             // User's account is banned
-                            cout << "Your account is banned." << endl;
+                            cout << "Cannot login, your account is banned." << endl;
                             Sleep(2000);
 
                             login();
@@ -303,35 +285,41 @@ void registration() {
 
     displayMenu();
 
-    cout << "\t\t\t REGISTRATION" << endl;
-    cout << "Username (action): ";
+    cout << "|\t\t\t\t\t    REGISTRATION    \t\t\t\t\t|" << endl;
+    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+
+    cout << "\t\t\t(action) Username: ";
     cin >> username;
 
     if (username.length() == 1) {
         menuCustomer(username);
+        registration();
 
     } else {
-        cout << "Email: ";
+        cout << "\t\t\t\t    Email: ";
         cin >> email;
-        cout << "Password: ";
-        cin >> password;
-        cout << "+-------------------------------------------------------------------------------+" << endl;
-        cout << "\t\t [1] Register \t [0] Clear" << endl;
 
-        cout << "Input action: ";
+        cout << "\t\t\t\t Password: ";
+        cin >> password;
+        
+        cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+        cout << "|\t\t\t[1] Register\t\t|\t\t[0] Clear\t\t\t|" << endl;
+        cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+
+        cout << "\t\t\t     Input action: ";
         cin >> choose;
 
-        cout << "+-------------------------------------------------------------------------------+" << endl;
+        cout << "+-----------------------------------------------------------------------------------------------+" << endl;
 
-        //check if a letter or a symbol is inputted
+        //check if string is inputted in an int variable
         if (cin.fail()) {
             invalidInput();
             
             cout << "Clearing fields...";
             Sleep(2000);
 
-            cin.clear();
-            cin.ignore(LONG_MAX, '\n');
+            cin.clear();//clear input
+            cin.ignore(LONG_MAX, '\n');//ignore any error
 
             registration();
 
@@ -390,41 +378,41 @@ void registration() {
 }
 
 void accountProfile() {
-    string choose;
-    int accNumber;
+    string choose, temp;
+    int accNumber, choose1;
 
     displayMenu();
 
-    cout << "\t\t\t PROFILE" << endl;
+    cout << "|\t\t\t\t\t\tPROFILE\t\t\t\t\t\t|" << endl;
+    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+
     for (int i = 0; i < accounts.size(); i++) {
         if (loginEmail == accounts[i].email) {
-            cout << "[0] Username: " << accounts[i].username << endl;
-            cout << "       Email: " << accounts[i].email << endl;
-            cout << "[1] Password: " << accounts[i].password << endl;
+
+            cout << "\t\t\t\t         Email: " << accounts[i].email << endl;
+            cout << "\t\t\t\t  [0] Username: " << accounts[i].username << endl;
+            cout << "\t\t\t\t  [1] Password: " << accounts[i].password << endl;
 
             accNumber = i;
             break;
         }
     }
     
-    cout << "+-------------------------------------------------------------------------------+" << endl;
+    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
 
-    if (loginEmail != "admin") {
-        cout << "\t [+] Add In-Store Money";
-    }
+    if (loginEmail == "admin") cout << "|\t\t\t\t\t    [L] Logout    \t\t\t\t\t|" << endl;
+    else cout << "|\t\t  [+] Add In-Store Money  \t\t|\t\t  [L] Logout  \t\t|" << endl;
 
-    cout << "\t\t\t [L] Logout" << endl;
+    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
 
-    cout << "+-------------------------------------------------------------------------------+" << endl;
-
-    cout << "Input action: ";
+    cout << "\t\t\t\t Input action: ";
     cin >> choose;
 
     if (loginEmail != "admin" || choose == "+") {
         //add in-store money
         
     } else if (checkInput(choose) == "alpha" && choose.length() == 1) {
-        if (choose == "L" || choose == "l") {
+        if (choose == "L" || choose == "l") {//logout
             cout << "Logging out...";
             Sleep(3000);
 
@@ -436,42 +424,111 @@ void accountProfile() {
         } else {
             if (loginEmail == "admin") menuAdmin(choose);
             else menuCustomer(choose);
+
+            accountProfile();
         }
 
-    } else if (checkInput(choose) == "number" && stoi(choose) <= 3 && stoi(choose) >= 0) {
-        cout << "+-------------------------------------------------------------------------------+" << endl;
+    } else if (checkInput(choose) == "number" && stoi(choose) <= 1 && stoi(choose) >= 0) {
+        cout << "+-----------------------------------------------------------------------------------------------+" << endl;
 
         switch(stoi(choose)) {
             case 0:
                 cout << "\t\t\t Edit Username" << endl;
                 cout << "Old username:" << accounts[accNumber].username << endl;
                 cout << "Enter new username: ";
-                cin >> choose;
-
-                accounts[accNumber].username = choose;
-
                 break;
+
             case 1:
                 cout << "\t\t\t Edit Password" << endl;
                 cout << "Old password:" << accounts[accNumber].password << endl;
                 cout << "Enter new password: ";
-                cin >> choose;
-
-                accounts[accNumber].password = choose;
-
                 break;
         }
 
-        cout << "+-------------------------------------------------------------------------------+" << endl;
-        cout << "Applying changes...";
-        Sleep(3000);
+        cin >> temp;
 
-        accountProfile();
+        cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+        cout << "\t\t [1] Save \t [0] Cancel" << endl;
+
+        cout << "\t\t\t\t Input action: ";
+        cin >> choose1;
+
+        cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+
+        //check if string is inputted in an int variable
+        if (cin.fail()) {
+            invalidInput();
+            
+            cout << "Canceling process...";
+            Sleep(2000);
+
+            cin.clear();//clear input
+            cin.ignore(LONG_MAX, '\n');//ignore any error
+
+            accountProfile();
+
+        } else {
+            switch(choose1) {
+                case 0:
+                    cout << "Canceling process...";
+                    Sleep(3000);
+
+                    accountProfile();
+                    break;
+                
+                case 1:
+                    if (stoi(choose) == 0) {
+                        //change username
+                        accounts[accNumber].username = temp;
+
+                    } else if (stoi(choose) == 1) {
+                        //change password
+                        accounts[accNumber].password = temp;
+                    }
+
+                    cout << "Applying changes...";
+                    Sleep(3000);
+
+                    accountProfile();
+                    break;
+                
+                default:
+                    invalidInput();
+
+                    cout << "Canceling process...";
+                    Sleep(2000);
+
+                    accountProfile();
+                    break;
+            }
+        }
 
     } else {
         invalidInput();
 
         accountProfile();
+    }
+}
+
+void menuAdmin(string choose) {
+
+    if (choose == "S" || choose == "s") {
+        searchAdmin();
+
+    } else if (choose == "A" || choose == "a") {
+        accountProfile();
+
+    } else if (choose == "C" || choose == "c") {
+        viewAccounts();
+
+    } else if (choose == "I" || choose == "i") {
+        viewInventory();
+
+    } else if (choose == "O" || choose == "o") {
+        viewCheckouts();
+
+    } else {
+        invalidInput();
     }
 }
 
@@ -491,25 +548,174 @@ void viewAccounts() {
 
     displayMenu();
 
-    cout << "\t\t\t LIST OF ACCOUNTS" << endl;
+    cout << "|\t\t\t\t\tLIST OF ACCOUNTS\t\t\t\t\t|" << endl;
+    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+    cout << "|\t\t\tEmail\t\t\t|\t\t\tStatus\t\t\t|" << endl;
+    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
 
     if (accounts.size() > 1) {
         for (int i = 1; i < accounts.size(); i++) {
-            cout << "[" << i << "] " << accounts[i].email << endl;
+            cout << "|\t[" << i << "] " << accounts[i].email << "\t\t|\t\t\t" << accounts[i].status << "\t\t\t|" << endl;
         }
 
     } else {
         cout << "No account is registered yet!" << endl;
     }
 
-    cout << "+-------------------------------------------------------------------------------+" << endl;
-    cout << "\t [+] Add \t [E] Edit" << endl;
-    cout << "+-------------------------------------------------------------------------------+" << endl;
+    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
 
-    cout << "Input action: ";
+    cout << "\t\t\t\t*To edit account, choose a number.\t\t\t\t" << endl;
+    cout << "\t\t\t\t Input action: ";
     cin >> choose;
 
-    menuAdmin(choose);
+    if (checkInput(choose) == "alpha" && choose.length() == 1) {
+        menuAdmin(choose);
+        viewAccounts();
+
+    } else if (checkInput(choose) == "number" && stoi(choose) < accounts.size() && stoi(choose) > 0) {
+
+        editAccount(stoi(choose));
+
+    } else {
+        invalidInput();
+        
+        viewAccounts();
+    }
+}
+
+void editAccount(int accNumber) {
+    string choose, temp;
+    int choose1;
+
+    displayMenu();
+
+    cout << "\t\tEditing account with an email: " << accounts[accNumber].email << endl << endl;
+    cout << "\t\t\t\t[0] Username: " << accounts[accNumber].username << endl;
+    cout << "\t\t\t\t[1] Password: " << accounts[accNumber].password << endl;
+    cout << "\t\t\t\t[2]   Status: " << accounts[accNumber].status << endl;
+    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+
+    cout << "\t\t\t\tInput action: ";
+    cin >> choose;
+
+    if (checkInput(choose) == "alpha" && choose.length() == 1) {
+        menuAdmin(choose);
+        editAccount(accNumber);
+
+    } else if (checkInput(choose) == "number" && stoi(choose) <= 2 && stoi(choose) >= 0) {
+        
+        cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+
+        switch(stoi(choose)) {
+            case 0:
+                cout << "|\t\t\t\t\t    Edit Username    \t\t\t\t\t|" << endl;
+                cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+
+                cout << "\t\t\t\tOld username: " << accounts[accNumber].username << endl;
+                cout << "\t\t\t  Enter new username: ";
+
+                cin >> temp;
+                break;
+
+            case 1:
+                cout << "|\t\t\t\t\t    Edit Password    \t\t\t\t\t|" << endl;
+                cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+
+                cout << "\t\t\t\tOld password: " << accounts[accNumber].password << endl;
+                cout << "\t\t\t  Enter new password: ";
+
+                cin >> temp;
+                break;
+
+            case 2:
+                cout << "|\t\t\t\t\t    Edit Status    \t\t\t\t\t|" << endl;
+                cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+                cout << "|\t\t\t\t      Status: " << accounts[accNumber].status;
+                
+                if (accounts[accNumber].status == "Active") temp = "Banned";
+                else temp = "Active";
+
+                cout << " -> " << temp << "  \t\t\t\t|" << endl;
+
+                break;
+
+            default:
+                invalidInput();
+                
+                cout << "Canceling process...";
+                Sleep(2000);
+
+                editAccount(accNumber);
+                break;
+        }
+
+        cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+        cout << "|\t\t\t[1] Save\t\t|\t\t[0] Cancel\t\t\t|" << endl;
+        cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+
+        cout << "\t\t\t\tInput action: ";
+        cin >> choose1;
+
+        //check if string is inputted in an int variable
+        if (cin.fail()) {
+            invalidInput();
+            
+            cout << "Canceling process...";
+            Sleep(2000);
+
+            cin.clear();//clear input
+            cin.ignore(LONG_MAX, '\n');//ignore any error
+
+            viewAccounts();
+
+        } else {
+            switch(choose1) {
+                case 0:
+                    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+                    cout << "Canceling process...";
+                    Sleep(3000);
+
+                    viewAccounts();
+                    break;
+                
+                case 1:
+                    if (stoi(choose) == 0) {
+                        //change username
+                        accounts[accNumber].username = temp;
+
+                    } else if (stoi(choose) == 1) {
+                        //change password
+                        accounts[accNumber].password = temp;
+
+                    } else if (stoi(choose) == 2) {
+                        //change status
+                        accounts[accNumber].status = temp;
+                    }
+
+                    cout << "Applying changes...";
+                    Sleep(3000);
+
+                    viewAccounts();
+                    break;
+                
+                default:
+                    invalidInput();
+
+                    cout << "Canceling process...";
+                    Sleep(2000);
+
+                    viewAccounts();
+                    break;
+            }
+        }
+
+    } else {
+        invalidInput();
+
+        editAccount(accNumber);
+    }
+
+
 }
 
 void viewInventory() {
@@ -517,23 +723,70 @@ void viewInventory() {
 
     displayMenu();
 
-    cout << "\t\t\t LIST OF PRODUCTS" << endl;
+    cout << "|\t\t\t\t\tLIST OF PRODUCTS\t\t\t\t\t|" << endl;
+    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+    cout << "|\t\tProduct Name\t\t\t|\tAnimal\t\t|\tPrice\t\t|" << endl;
+    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
 
     if (products.size() > 0) {
         for (int i = 0; i < products.size(); i++) {
-            cout << "[" << i << "] " << products[i].name << endl;
+            cout << "|\t[" << i << "] " << products[i].name << "\t\t";
+
+            if (products[i].name.length() <= 10) {
+                cout << "\t\t";
+
+            } else if (products[i].name.length() <= 19 && i < 10) {
+                cout << "\t";
+                
+            } else if (products[i].name.length() <= 18 && i >= 10) {
+                cout << "\t";
+            }
+
+            cout << "|\t" << products[i].animal << "\t\t|\t" << products[i].price << " php\t\t|" << endl;
         }
 
     } else {
         cout << "No product is added yet!" << endl;
     }
 
-    cout << "+-------------------------------------------------------------------------------+" << endl;
-    cout << "\t [+] Add \t [D] Delete \t [E] Edit" << endl;
-    cout << "+-------------------------------------------------------------------------------+" << endl;
+    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+    cout << "|\t\t\t\t\t    [+] Add Product    \t\t\t\t\t|" << endl;
+    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
 
-    cout << "Input action: ";
+    cout << "\t\t\t\t*To edit account, choose a number.\t\t\t\t" << endl;
+    cout << "\t\t\t\t Input action: ";
     cin >> choose;
+
+    if (choose == "+") {
+        addItem();
+
+    } else if (checkInput(choose) == "alpha" && choose.length() == 1) {
+        menuAdmin(choose);
+
+    } else if (checkInput(choose) == "number" && stoi(choose) < products.size() && stoi(choose) <= 0) {
+        editItem(stoi(choose));
+
+    } else {
+        cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+        invalidInput();
+
+        viewInventory();
+    }
+}
+
+void addItem() {
+
+}
+
+void editItem(int p_num) {
+    string choose;
+
+    displayMenu();
+
+    cout << products[p_num].name << endl;
+
+    cout << "\t\t\t\t Input action: ";
+    cin >> choose; 
 
     menuAdmin(choose);
 }
@@ -543,7 +796,8 @@ void viewCheckouts() {
 
     displayMenu();
 
-    cout << "\t\t\t LIST OF CHECKOUTS" << endl;
+    cout << "|\t\t\t\t\tLIST OF CHECKOUTS\t\t\t\t\t|" << endl;
+    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
 
     // if (products.size() > 0) {
     //     for (int i = 0; i < products.size(); i++) {
@@ -554,9 +808,9 @@ void viewCheckouts() {
     //     cout << "No checkouts yet!" << endl;
     // }
 
-    cout << "+-------------------------------------------------------------------------------+" << endl;
+    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
 
-    cout << "Input action: ";
+    cout << "\t\t\t\t Input action: ";
     cin >> choose;
     
     menuAdmin(choose);
@@ -590,7 +844,7 @@ void menuCustomer(string choose) {
     } else {
         invalidInput();
 
-        homeCustomer();
+        // homeCustomer();
     }
 }
 
@@ -609,9 +863,10 @@ void homeCustomer() {
     srand(time(nullptr));
     set<int> selected;
 
-    cout << "\t     Product Name \t\t       Animal \t\t Price" << endl;
-
-    cout << "+-------------------------------------------------------------------------------+" << endl;
+    cout << "|\t\t\t\t\t\tHOME\t\t\t\t\t\t|" << endl;
+    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+    cout << "|\t\tProduct Name\t\t\t|\tAnimal\t\t|\tPrice\t\t|" << endl;
+    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
 
     for (int i = 0; i < 10; ++i) {
         int index = getRandomNumber(products);
@@ -623,7 +878,7 @@ void homeCustomer() {
         selected.insert(index);
 
         if (products[index].status == "Display") {
-            cout << "\t[" << index << "] " << products[index].name << "\t\t";
+            cout << "|\t[" << index << "] " << products[index].name << "\t\t";
 
             if (products[index].name.length() <= 10) {
                 cout << "\t\t";
@@ -635,20 +890,20 @@ void homeCustomer() {
                 cout << "\t";
             }
 
-            cout << products[index].animal << "\t\t" << products[index].price << " php" << endl;
+            cout << "|\t" << products[index].animal << "\t\t|\t" << products[index].price << " php\t\t|" << endl;
         }
     }
 
-    cout << "+-------------------------------------------------------------------------------+" << endl;
+    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
 
-    cout << "Input action: "; 
+    cout << "\t\t\t\t Input action: ";
     cin >> choose;
-
-    cout << "+-------------------------------------------------------------------------------+" << endl;
 
     if (checkInput(choose) == "alpha" && choose.length() == 1) {
         if (loginEmail == "admin") menuAdmin(choose);
         else menuCustomer(choose);
+
+        homeCustomer();
 
     } else if (checkInput(choose) == "number" && products.size() > stoi(choose)) {
 
@@ -665,13 +920,14 @@ void foods() {
     string choose;
 
     displayMenu();
-
-    cout << "\t     Product Name \t\t       Animal \t\t Price" << endl;
-    cout << "+-------------------------------------------------------------------------------+" << endl;
+    cout << "|\t\t\t\t\t\tFOODS\t\t\t\t\t\t|" << endl;
+    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+    cout << "|\t\tProduct Name\t\t\t|\tAnimal\t\t|\tPrice\t\t|" << endl;
+    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
 
     for (int i = 0; i < products.size(); i++) {
         if (products[i].category == "Food" && products[i].status == "Display") {
-            cout << "\t[" << i << "] " << products[i].name << "\t\t";
+            cout << "|\t[" << i << "] " << products[i].name << "\t\t";
 
             if (products[i].name.length() <= 10) {
                 cout << "\t\t";
@@ -683,20 +939,20 @@ void foods() {
                 cout << "\t";
             }
 
-            cout << products[i].animal << "\t\t" << products[i].price << " php" << endl;
+            cout << "|\t" << products[i].animal << "\t\t|\t" << products[i].price << " php\t\t|" << endl;
         }
     }
 
-    cout << "+-------------------------------------------------------------------------------+" << endl;
+    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
 
-    cout << "Input action: ";
+    cout << "\t\t\t\t Input action: ";
     cin >> choose; 
-
-    cout << "+-------------------------------------------------------------------------------+" << endl;
 
     if (checkInput(choose) == "alpha" && choose.length() == 1) {
         if (loginEmail == "admin") menuAdmin(choose);
         else menuCustomer(choose);
+
+        foods();
 
     } else if (checkInput(choose) == "number" && products.size() > stoi(choose) && products[stoi(choose)].category == "Food") {
 
@@ -714,12 +970,14 @@ void equipments() {
 
     displayMenu();
     
-    cout << "\t     Product Name \t\t       Animal \t\t Price" << endl;
-    cout << "+-------------------------------------------------------------------------------+" << endl;
+    cout << "|\t\t\t\t\t    EQUIPMENTS    \t\t\t\t\t|" << endl;
+    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+    cout << "|\t\tProduct Name\t\t\t|\tAnimal\t\t|\tPrice\t\t|" << endl;
+    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
 
     for (int i = 0; i < products.size(); i++) {
         if (products[i].category == "Equipment" && products[i].status == "Display") {
-            cout << "\t[" << i << "] " << products[i].name << "\t\t";
+            cout << "|\t[" << i << "] " << products[i].name << "\t\t";
 
             if (products[i].name.length() <= 10) {
                 cout << "\t\t";
@@ -731,20 +989,20 @@ void equipments() {
                 cout << "\t";
             }
 
-            cout << products[i].animal << "\t\t" << products[i].price << " php" << endl;
+            cout << "|\t" << products[i].animal << "\t\t|\t" << products[i].price << " php\t\t|" << endl;
         }
     }
 
-    cout << "+-------------------------------------------------------------------------------+" << endl;
+    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
 
-    cout << "Input action: ";
+    cout << "\t\t\t\t Input action: ";
     cin >> choose; 
-
-    cout << "+-------------------------------------------------------------------------------+" << endl;
 
     if (checkInput(choose) == "alpha" && choose.length() == 1) {
         if (loginEmail == "admin") menuAdmin(choose);
         else menuCustomer(choose);
+        
+        equipments();
 
     } else if (checkInput(choose) == "number" && products.size() > stoi(choose) && products[stoi(choose)].category == "Food") {
         viewItem(stoi(choose));
@@ -761,12 +1019,14 @@ void medicine() {
 
     displayMenu();
 
-    cout << "\t     Product Name \t\t       Animal \t\t Price" << endl;
-    cout << "+-------------------------------------------------------------------------------+" << endl;
+    cout << "|\t\t\t\t\t    MEDICINE    \t\t\t\t\t|" << endl;
+    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+    cout << "|\t\tProduct Name\t\t\t|\tAnimal\t\t|\tPrice\t\t|" << endl;
+    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
 
     for (int i = 0; i < products.size(); i++) {
         if (products[i].category == "Medicine" && products[i].status == "Display") {
-            cout << "\t[" << i << "] " << products[i].name << "\t\t";
+            cout << "|\t[" << i << "] " << products[i].name << "\t\t";
 
             if (products[i].name.length() <= 10) {
                 cout << "\t\t";
@@ -778,20 +1038,20 @@ void medicine() {
                 cout << "\t";
             }
 
-            cout << products[i].animal << "\t\t" << products[i].price << " php" << endl;
+            cout << "|\t" << products[i].animal << "\t\t|\t" << products[i].price << " php\t\t|" << endl;
         }
     }
 
-    cout << "+-------------------------------------------------------------------------------+" << endl;
+    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
 
-    cout << "Input action: ";
+    cout << "\t\t\t\t Input action: ";
     cin >> choose; 
-
-    cout << "+-------------------------------------------------------------------------------+" << endl;
 
     if (checkInput(choose) == "alpha" && choose.length() == 1) {
         if (loginEmail == "admin") menuAdmin(choose);
         else menuCustomer(choose);
+
+        medicine();
 
     } else if (checkInput(choose) == "number" && products.size() > stoi(choose) && products[stoi(choose)].category == "Food") {
         viewItem(stoi(choose));
@@ -810,11 +1070,10 @@ void viewItem(int p_num) {
 
     cout << products[p_num].name << endl;
 
-    cout << "Input action: ";
+    cout << "\t\t\t\t Input action: ";
     cin >> choose; 
 
     menuCustomer(choose);
-
 }
 
 void cart() {
@@ -831,31 +1090,18 @@ void checkout() {
 
 }
 
-bool checkAccount(string accountType) {
-    return accountType.empty();
-}
-
 string checkInput(string choose) {
     bool only_alpha = false, only_digit = false;
 
     for (char c : choose) {
-        if (isalpha(c)) {
-            only_alpha = true;  // The character is not alphabetical
-        }
-        else if (isdigit(c)) {
-            only_digit = true;  // The character is not a digit
-        }
+        if (isalpha(c)) only_alpha = true;  // The character is not alphabetical
+        else if (isdigit(c)) only_digit = true;  // The character is not a digit
     }
 
-    if (only_alpha && only_digit) {
-        return "invalid";
-        
-    } else if (only_alpha) {
-        return "alpha";
-        
-    } else if (only_digit) {
-        return "number";
-    }
+    if (only_alpha) return "alpha";
+    else if (only_digit) return "number";
+
+    return "invalid";
 }
 
 int getRandomNumber(const vector<Product>& vec) {
@@ -864,6 +1110,7 @@ int getRandomNumber(const vector<Product>& vec) {
 
 void invalidInput() {
 
+    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
     cout << "Invalid input, please try again" << endl;
     Sleep(3000);
 }
