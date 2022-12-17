@@ -151,6 +151,7 @@ int main() {
 
 void displayMenu() {
     system("cls");
+    SetConsoleOutputCP(CP_UTF8);
 
     if (loginEmail == "admin") {//menu of admin-----+---------------+
         cout << "+-----------------------------------------------------------------------------------------------+" << endl;
@@ -890,7 +891,7 @@ void homeCustomer() {
                 cout << "\t";
             }
 
-            cout << "|\t" << products[index].animal << "\t\t|\t" << products[index].price << " php\t\t|" << endl;
+            cout << "|\t" << products[index].animal << "\t\t|\t₱ " << products[index].price << "\t\t|" << endl;
         }
     }
 
@@ -939,7 +940,7 @@ void foods() {
                 cout << "\t";
             }
 
-            cout << "|\t" << products[i].animal << "\t\t|\t" << products[i].price << " php\t\t|" << endl;
+            cout << "|\t" << products[i].animal << "\t\t|\t₱ " << products[i].price << "\t\t|" << endl;
         }
     }
 
@@ -989,7 +990,7 @@ void equipments() {
                 cout << "\t";
             }
 
-            cout << "|\t" << products[i].animal << "\t\t|\t" << products[i].price << " php\t\t|" << endl;
+            cout << "|\t" << products[i].animal << "\t\t|\t₱ " << products[i].price << "\t\t|" << endl;
         }
     }
 
@@ -1038,7 +1039,7 @@ void medicine() {
                 cout << "\t";
             }
 
-            cout << "|\t" << products[i].animal << "\t\t|\t" << products[i].price << " php\t\t|" << endl;
+            cout << "|\t" << products[i].animal << "\t\t|\t₱ " << products[i].price << "\t\t|" << endl;
         }
     }
 
