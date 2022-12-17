@@ -7,7 +7,11 @@
 #include <cctype>
 #include <set>
 #include <cstdlib> 
-#include <ctime> 
+#include <ctime>
+#include <conio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <iterator>
 
 using namespace std;
 
@@ -17,6 +21,39 @@ struct Account {
     string password;
     string status;
 };
+// THIS CODES IS FOR ADMIN SEARCH ACCOUNT
+ bool contains(const string& str, const string& searchTerm) {
+    return str.find(searchTerm) != string::npos;
+    }
+    //for searching accounts
+vector<Account> search(const vector<Account>& accounts, const string& searchTerm) {
+    vector<Account> results;
+
+    // Convert the search term to lower case
+    string lowerCaseSearchTerm = searchTerm;
+    transform(lowerCaseSearchTerm.begin(), lowerCaseSearchTerm.end(), lowerCaseSearchTerm.begin(), ::tolower);
+    
+    for (const auto& account : accounts) {
+
+        // Convert the accounts username, email, and status to lower case
+        string lowerCaseUserName = account.username;
+        transform(lowerCaseUserName.begin(), lowerCaseUserName.end(), lowerCaseUserName.begin(), ::tolower);
+        string lowerCaseEmail = account.email;
+        transform(lowerCaseEmail.begin(), lowerCaseEmail.end(), lowerCaseEmail.begin(), ::tolower);
+        string lowerCaseStatus = account.status;
+        transform(lowerCaseStatus.begin(), lowerCaseStatus.end(), lowerCaseStatus.begin(), ::tolower);
+
+        // Search the lower case version of the account username, email, and status
+        if (contains(lowerCaseUserName, lowerCaseSearchTerm) ||
+            contains(lowerCaseEmail, lowerCaseSearchTerm) ||
+            contains(lowerCaseStatus, lowerCaseSearchTerm)) {
+            results.push_back(account);
+        }
+    }
+
+    return results;
+}
+
 
 struct Product {
     string name;
@@ -27,6 +64,43 @@ struct Product {
     int stock;
     string status;
 };
+
+// Product Searching
+    bool containss(const string& str, const string& searchProd) {
+    return str.find(searchProd) != string::npos;
+    }
+    // Product Searching
+    vector<Product> search(const vector<Product>& products, const string& searchProd){
+    vector<Product> results;
+
+     // Convert the search term to lower case
+    string lowerCaseSearchProd = searchProd;
+    transform(lowerCaseSearchProd.begin(), lowerCaseSearchProd.end(), lowerCaseSearchProd.begin(), ::tolower);
+    
+    for (const auto& product : products) {
+
+        // Convert the products name, category,animals, and description to lower case
+        string lowerCaseName = product.name;
+        transform(lowerCaseName.begin(), lowerCaseName.end(), lowerCaseName.begin(), ::tolower);
+        string lowerCaseCategory = product.category;
+        transform(lowerCaseCategory.begin(), lowerCaseCategory.end(), lowerCaseCategory.begin(), ::tolower);
+        string lowerCaseAnimal = product.animal;
+        transform(lowerCaseAnimal.begin(), lowerCaseAnimal.end(), lowerCaseAnimal.begin(), ::tolower);
+        string lowerCaseDescription = product.description;
+        transform(lowerCaseDescription.begin(), lowerCaseDescription.end(), lowerCaseDescription.begin(), ::tolower);
+
+        // Search the lower case version of the product  name, category,animals, and description
+        if (contains(lowerCaseName, lowerCaseSearchProd) ||
+            contains(lowerCaseCategory, lowerCaseSearchProd) ||
+            contains(lowerCaseAnimal, lowerCaseSearchProd) ||
+            contains(lowerCaseDescription, lowerCaseSearchProd)) {
+            results.push_back(product);
+        }
+    }
+
+        return results;
+    }
+
 
 vector<Account> accounts;
 vector<Product> products;
@@ -42,6 +116,8 @@ void registration();
 void accountProfile();
 void homeAdmin();
 void searchAdmin();
+void searchAcc();
+void searchProducts();
 void viewAccounts();
 void editAccount(int accNumber);
 void viewInventory();
@@ -556,10 +632,74 @@ void homeAdmin() {
 }
 
 void searchAdmin() {
+   int opt = 0;
+    string searchTerm;
+    system("cls");
     displayMenu();
+    cout << "|\t\t\t\t\t\tSEARCH\t\t\t\t\t\t|" << endl;
+    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+    cout << "|\t\t\t\t\t Search Window \t\t\t\t\t\t|" << endl;
+    cout << "|\t\t[1] Accounts\t|\t ";
+    cout << "[2] Products\t\t|\t\t [3] Back \t\t\t |" << endl;
+    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+    cout << "\t\t\t\t Action: ";
+    cin >> opt;
+    switch (opt){
+        case 1: searchAcc();
+        case 2: searchProducts();
+        case 3: login();
+        default:
+            cout << "Input Invalid !";
+            getch(); 
+            searchAdmin();
+                }
 
-    cout << "search"; 
+}
 
+void searchAcc(){
+    string searchTerm;
+    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+                cout << "\t\t\t Enter a Search Term:  ";
+                cin >> searchTerm;
+                vector<Account> results = search(accounts, searchTerm);
+                
+                cout << "Search results:" << endl;
+                cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+                cout << "|\tUsername\t\t|\tEmail\t\t\t|\t\tStatus\t\t|" << endl;
+                //looping for result
+                for (const auto& account : results) {
+                cout << "|\t" << account.username << "\t\t|\t\t" <<account.email << "\t|\t" << account.status << "\t\t|" << endl;
+                    }
+                         cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+                        getch();
+}
+void searchProducts(){
+    string searchProd;
+        cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+        cout << "\t\t\t Enter a Search Term:  ";
+        cin >> searchProd;
+        vector<Product> results = search(products, searchProd);
+
+        cout << "Search results:" << endl;
+        cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+        cout << "|\t\tName\t\t\t|\tCategory\t|\tAnimal\t\t|\tPrice\t\t|";
+       
+        for (int i = 0; i < results.size(); i++){
+            if (results[i].name.length() <= 1) {
+                cout << "\t\t";
+
+            } else if (results[i].name.length() <= 19 && i < 10) {
+                cout << "\t";
+                
+            } else if (results[i].name.length() <= 18 && i >= 10) {
+                cout << "\t";
+            }
+            cout << endl;
+            cout << "|\t" << results[i].name << "\t\t|\t" << results[i].category << "\t\t|\t" << results[i].animal << "\t\t|\t" << results[i].price << " php\t\t|" << endl;
+        }
+    
+             cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+            getch();
 }
 
 void viewAccounts() {
@@ -869,9 +1009,7 @@ void menuCustomer(string choose) {
 
 void searchCustomer() {
     displayMenu();
-
-    cout << "search"; 
-
+    searchProducts();
 }
 
 void homeCustomer() {
