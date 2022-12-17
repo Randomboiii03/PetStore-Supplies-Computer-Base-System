@@ -94,56 +94,56 @@ int main() {
     products.push_back({"Cage", "Equipment", "Cat", "Collapsible cage", 399, 30, "Display"});
     products.push_back({"Litter Sand (10 L)", "Equipment", "Cat", "Lavender scent", 250, 30, "Display"});
 
-    // Add products for "dog" to the vector
-    products.push_back({"Nutrichunks (500 g)", "Food", "Dog", "", 250, 30, "Display"});
-    products.push_back({"Vitalamb (1kg)", "Food", "Dog", "", 102, 30, "Display"});
-    products.push_back({"Pedigree (1kg)", "Food", "Dog", "", 146, 30, "Display"});
-    products.push_back({"Top Breed (1kg)", "Food", "Dog", "", 99, 30, "Display"});
-    products.push_back({"Royal Canin (500g)", "Food", "Dog", "", 179, 30, "Display"});
-    products.push_back({"Pedigree Pouch (30g)", "Food", "Dog", "", 32, 30, "Display"});
-    products.push_back({"Jerhigh Pouch (120g)", "Food", "Dog", "", 50, 30, "Display"});
-    products.push_back({"SmartHeart Pouch (80g)", "Food", "Dog", "", 39, 30, "Display"});
-    products.push_back({"Himalayan (100ml)", "Medicine", "Dog", "", 265, 30, "Display"});
-    products.push_back({"Multivitamins (120 ml)", "Medicine", "Dog", "", 118, 30, "Display"});
-    products.push_back({"Nematocide (15ml)", "Medicine", "Dog", "", 115, 30, "Display"});
-    products.push_back({"Papi Doxy (60 ml)", "Medicine", "Dog", "", 107, 30, "Display"});
-    products.push_back({"Nexgard (260 g)", "Medicine", "Dog", "", 419, 30, "Display"});
-    products.push_back({"Wormgard (150 mg)", "Medicine", "Dog", "", 165, 30, "Display"});
-    products.push_back({"Simparica trio (120 mg)", "Medicine", "Dog", "", 495, 30, "Display"});
-    products.push_back({"Bravecto (98 mg)", "Medicine", "Dog", "", 394, 30, "Display"});
-    products.push_back({"Dog bowl", "Equipment", "Dog", "", 75, 30, "Display"});
-    products.push_back({"Dog bed", "Equipment", "Dog", "", 181, 30, "Display"});
-    products.push_back({"Dog backpack ", "Equipment", "Dog", "", 189, 30, "Display"});
-    products.push_back({"Dog collar", "Equipment", "Dog", "", 98, 30, "Display"});
-    products.push_back({"Clothes", "Equipment", "Dog", "", 125, 30, "Display"});
-    products.push_back({"Diaper", "Equipment", "Dog", "", 65, 30, "Display"});
-    products.push_back({"Muzzles", "Equipment", "Dog", "", 89, 30, "Display"});
-    products.push_back({"Dog crate", "Equipment", "Dog", "", 120, 30, "Display"});
+   // Add products for "dog" to the vector
+    products.push_back({"Nutrichunks (500 g)", "Food", "Dog", "12 months old above", 250, 30, "Display"});
+    products.push_back({"Vitalamb (1kg)", "Food", "Dog", "15 months old above", 102, 30, "Display"});
+    products.push_back({"Pedigree (1kg)", "Food", "Dog", "4 weeks old above", 146, 30, "Display"});
+    products.push_back({"Top Breed (1kg)", "Food", "Dog", "4 months old above", 99, 30, "Display"});
+    products.push_back({"Royal Canin (500g)", "Food", "Dog", "ten months old above", 179, 30, "Display"});
+    products.push_back({"Pedigree Pouch (30g)", "Food", "Dog", "3 weeks old above", 32, 30, "Display"});
+    products.push_back({"Jerhigh Pouch (120g)", "Food", "Dog", "2 months old above", 50, 30, "Display"});
+    products.push_back({"SmartHeart Pouch (80g)", "Food", "Dog", "2 months old above", 39, 30, "Display"});
+    products.push_back({"Himalaya (100ml)", "Medicine", "Dog", "treats for liver, kidney, digestive, etc.", 265, 30, "Display"});
+    products.push_back({"Multivitamins (120 ml)", "Medicine", "Dog", "12 weeks above", 118, 30, "Display"});
+    products.push_back({"Nematocide (15ml)", "Medicine", "Dog", "against roundworms & hookworms", 115, 30, "Display"});
+    products.push_back({"Doxycycline (60 ml)", "Medicine", "Dog", "tetracycline antibiotic for anaplasma, heartworm & periodontal disease", 107, 30, "Display"});
+    products.push_back({"Nexgard (260 g)", "Medicine", "Dog", "protection for fleas, ticks & mites", 419, 30, "Display"});
+    products.push_back({"Wormgard (150 mg)", "Medicine", "Dog", "for control of all gastrointestinal worms", 165, 30, "Display"});
+    products.push_back({"Simparica trio (120 mg)", "Medicine", "Dog", "against naturally occurring flea & tick infestations", 495, 30, "Display"});
+    products.push_back({"Bravecto (98 mg)", "Medicine", "Dog", "for parasites", 394, 30, "Display"});
+    products.push_back({"Dog bowl", "Equipment", "Dog", "for placement of dog food & water", 75, 30, "Display"});
+    products.push_back({"Dog bed", "Equipment", "Dog", "for comfortable god sleep", 181, 30, "Display"});
+    products.push_back({"Dog backpack ", "Equipment", "Dog", "for owner's dog carrier", 189, 30, "Display"});
+    products.push_back({"Dog collar", "Equipment", "Dog", "for dog's restraint & protection", 98, 30, "Display"});
+    products.push_back({"Clothes", "Equipment", "Dog", "for dog's fashion & cold protection", 125, 30, "Display"});
+    products.push_back({"Diaper", "Equipment", "Dog", "for dog's urinary incontinence", 65, 30, "Display"});
+    products.push_back({"Muzzles", "Equipment", "Dog", "preventive equipment for dog's violence", 89, 30, "Display"});
+    products.push_back({"Dog crate", "Equipment", "Dog", "for dog's confinement", 120, 30, "Display"});
 
     // Add products for "fish" to the vector
-    products.push_back({"Fish flakes (20 g)", "Food", "Fish", "", 160, 30, "Display"});
-    products.push_back({"Fish pellets (50 g)", "Food", "Fish", "", 67, 30, "Display"});
-    products.push_back({"Pimafix (16 oz)", "Medicine", "Fish", "", 370, 30, "Display"});
-    products.push_back({"Aqua Guard (1L)", "Medicine", "Fish", "", 93, 30, "Display"});
-    products.push_back({"API Melafix (16 oz)", "Medicine", "Fish", "", 350, 30, "Display"});
-    products.push_back({"Paracidol-Fw (100ml)", "Medicine", "Fish", "", 124, 30, "Display"});
-    products.push_back({"Air pump", "Equipment", "Fish", "", 135, 30, "Display"});
-    products.push_back({"Aquarium (5 gal)", "Equipment", "Fish", "", 290, 30, "Display"});
-    products.push_back({"Aquarium heater (50w)", "Equipment", "Fish", "", 199, 30, "Display"});
+    products.push_back({"Fish flakes (20 g)", "Food", "Fish", "all ages of fish", 160, 30, "Display"});
+    products.push_back({"Fish pellets (50 g)", "Food", "Fish", "all ages of fish", 67, 30, "Display"});
+    products.push_back({"Pimafix (16 oz)", "Medicine", "Fish", "for fungal infections", 370, 30, "Display"});
+    products.push_back({"Aqua Guard (1L)", "Medicine", "Fish", "purifier for high water savings", 93, 30, "Display"});
+    products.push_back({"API Melafix (16 oz)", "Medicine", "Fish", "all- natural antibacterial treatment for fish infections", 350, 30, "Display"});
+    products.push_back({"Paracidol-Fw (100ml)", "Medicine", "Fish", "for external & internal parasitic infection", 124, 30, "Display"});
+    products.push_back({"Air pump", "Equipment", "Fish", "promotes gas exchange at water surface", 135, 30, "Display"});
+    products.push_back({"Aquarium (5 gal)", "Equipment", "Fish", "artificial habitats for fish", 290, 30, "Display"});
+    products.push_back({"Aquarium heater (50w)", "Equipment", "Fish", "keeps aquarium temperature warm", 199, 30, "Display"});
 
     // Add products for "bird" to the vector
-    products.push_back({"Bird seed mix (1k)", "Food", "Bird", "", 30, 30, "Display"});
-    products.push_back({"African mix (1k)", "Food", "Bird", "", 75, 30, "Display"});
-    products.push_back({"Parakeet (500 g)", "Food", "Bird", "", 245, 30, "Display"});
-    products.push_back({"Premium mix (1k)", "Food", "Bird", "", 68, 30, "Display"});
-    products.push_back({"Mynah bird food (1kg)", "Food", "Bird", "", 195, 30, "Display"});
-    products.push_back({"Baytril (12,5 ml)", "Medicine", "Bird", "", 240, 30, "Display"});
-    products.push_back({"Amtyl (500 g)", "Medicine", "Bird", "", 150, 30, "Display"});
-    products.push_back({"Enrofloxacin (20 ml)", "Medicine", "Bird", "", 279, 30, "Display"});
-    products.push_back({"Pikoy BACTI Bird (10 ml)", "Medicine", "Bird", "", 148, 30, "Display"});
-    products.push_back({"Aviator Harness & Leash", "Equipment", "Bird", "", 143, 30, "Display"});
-    products.push_back({"Bird cage", "Equipment", "Bird", "", 500, 30, "Display"});
-    products.push_back({"Bird feeder", "Equipment", "Bird", "", 113, 30, "Display"});
+    products.push_back({"Bird seed mix (1k)", "Food", "Bird", "for all ages of bird", 30, 30, "Display"});
+    products.push_back({"African mix (1k)", "Food", "Bird", "for all ages of bird", 75, 30, "Display"});
+    products.push_back({"Parakeet (500 g)", "Food", "Bird", "for all ages of bird", 245, 30, "Display"});
+    products.push_back({"Premium mix (1k)", "Food", "Bird", "for all ages of bird", 68, 30, "Display"});
+    products.push_back({"Mynah bird food (1kg)", "Food", "Bird", "for all ages of bird", 195, 30, "Display"});
+    products.push_back({"Baytril (12,5 ml)", "Medicine", "Bird", "for bacterial infections", 240, 30, "Display"});
+    products.push_back({"Amtyl (500 g)", "Medicine", "Bird", "for prevention of CRD & fowl pox", 150, 30, "Display"});
+    products.push_back({"Enrofloxacin (20 ml)", "Medicine", "Bird", "for bacterial infections", 279, 30, "Display"});
+    products.push_back({"Pikoy BACTI Bird (10 ml)", "Medicine", "Bird", "for bird's systemic & bacterial infections", 148, 30, "Display"});
+    products.push_back({"Aviator Harness & Leash", "Equipment", "Bird", "for safely taking bird outside", 143, 30, "Display"});
+    products.push_back({"Bird cage", "Equipment", "Bird", "protects bird from getting out", 500, 30, "Display"});
+    products.push_back({"Bird feeder", "Equipment", "Bird", "equipment for placing bird food", 113, 30, "Display"});
 
 
     homeCustomer();
