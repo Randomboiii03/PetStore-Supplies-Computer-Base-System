@@ -5,7 +5,8 @@
         "string": "cpp",
         "xstring": "cpp",
         "ostream": "cpp",
-        "xlocale": "cpp"
+        "xlocale": "cpp",
+        "algorithm": "cpp"
     },
     "debug.terminal.clearBeforeReusing": true,
     "editor.fontFamily": "Consolas, 'Courier New', monospace, Segoe UI Emoji"

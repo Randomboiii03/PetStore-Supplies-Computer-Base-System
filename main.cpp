@@ -21,39 +21,6 @@ struct Account {
     string password;
     string status;
 };
-// THIS CODES IS FOR ADMIN SEARCH ACCOUNT
- bool contains(const string& str, const string& searchTerm) {
-    return str.find(searchTerm) != string::npos;
-    }
-    //for searching accounts
-vector<Account> search(const vector<Account>& accounts, const string& searchTerm) {
-    vector<Account> results;
-
-    // Convert the search term to lower case
-    string lowerCaseSearchTerm = searchTerm;
-    transform(lowerCaseSearchTerm.begin(), lowerCaseSearchTerm.end(), lowerCaseSearchTerm.begin(), ::tolower);
-    
-    for (const auto& account : accounts) {
-
-        // Convert the accounts username, email, and status to lower case
-        string lowerCaseUserName = account.username;
-        transform(lowerCaseUserName.begin(), lowerCaseUserName.end(), lowerCaseUserName.begin(), ::tolower);
-        string lowerCaseEmail = account.email;
-        transform(lowerCaseEmail.begin(), lowerCaseEmail.end(), lowerCaseEmail.begin(), ::tolower);
-        string lowerCaseStatus = account.status;
-        transform(lowerCaseStatus.begin(), lowerCaseStatus.end(), lowerCaseStatus.begin(), ::tolower);
-
-        // Search the lower case version of the account username, email, and status
-        if (contains(lowerCaseUserName, lowerCaseSearchTerm) ||
-            contains(lowerCaseEmail, lowerCaseSearchTerm) ||
-            contains(lowerCaseStatus, lowerCaseSearchTerm)) {
-            results.push_back(account);
-        }
-    }
-
-    return results;
-}
-
 
 struct Product {
     string name;
@@ -100,8 +67,9 @@ bool checkAccount(string accountType);
 string checkInput(string choose);
 int getRandomNumber(const vector<Product>& vec);
 void invalidInput();
-vector<Product> search(const vector<Product>& products, const string& searchProd);
 bool contains(const string& str, const string& searchProd);
+template <typename T>
+vector<T> search(const vector<T>& products, const string& searchProd);
 
 int main() {
 
@@ -1229,9 +1197,8 @@ bool contains(const string& str, const string& searchProd) {
     return str.find(searchProd) != string::npos;
 }
 
-// Product Searching
-vector<Product> search(const vector<Product>& products, const string& searchProd) {
-    vector<Product> results;
+template <typename T>
+vector<T> search(const vector<T>& products, const string& searchProd) {
 
      // Convert the search term to lower case
     string lowerCaseSearchProd = searchProd;
