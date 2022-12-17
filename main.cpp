@@ -154,18 +154,36 @@ void displayMenu() {
     SetConsoleOutputCP(CP_UTF8);
 
     if (loginEmail == "admin") {//menu of admin-----+---------------+
-        cout << "+-----------------------------------------------------------------------------------------------+" << endl;
-        cout << "|\t\t\t [S] Search\t\t|\t\t[A] Account\t\t\t|" << endl;
-        cout << "+-----------------------------------------------------------------------------------------------+" << endl;
-        cout << "|\t\t[C] Accounts \t|\t   [I] Products    \t|\t[O] Checkouts\t\t|" << endl;
-        cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+        cout << "┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓" << endl;
+        cout << "┃\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t┃" << endl;
+        cout << "┃\t\t\t\t██████╗░███████╗████████╗░░███████╗██╗░░██╗██████╗░██████╗░███████╗░██████╗░██████╗\t\t\t\t┃" << endl;
+        cout << "┃\t\t\t\t██╔══██╗██╔════╝╚══██╔══╝░░██╔════╝╚██╗██╔╝██╔══██╗██╔══██╗██╔════╝██╔════╝██╔════╝\t\t\t\t┃" << endl;
+        cout << "┃\t\t\t\t██████╔╝█████╗░░░░░██║░░░░░█████╗░░░╚███╔╝░██████╔╝██████╔╝█████╗░░╚█████╗░╚█████╗░\t\t\t\t┃" << endl;
+        cout << "┃\t\t\t\t██╔═══╝░██╔══╝░░░░░██║░░░░░██╔══╝░░░██╔██╗░██╔═══╝░██╔══██╗██╔══╝░░░╚═══██╗░╚═══██╗\t\t\t\t┃" << endl;
+        cout << "┃\t\t\t\t██║░░░░░███████╗░░░██║░░░░░███████╗██╔╝╚██╗██║░░░░░██║░░██║███████╗██████╔╝██████╔╝\t\t\t\t┃" << endl;
+        cout << "┃\t\t\t\t╚═╝░░░░░╚══════╝░░░╚═╝░░░░░╚══════╝╚═╝░░╚═╝╚═╝░░░░░╚═╝░░╚═╝╚══════╝╚═════╝░╚═════╝░\t\t\t\t┃" << endl;
+        cout << "┃\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t┃" << endl;
+        cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+        cout << "┃\t\t\t\t\t\t\t\t\t┃\t\t\t\t\t\t\t\t\t┃" << endl;
+        cout << "┃\t\t\t[S] Search\t[A] Account\t\t\t┃\t\t[C] Accounts\t[I] Products\t[O] Checkouts\t\t┃" << endl;
+        cout << "┃\t\t\t\t\t\t\t\t\t┃\t\t\t\t\t\t\t\t\t┃" << endl;
+        cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
         
-    } else {//menu of  customer
-        cout << "+-----------------------------------------------------------------------------------------------+" << endl;
-        cout << "|\t[H] Home   \t|\t[S] Search\t|\t[A] Account\t|\t[C] Cart   \t|" << endl;
-        cout << "+-----------------------------------------------------------------------------------------------+" << endl;
-        cout << "|\t\t[F] Foods    \t|\t    [Q] Equipment    \t|\t[M] Medicine \t\t|" << endl;
-        cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+    } else {//menu of customer
+        cout << "┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓" << endl;
+        cout << "┃\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t┃" << endl;
+        cout << "┃\t\t\t\t██████╗░███████╗████████╗░░███████╗██╗░░██╗██████╗░██████╗░███████╗░██████╗░██████╗\t\t\t\t┃" << endl;
+        cout << "┃\t\t\t\t██╔══██╗██╔════╝╚══██╔══╝░░██╔════╝╚██╗██╔╝██╔══██╗██╔══██╗██╔════╝██╔════╝██╔════╝\t\t\t\t┃" << endl;
+        cout << "┃\t\t\t\t██████╔╝█████╗░░░░░██║░░░░░█████╗░░░╚███╔╝░██████╔╝██████╔╝█████╗░░╚█████╗░╚█████╗░\t\t\t\t┃" << endl;
+        cout << "┃\t\t\t\t██╔═══╝░██╔══╝░░░░░██║░░░░░██╔══╝░░░██╔██╗░██╔═══╝░██╔══██╗██╔══╝░░░╚═══██╗░╚═══██╗\t\t\t\t┃" << endl;
+        cout << "┃\t\t\t\t██║░░░░░███████╗░░░██║░░░░░███████╗██╔╝╚██╗██║░░░░░██║░░██║███████╗██████╔╝██████╔╝\t\t\t\t┃" << endl;
+        cout << "┃\t\t\t\t╚═╝░░░░░╚══════╝░░░╚═╝░░░░░╚══════╝╚═╝░░╚═╝╚═╝░░░░░╚═╝░░╚═╝╚══════╝╚═════╝░╚═════╝░\t\t\t\t┃" << endl;
+        cout << "┃\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t┃" << endl;
+        cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+        cout << "┃\t\t\t\t\t\t\t\t\t┃\t\t\t\t\t\t\t\t\t┃" << endl;
+        cout << "┃\t\t[S] Search\t[A] Account\t[C] Cart\t\t┃\t[H] Home\t[F] Foods\t[Q] Equipment\t[M] Medicine\t┃" << endl;
+        cout << "┃\t\t\t\t\t\t\t\t\t┃\t\t\t\t\t\t\t\t\t┃" << endl;
+        cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
     }
 }
 
@@ -864,10 +882,13 @@ void homeCustomer() {
     srand(time(nullptr));
     set<int> selected;
 
-    cout << "|\t\t\t\t\t\tHOME\t\t\t\t\t\t|" << endl;
-    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
-    cout << "|\t\tProduct Name\t\t\t|\tAnimal\t\t|\tPrice\t\t|" << endl;
-    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+    cout << "┃\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t┃" << endl;
+    cout << "┃\t\t\t\t\t\t\t\t      HOME          \t\t\t\t\t\t\t\t┃" << endl;
+    cout << "┃\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t┃" << endl;
+    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+    cout << "┃\t\t\t\tProduct Name\t\t\t\t┃\t\t  Animal      \t\t┃\t      Price  \t\t┃" << endl;
+    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+    cout << "┃\t\t\t\t\t\t\t\t\t┃\t\t\t\t\t┃\t\t\t\t┃" << endl;
 
     for (int i = 0; i < 10; ++i) {
         int index = getRandomNumber(products);
@@ -879,7 +900,7 @@ void homeCustomer() {
         selected.insert(index);
 
         if (products[index].status == "Display") {
-            cout << "|\t[" << index << "] " << products[index].name << "\t\t";
+            cout << "┃\t\t\t[" << index << "] " << products[index].name << "\t\t\t";
 
             if (products[index].name.length() <= 10) {
                 cout << "\t\t";
@@ -891,14 +912,17 @@ void homeCustomer() {
                 cout << "\t";
             }
 
-            cout << "|\t" << products[index].animal << "\t\t|\t₱ " << products[index].price << "\t\t|" << endl;
+            cout << "┃\t\t   " << products[index].animal << "     \t\t┃\t      ₱ " << products[index].price << "  \t\t┃" << endl;
         }
     }
 
-    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+    cout << "┃\t\t\t\t\t\t\t\t\t┃\t\t\t\t\t┃\t\t\t\t┃" << endl;
+    cout << "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
 
     cout << "\t\t\t\t Input action: ";
     cin >> choose;
+
+    cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
 
     if (checkInput(choose) == "alpha" && choose.length() == 1) {
         if (loginEmail == "admin") menuAdmin(choose);
@@ -921,14 +945,16 @@ void foods() {
     string choose;
 
     displayMenu();
-    cout << "|\t\t\t\t\t\tFOODS\t\t\t\t\t\t|" << endl;
-    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
-    cout << "|\t\tProduct Name\t\t\t|\tAnimal\t\t|\tPrice\t\t|" << endl;
-    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+
+    cout << "┃\t\t\t\t\t\t\t\t      FOODS         \t\t\t\t\t\t\t\t┃" << endl;
+    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+    cout << "┃\t\t\t\tProduct Name\t\t\t\t┃\t\t  Animal      \t\t┃\t      Price  \t\t┃" << endl;
+    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+    cout << "┃\t\t\t\t\t\t\t\t\t┃\t\t\t\t\t┃\t\t\t\t┃" << endl;
 
     for (int i = 0; i < products.size(); i++) {
         if (products[i].category == "Food" && products[i].status == "Display") {
-            cout << "|\t[" << i << "] " << products[i].name << "\t\t";
+            cout << "┃\t\t\t[" << i << "] " << products[i].name << "\t\t\t";
 
             if (products[i].name.length() <= 10) {
                 cout << "\t\t";
@@ -940,14 +966,17 @@ void foods() {
                 cout << "\t";
             }
 
-            cout << "|\t" << products[i].animal << "\t\t|\t₱ " << products[i].price << "\t\t|" << endl;
+            cout << "┃\t\t   " << products[i].animal << "     \t\t┃\t      ₱ " << products[i].price << "  \t\t┃" << endl;
         }
     }
 
-    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+    cout << "┃\t\t\t\t\t\t\t\t\t┃\t\t\t\t\t┃\t\t\t\t┃" << endl;
+    cout << "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
 
     cout << "\t\t\t\t Input action: ";
     cin >> choose; 
+
+    cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
 
     if (checkInput(choose) == "alpha" && choose.length() == 1) {
         if (loginEmail == "admin") menuAdmin(choose);
@@ -971,14 +1000,15 @@ void equipments() {
 
     displayMenu();
     
-    cout << "|\t\t\t\t\t    EQUIPMENTS    \t\t\t\t\t|" << endl;
-    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
-    cout << "|\t\tProduct Name\t\t\t|\tAnimal\t\t|\tPrice\t\t|" << endl;
-    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+    cout << "┃\t\t\t\t\t\t\t\t   EQUIPMENTS       \t\t\t\t\t\t\t\t┃" << endl;
+    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+    cout << "┃\t\t\t\tProduct Name\t\t\t\t┃\t\t  Animal      \t\t┃\t      Price  \t\t┃" << endl;
+    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+    cout << "┃\t\t\t\t\t\t\t\t\t┃\t\t\t\t\t┃\t\t\t\t┃" << endl;
 
     for (int i = 0; i < products.size(); i++) {
         if (products[i].category == "Equipment" && products[i].status == "Display") {
-            cout << "|\t[" << i << "] " << products[i].name << "\t\t";
+            cout << "┃\t\t\t[" << i << "] " << products[i].name << "\t\t\t";
 
             if (products[i].name.length() <= 10) {
                 cout << "\t\t";
@@ -990,14 +1020,17 @@ void equipments() {
                 cout << "\t";
             }
 
-            cout << "|\t" << products[i].animal << "\t\t|\t₱ " << products[i].price << "\t\t|" << endl;
+            cout << "┃\t\t   " << products[i].animal << "     \t\t┃\t      ₱ " << products[i].price << "  \t\t┃" << endl;
         }
     }
 
-    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+    cout << "┃\t\t\t\t\t\t\t\t\t┃\t\t\t\t\t┃\t\t\t\t┃" << endl;
+    cout << "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
 
     cout << "\t\t\t\t Input action: ";
     cin >> choose; 
+
+    cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
 
     if (checkInput(choose) == "alpha" && choose.length() == 1) {
         if (loginEmail == "admin") menuAdmin(choose);
@@ -1005,7 +1038,7 @@ void equipments() {
         
         equipments();
 
-    } else if (checkInput(choose) == "number" && products.size() > stoi(choose) && products[stoi(choose)].category == "Food") {
+    } else if (checkInput(choose) == "number" && products.size() > stoi(choose) && products[stoi(choose)].category == "Equipment") {
         viewItem(stoi(choose));
 
     } else {
@@ -1020,14 +1053,15 @@ void medicine() {
 
     displayMenu();
 
-    cout << "|\t\t\t\t\t    MEDICINE    \t\t\t\t\t|" << endl;
-    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
-    cout << "|\t\tProduct Name\t\t\t|\tAnimal\t\t|\tPrice\t\t|" << endl;
-    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+    cout << "┃\t\t\t\t\t\t\t\t     MEDICINE         \t\t\t\t\t\t\t\t┃" << endl;
+    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+    cout << "┃\t\t\t\tProduct Name\t\t\t\t┃\t\t  Animal      \t\t┃\t      Price  \t\t┃" << endl;
+    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+    cout << "┃\t\t\t\t\t\t\t\t\t┃\t\t\t\t\t┃\t\t\t\t┃" << endl;
 
     for (int i = 0; i < products.size(); i++) {
         if (products[i].category == "Medicine" && products[i].status == "Display") {
-            cout << "|\t[" << i << "] " << products[i].name << "\t\t";
+            cout << "┃\t\t\t[" << i << "] " << products[i].name << "\t\t\t";
 
             if (products[i].name.length() <= 10) {
                 cout << "\t\t";
@@ -1039,14 +1073,17 @@ void medicine() {
                 cout << "\t";
             }
 
-            cout << "|\t" << products[i].animal << "\t\t|\t₱ " << products[i].price << "\t\t|" << endl;
+            cout << "┃\t\t   " << products[i].animal << "     \t\t┃\t      ₱ " << products[i].price << "  \t\t┃" << endl;
         }
     }
 
-    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+    cout << "┃\t\t\t\t\t\t\t\t\t┃\t\t\t\t\t┃\t\t\t\t┃" << endl;
+    cout << "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
 
     cout << "\t\t\t\t Input action: ";
     cin >> choose; 
+
+    cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
 
     if (checkInput(choose) == "alpha" && choose.length() == 1) {
         if (loginEmail == "admin") menuAdmin(choose);
@@ -1054,7 +1091,7 @@ void medicine() {
 
         medicine();
 
-    } else if (checkInput(choose) == "number" && products.size() > stoi(choose) && products[stoi(choose)].category == "Food") {
+    } else if (checkInput(choose) == "number" && products.size() > stoi(choose) && products[stoi(choose)].category == "Medicine") {
         viewItem(stoi(choose));
 
     } else {
@@ -1111,7 +1148,6 @@ int getRandomNumber(const vector<Product>& vec) {
 
 void invalidInput() {
 
-    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
     cout << "Invalid input, please try again" << endl;
     Sleep(3000);
 }
