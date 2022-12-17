@@ -65,43 +65,6 @@ struct Product {
     string status;
 };
 
-// Product Searching
-    bool containss(const string& str, const string& searchProd) {
-    return str.find(searchProd) != string::npos;
-    }
-    // Product Searching
-    vector<Product> search(const vector<Product>& products, const string& searchProd){
-    vector<Product> results;
-
-     // Convert the search term to lower case
-    string lowerCaseSearchProd = searchProd;
-    transform(lowerCaseSearchProd.begin(), lowerCaseSearchProd.end(), lowerCaseSearchProd.begin(), ::tolower);
-    
-    for (const auto& product : products) {
-
-        // Convert the products name, category,animals, and description to lower case
-        string lowerCaseName = product.name;
-        transform(lowerCaseName.begin(), lowerCaseName.end(), lowerCaseName.begin(), ::tolower);
-        string lowerCaseCategory = product.category;
-        transform(lowerCaseCategory.begin(), lowerCaseCategory.end(), lowerCaseCategory.begin(), ::tolower);
-        string lowerCaseAnimal = product.animal;
-        transform(lowerCaseAnimal.begin(), lowerCaseAnimal.end(), lowerCaseAnimal.begin(), ::tolower);
-        string lowerCaseDescription = product.description;
-        transform(lowerCaseDescription.begin(), lowerCaseDescription.end(), lowerCaseDescription.begin(), ::tolower);
-
-        // Search the lower case version of the product  name, category,animals, and description
-        if (contains(lowerCaseName, lowerCaseSearchProd) ||
-            contains(lowerCaseCategory, lowerCaseSearchProd) ||
-            contains(lowerCaseAnimal, lowerCaseSearchProd) ||
-            contains(lowerCaseDescription, lowerCaseSearchProd)) {
-            results.push_back(product);
-        }
-    }
-
-        return results;
-    }
-
-
 vector<Account> accounts;
 vector<Product> products;
 
@@ -137,6 +100,8 @@ bool checkAccount(string accountType);
 string checkInput(string choose);
 int getRandomNumber(const vector<Product>& vec);
 void invalidInput();
+vector<Product> search(const vector<Product>& products, const string& searchProd);
+bool contains(const string& str, const string& searchProd);
 
 int main() {
 
@@ -632,16 +597,18 @@ void homeAdmin() {
 }
 
 void searchAdmin() {
-   int opt = 0;
+    int opt = 0;
     string searchTerm;
-    system("cls");
+    
     displayMenu();
+
     cout << "|\t\t\t\t\t\tSEARCH\t\t\t\t\t\t|" << endl;
     cout << "+-----------------------------------------------------------------------------------------------+" << endl;
     cout << "|\t\t\t\t\t Search Window \t\t\t\t\t\t|" << endl;
     cout << "|\t\t[1] Accounts\t|\t ";
     cout << "[2] Products\t\t|\t\t [3] Back \t\t\t |" << endl;
     cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+
     cout << "\t\t\t\t Action: ";
     cin >> opt;
     switch (opt){
@@ -650,9 +617,9 @@ void searchAdmin() {
         case 3: login();
         default:
             cout << "Input Invalid !";
-            getch(); 
+             
             searchAdmin();
-                }
+    }
 
 }
 
@@ -671,8 +638,9 @@ void searchAcc(){
                 cout << "|\t" << account.username << "\t\t|\t\t" <<account.email << "\t|\t" << account.status << "\t\t|" << endl;
                     }
                          cout << "+-----------------------------------------------------------------------------------------------+" << endl;
-                        getch();
+                        
 }
+
 void searchProducts(){
     string searchProd;
         cout << "+-----------------------------------------------------------------------------------------------+" << endl;
@@ -685,21 +653,17 @@ void searchProducts(){
         cout << "|\t\tName\t\t\t|\tCategory\t|\tAnimal\t\t|\tPrice\t\t|";
        
         for (int i = 0; i < results.size(); i++){
-            if (results[i].name.length() <= 1) {
-                cout << "\t\t";
 
-            } else if (results[i].name.length() <= 19 && i < 10) {
-                cout << "\t";
-                
-            } else if (results[i].name.length() <= 18 && i >= 10) {
-                cout << "\t";
-            }
+            if (results[i].name.length() <= 1) cout << "\t\t";
+            else if (results[i].name.length() <= 19 && i < 10) cout << "\t";
+            else if (results[i].name.length() <= 18 && i >= 10) cout << "\t";
+            
             cout << endl;
             cout << "|\t" << results[i].name << "\t\t|\t" << results[i].category << "\t\t|\t" << results[i].animal << "\t\t|\t" << results[i].price << " php\t\t|" << endl;
         }
     
              cout << "+-----------------------------------------------------------------------------------------------+" << endl;
-            getch();
+            
 }
 
 void viewAccounts() {
@@ -873,8 +837,6 @@ void editAccount(int accNumber) {
 
         editAccount(accNumber);
     }
-
-
 }
 
 void viewInventory() {
@@ -1002,13 +964,12 @@ void menuCustomer(string choose) {
 
     } else {
         invalidInput();
-
-        // homeCustomer();
     }
 }
 
 void searchCustomer() {
     displayMenu();
+
     searchProducts();
 }
 
@@ -1040,15 +1001,9 @@ void homeCustomer() {
         if (products[index].status == "Display") {
             cout << "┃\t\t\t[" << index << "] " << products[index].name << "\t\t\t";
 
-            if (products[index].name.length() <= 10) {
-                cout << "\t\t";
-
-            } else if (products[index].name.length() <= 19 && index < 10) {
-                cout << "\t";
-                
-            } else if (products[index].name.length() <= 18 && index >= 10) {
-                cout << "\t";
-            }
+            if (products[index].name.length() <= 10) cout << "\t\t";
+            else if (products[index].name.length() <= 19 && index < 10) cout << "\t";
+            else if (products[index].name.length() <= 18 && index >= 10) cout << "\t";
 
             cout << "┃\t\t   " << products[index].animal << "     \t\t┃\t      ₱ " << products[index].price << "  \t\t┃" << endl;
         }
@@ -1069,7 +1024,6 @@ void homeCustomer() {
         homeCustomer();
 
     } else if (checkInput(choose) == "number" && products.size() > stoi(choose)) {
-
         viewItem(stoi(choose));
 
     } else {
@@ -1094,15 +1048,9 @@ void foods() {
         if (products[i].category == "Food" && products[i].status == "Display") {
             cout << "┃\t\t\t[" << i << "] " << products[i].name << "\t\t\t";
 
-            if (products[i].name.length() <= 10) {
-                cout << "\t\t";
-
-            } else if (products[i].name.length() <= 19 && i < 10) {
-                cout << "\t";
-                
-            } else if (products[i].name.length() <= 18 && i >= 10) {
-                cout << "\t";
-            }
+            if (products[i].name.length() <= 10) cout << "\t\t";
+            else if (products[i].name.length() <= 19 && i < 10) cout << "\t";
+            else if (products[i].name.length() <= 18 && i >= 10) cout << "\t";
 
             cout << "┃\t\t   " << products[i].animal << "     \t\t┃\t      ₱ " << products[i].price << "  \t\t┃" << endl;
         }
@@ -1123,7 +1071,6 @@ void foods() {
         foods();
 
     } else if (checkInput(choose) == "number" && products.size() > stoi(choose) && products[stoi(choose)].category == "Food") {
-
         viewItem(stoi(choose));
 
     } else {
@@ -1148,15 +1095,9 @@ void equipments() {
         if (products[i].category == "Equipment" && products[i].status == "Display") {
             cout << "┃\t\t\t[" << i << "] " << products[i].name << "\t\t\t";
 
-            if (products[i].name.length() <= 10) {
-                cout << "\t\t";
-
-            } else if (products[i].name.length() <= 19 && i < 10) {
-                cout << "\t";
-                
-            } else if (products[i].name.length() <= 18 && i >= 10) {
-                cout << "\t";
-            }
+            if (products[i].name.length() <= 10) cout << "\t\t";
+            else if (products[i].name.length() <= 19 && i < 10) cout << "\t";
+            else if (products[i].name.length() <= 18 && i >= 10) cout << "\t";
 
             cout << "┃\t\t   " << products[i].animal << "     \t\t┃\t      ₱ " << products[i].price << "  \t\t┃" << endl;
         }
@@ -1201,15 +1142,9 @@ void medicine() {
         if (products[i].category == "Medicine" && products[i].status == "Display") {
             cout << "┃\t\t\t[" << i << "] " << products[i].name << "\t\t\t";
 
-            if (products[i].name.length() <= 10) {
-                cout << "\t\t";
-
-            } else if (products[i].name.length() <= 19 && i < 10) {
-                cout << "\t";
-                
-            } else if (products[i].name.length() <= 18 && i >= 10) {
-                cout << "\t";
-            }
+            if (products[i].name.length() <= 10) cout << "\t\t";
+            else if (products[i].name.length() <= 19 && i < 10) cout << "\t";
+            else if (products[i].name.length() <= 18 && i >= 10) cout << "\t";
 
             cout << "┃\t\t   " << products[i].animal << "     \t\t┃\t      ₱ " << products[i].price << "  \t\t┃" << endl;
         }
@@ -1288,4 +1223,40 @@ void invalidInput() {
 
     cout << "Invalid input, please try again" << endl;
     Sleep(3000);
+}
+
+bool contains(const string& str, const string& searchProd) {
+    return str.find(searchProd) != string::npos;
+}
+
+// Product Searching
+vector<Product> search(const vector<Product>& products, const string& searchProd) {
+    vector<Product> results;
+
+     // Convert the search term to lower case
+    string lowerCaseSearchProd = searchProd;
+    transform(lowerCaseSearchProd.begin(), lowerCaseSearchProd.end(), lowerCaseSearchProd.begin(), ::tolower);
+    
+    for (const auto& product : products) {
+
+        // Convert the products name, category,animals, and description to lower case
+        string lowerCaseName = product.name;
+        transform(lowerCaseName.begin(), lowerCaseName.end(), lowerCaseName.begin(), ::tolower);
+        string lowerCaseCategory = product.category;
+        transform(lowerCaseCategory.begin(), lowerCaseCategory.end(), lowerCaseCategory.begin(), ::tolower);
+        string lowerCaseAnimal = product.animal;
+        transform(lowerCaseAnimal.begin(), lowerCaseAnimal.end(), lowerCaseAnimal.begin(), ::tolower);
+        string lowerCaseDescription = product.description;
+        transform(lowerCaseDescription.begin(), lowerCaseDescription.end(), lowerCaseDescription.begin(), ::tolower);
+
+        // Search the lower case version of the product  name, category,animals, and description
+        if (contains(lowerCaseName, lowerCaseSearchProd) ||
+            contains(lowerCaseCategory, lowerCaseSearchProd) ||
+            contains(lowerCaseAnimal, lowerCaseSearchProd) ||
+            contains(lowerCaseDescription, lowerCaseSearchProd)) {
+            results.push_back(product);
+        }
+    }
+
+    return results;
 }
