@@ -6,12 +6,6 @@
 #include <algorithm>
 #include <cctype>
 #include <set>
-#include <cstdlib> 
-#include <ctime>
-#include <conio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <iterator>
 #include <type_traits>
 
 using namespace std;
@@ -36,8 +30,8 @@ struct Product {
 vector<Account> accounts;
 vector<Product> products;
 
-bool loginStatus = true;
-string loginEmail = "admin";
+bool loginStatus = false;
+string loginEmail = "";
 
 //declaration of functions
 void displayMenu();
@@ -415,28 +409,32 @@ void accountProfile() {
 
     displayMenu();
 
-    cout << "|\t\t\t\t\t\tPROFILE\t\t\t\t\t\t|" << endl;
-    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+    cout << "┃\t\t\t\t\t\t\t\t    PROFILE    \t\t\t\t\t\t\t\t\t┃" << endl;
+    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl << endl;
 
     //display user's credentials
     for (int i = 0; i < accounts.size(); i++) {
         if (loginEmail == accounts[i].email) {
 
-            cout << "\t\t\t\t         Email: " << accounts[i].email << endl;
-            cout << "\t\t\t\t  [0] Username: " << accounts[i].username << endl;
-            cout << "\t\t\t\t  [1] Password: " << accounts[i].password << endl;
+            cout << "\t\t\t\t\t\t         Email: " << accounts[i].email << endl;
+            cout << "\t\t\t\t\t\t  [1] Username: " << accounts[i].username << endl;
+            cout << "\t\t\t\t\t\t  [2] Password: " << accounts[i].password << endl;
 
             accNumber = i;
             break;
         }
     }
-    
-    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
 
-    if (loginEmail == "admin") cout << "|\t\t\t\t\t    [L] Logout    \t\t\t\t\t|" << endl;
-    else cout << "|\t\t  [+] Add In-Store Money  \t\t|\t\t  [L] Logout  \t\t|" << endl;
+    if (loginEmail == "admin") {
+        cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+        cout << "┃\t\t\t\t\t\t\t\t   [L] Logout     \t\t\t\t\t\t\t\t┃" << endl;
+        cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
 
-    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+    } else {
+        cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+        cout << "┃\t\t\t  [+] Add In-Store Money  \t\t\t┃\t\t\t\t  [L] Logout  \t\t\t\t┃" << endl;
+        cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+    }
 
     cout << "\t\t\t\t Input action: ";
     cin >> choose;
@@ -463,27 +461,28 @@ void accountProfile() {
             accountProfile();
         }
 
-    } else if (checkInput(choose) == "number" && stoi(choose) <= 1 && stoi(choose) >= 0) {
+    } else if (checkInput(choose) == "number" && stoi(choose) <= 2 && stoi(choose) > 0) {
         cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
 
         switch(stoi(choose)) {
-            case 0:
+            case 1:
                 cout << "\t\t\t Edit Username" << endl;
-                cout << "Old username:" << accounts[accNumber].username << endl;
+                cout << "Old username: " << accounts[accNumber].username << endl;
                 cout << "Enter new username: ";
                 break;
 
-            case 1:
+            case 2:
                 cout << "\t\t\t Edit Password" << endl;
-                cout << "Old password:" << accounts[accNumber].password << endl;
+                cout << "Old password: " << accounts[accNumber].password << endl;
                 cout << "Enter new password: ";
                 break;
         }
 
         cin >> temp;
 
-        cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
-        cout << "\t\t [1] Save \t [0] Cancel" << endl;
+        cout << endl << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+        cout << "┃\t\t\t\t[1] Save\t\t\t\t┃\t\t\t\t[0] Cancel\t\t\t\t┃" << endl;
+        cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
 
         cout << "\t\t\t\t Input action: ";
         cin >> choose1;
@@ -577,17 +576,14 @@ void searchAdmin() {
     
     displayMenu();
 
-    cout << "|\t\t\t\t\t\tSEARCH\t\t\t\t\t\t|" << endl;
-    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
-    cout << "|\t\t\t\t\t Search Window \t\t\t\t\t\t|" << endl;
-    cout << "|\t\t[1] Accounts\t|\t ";
-    cout << "[2] Products\t\t|\t\t [3] Back \t\t\t |" << endl;
-    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+    cout << "┃\t\t\tSEARCH ➜\t\t\t\t[1] Accounts\t\t\t\t[2] Products\t\t\t\t┃" << endl;
+    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
 
-    cout << "\t\t\t\t Action: ";
+    cout << "\t\t\t\tInput action: ";
     cin >> choose;
 
     if (cin.fail()) {
+        cout << "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
         invalidInput();
 
         cout << "Clearing fields...";
@@ -596,20 +592,19 @@ void searchAdmin() {
         cin.clear(); // clear input
         cin.ignore(LONG_MAX, '\n'); // ignore any error
 
-        login();
+        searchAdmin();
 
     } else {
         switch (choose){
             case 1: searchAcc();
             case 2: searchProducts();
-            case 3: login();
             default:
-                cout << "Input Invalid !";
+                cout << "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
+                invalidInput();
                 
                 searchAdmin();
         }
     }
-
 }
 
 void searchProducts() {
@@ -679,19 +674,20 @@ void searchProducts() {
 
 void searchAcc() {
     string searchTerm, choose;
-    
-    cout << "\t\t\t Enter a Search Term:  ";
+
+    displayMenu();
+
+    cout << "\t\tEnter a search term:  ";
     cin >> searchTerm;
+
     vector<Account> results = search<Account>(accounts, searchTerm);
                 
-    cout << "Search results:" << endl;
     cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
     cout << "┃\t\t\tUsername\t\t\t┃\t\t\t    Email    \t\t\t┃\t      Status  \t\t┃" << endl;
-    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
 
     if (!results.empty()) {
-        cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
-        cout << "┃\t\t\t\t\t\t\t┃\t\t\t\t\t┃\t\t\t┃\t\t\t┃" << endl;
+        cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+        cout << "┃\t\t\t\t\t\t\t┃\t\t\t\t\t\t\t┃\t\t\t\t┃" << endl;
 
         //displaying search result
         for (int i = 0; i < results.size(); i++) {
@@ -706,13 +702,13 @@ void searchAcc() {
             }
         }
 
-        cout << "┃\t\t\t\t\t\t\t┃\t\t\t\t\t┃\t\t\t┃\t\t\t┃" << endl;
-        cout << "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
+        cout << "┃\t\t\t\t\t\t\t┃\t\t\t\t\t\t\t┃\t\t\t\t┃" << endl;
+        cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
 
     } else {
-        cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+        cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
         cout << "┃\t\t\t\t\t\t\t\tNo result for: " << searchTerm << "\t\t\t\t\t\t\t\t┃" << endl;
-        cout << "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
+        cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
     }
 
     cout << "\t\t\t\tInput action: ";
@@ -720,7 +716,6 @@ void searchAcc() {
 
     if (checkInput(choose) == "alpha" && choose.length() == 1) {
         menuAdmin(choose);
-
         searchAcc();
 
     } else if (checkInput(choose) == "number" && accounts.size() > stoi(choose) && stoi(choose) < 1) {
@@ -728,7 +723,6 @@ void searchAcc() {
 
     } else {
         invalidInput();
-
         searchAcc();
     }    
 }
@@ -761,7 +755,7 @@ void viewAccounts() {
     }
 
     cout << "┃\t\t\t\t\t\t\t┃\t\t\t\t\t\t\t┃\t\t\t\t┃" << endl;
-    cout << "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
+    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
 
     cout << "\t\t✎ To edit account, choose a number.\t\t\t\t" << endl;
     cout << "\t\t☛ Input action: ";
