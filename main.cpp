@@ -36,8 +36,8 @@ struct Product {
 vector<Account> accounts;
 vector<Product> products;
 
-bool loginStatus = false;
-string loginEmail = "";
+bool loginStatus = true;
+string loginEmail = "admin";
 
 //declaration of functions
 void displayMenu();
@@ -165,7 +165,7 @@ void displayMenu() {
     system("cls");
     SetConsoleOutputCP(CP_UTF8);
 
-    if (loginEmail == "admin") {//menu of admin-----+---------------+
+    if (loginEmail == "admin") { //menu of admin
         cout << "┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓" << endl;
         cout << "┃\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t┃" << endl;
         cout << "┃\t\t\t\t██████╗░███████╗████████╗░░███████╗██╗░░██╗██████╗░██████╗░███████╗░██████╗░██████╗\t\t\t\t┃" << endl;
@@ -181,7 +181,7 @@ void displayMenu() {
         cout << "┃\t\t\t\t\t\t\t\t\t┃\t\t\t\t\t\t\t\t\t┃" << endl;
         cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
         
-    } else {//menu of customer
+    } else { //menu of customer
         cout << "┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓" << endl;
         cout << "┃\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t┃" << endl;
         cout << "┃\t\t\t\t██████╗░███████╗████████╗░░███████╗██╗░░██╗██████╗░██████╗░███████╗░██████╗░██████╗\t\t\t\t┃" << endl;
@@ -235,8 +235,8 @@ void login() {
             cout << "Clearing fields...";
             Sleep(2000);
 
-            cin.clear();// clear input
-            cin.ignore(LONG_MAX, '\n');// ignore any error
+            cin.clear(); // clear input
+            cin.ignore(LONG_MAX, '\n'); // ignore any error
 
             login();
 
@@ -262,20 +262,20 @@ void login() {
                         for (const auto& account : accounts) {
                             if (email == account.email && password == account.password) {
                                 found = true;
-                                status = account.status;//check account's status
+                                status = account.status; // check account's status
                                 break;
                             }
                         }
 
                         if (!found) {
-                            // User's credentials did not match any registered users
+                            // user's credentials did not match any registered users
                             cout << "Invalid email address or password." << endl;
                             Sleep(2000);
 
                             login();
 
                         } else if (status == "Banned") {
-                            // User's account is banned
+                            // user's account is banned
                             cout << "Cannot login, your account is banned." << endl;
                             Sleep(2000);
 
@@ -350,8 +350,8 @@ void registration() {
             cout << "Clearing fields...";
             Sleep(2000);
 
-            cin.clear();// clear input
-            cin.ignore(LONG_MAX, '\n');// ignore any error
+            cin.clear(); // clear input
+            cin.ignore(LONG_MAX, '\n'); // ignore any error
 
             registration();
 
@@ -418,6 +418,7 @@ void accountProfile() {
     cout << "|\t\t\t\t\t\tPROFILE\t\t\t\t\t\t|" << endl;
     cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
 
+    //display user's credentials
     for (int i = 0; i < accounts.size(); i++) {
         if (loginEmail == accounts[i].email) {
 
@@ -444,7 +445,9 @@ void accountProfile() {
         // add in-store money
         
     } else if (checkInput(choose) == "alpha" && choose.length() == 1) {
-        if (choose == "L" || choose == "l") {// logout
+
+        // logout
+        if (choose == "L" || choose == "l") {
             cout << "Logging out...";
             Sleep(3000);
 
@@ -494,8 +497,8 @@ void accountProfile() {
             cout << "Canceling process...";
             Sleep(2000);
 
-            cin.clear();// clear input
-            cin.ignore(LONG_MAX, '\n');// ignore any error
+            cin.clear(); // clear input
+            cin.ignore(LONG_MAX, '\n'); // ignore any error
 
             accountProfile();
 
@@ -590,8 +593,8 @@ void searchAdmin() {
         cout << "Clearing fields...";
         Sleep(2000);
 
-        cin.clear();//clear input
-        cin.ignore(LONG_MAX, '\n');//ignore any error
+        cin.clear(); // clear input
+        cin.ignore(LONG_MAX, '\n'); // ignore any error
 
         login();
 
@@ -607,31 +610,6 @@ void searchAdmin() {
         }
     }
 
-}
-
-void searchAcc() {
-    string searchTerm, choose;
-    
-    cout << "\t\t\t Enter a Search Term:  ";
-    cin >> searchTerm;
-    vector<Account> results = search<Account>(accounts, searchTerm);
-                
-    cout << "Search results:" << endl;
-    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
-    cout << "|\tUsername\t\t|\tEmail\t\t\t|\t\tStatus\t\t|" << endl;
-    //looping for result
-    for (const auto& account : results) {
-        if (account.email != "admin") {
-            cout << "|\t" << account.username << "\t\t|\t\t" <<account.email << "\t|\t" << account.status << "\t\t|" << endl;
-        }
-    }
-    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
-
-    cout << "\t\t\t\tInput action: ";
-    cin >> choose;
-
-    if (loginEmail == "admin") menuAdmin(choose);
-    else menuCustomer(choose);
 }
 
 void searchProducts() {
@@ -651,6 +629,7 @@ void searchProducts() {
         cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
         cout << "┃\t\t\t\t\t\t\t┃\t\t\t\t\t┃\t\t\t┃\t\t\t┃" << endl;
        
+        //displaying search result
         for (int i = 0; i < results.size(); i++) {
             for (int j = 0; j < products.size(); j++) {
                 if (results[i].name == products[j].name) {
@@ -688,7 +667,7 @@ void searchProducts() {
 
         searchProducts();
 
-    } else if (checkInput(choose) == "number" && products.size() > stoi(choose)) {
+    } else if (checkInput(choose) == "number" && products.size() > stoi(choose) && stoi(choose) < 0) {
         viewItem(stoi(choose));
 
     } else {
@@ -696,6 +675,62 @@ void searchProducts() {
 
         searchProducts();
     }       
+}
+
+void searchAcc() {
+    string searchTerm, choose;
+    
+    cout << "\t\t\t Enter a Search Term:  ";
+    cin >> searchTerm;
+    vector<Account> results = search<Account>(accounts, searchTerm);
+                
+    cout << "Search results:" << endl;
+    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+    cout << "┃\t\t\tUsername\t\t\t┃\t\t\t    Email    \t\t\t┃\t      Status  \t\t┃" << endl;
+    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+
+    if (!results.empty()) {
+        cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+        cout << "┃\t\t\t\t\t\t\t┃\t\t\t\t\t┃\t\t\t┃\t\t\t┃" << endl;
+
+        //displaying search result
+        for (int i = 0; i < results.size(); i++) {
+            if (i > 0) {
+            cout << "┃\t\t    [" << i << "] " << accounts[i].username << "    \t";
+
+                if (accounts[i].username.length() <= 10) cout << "\t\t";
+                else if (accounts[i].username.length() <= 19 && i < 10) cout << "\t";
+                else if (accounts[i].username.length() <= 18 && i >= 10) cout << "\t";
+                
+                cout << "┃\t\t" << accounts[i].email << "\t\t┃\t      " << accounts[i].status << "  \t\t┃" << endl;
+            }
+        }
+
+        cout << "┃\t\t\t\t\t\t\t┃\t\t\t\t\t┃\t\t\t┃\t\t\t┃" << endl;
+        cout << "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
+
+    } else {
+        cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+        cout << "┃\t\t\t\t\t\t\t\tNo result for: " << searchTerm << "\t\t\t\t\t\t\t\t┃" << endl;
+        cout << "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
+    }
+
+    cout << "\t\t\t\tInput action: ";
+    cin >> choose;
+
+    if (checkInput(choose) == "alpha" && choose.length() == 1) {
+        menuAdmin(choose);
+
+        searchAcc();
+
+    } else if (checkInput(choose) == "number" && accounts.size() > stoi(choose) && stoi(choose) < 1) {
+        editAccount(stoi(choose));
+
+    } else {
+        invalidInput();
+
+        searchAcc();
+    }    
 }
 
 void viewAccounts() {
@@ -736,7 +771,7 @@ void viewAccounts() {
         menuAdmin(choose);
         viewAccounts();
 
-    } else if (checkInput(choose) == "number" && stoi(choose) < accounts.size() && stoi(choose) > 0) {
+    } else if (checkInput(choose) == "number" && stoi(choose) < accounts.size() && stoi(choose) > 1) {
 
         editAccount(stoi(choose));
 
@@ -1072,7 +1107,7 @@ void homeCustomer() {
 
         homeCustomer();
 
-    } else if (checkInput(choose) == "number" && products.size() > stoi(choose)) {
+    } else if (checkInput(choose) == "number" && products.size() > stoi(choose) && stoi(choose) < 0) {
         viewItem(stoi(choose));
 
     } else {
@@ -1119,13 +1154,13 @@ void foods() {
 
         foods();
 
-    } else if (checkInput(choose) == "number" && products.size() > stoi(choose) && products[stoi(choose)].category == "Food") {
+    } else if (checkInput(choose) == "number" && products.size() > stoi(choose) && stoi(choose) < 0 && products[stoi(choose)].category == "Food") {
         viewItem(stoi(choose));
 
     } else {
         invalidInput();
 
-        homeCustomer();
+        foods();
     }
 }
 
@@ -1166,13 +1201,13 @@ void equipments() {
         
         equipments();
 
-    } else if (checkInput(choose) == "number" && products.size() > stoi(choose) && products[stoi(choose)].category == "Equipment") {
+    } else if (checkInput(choose) == "number" && products.size() > stoi(choose) && stoi(choose) < 0 && products[stoi(choose)].category == "Equipment") {
         viewItem(stoi(choose));
 
     } else {
         invalidInput();
 
-        homeCustomer();
+        equipments();
     }
 }
 
@@ -1213,13 +1248,13 @@ void medicine() {
 
         medicine();
 
-    } else if (checkInput(choose) == "number" && products.size() > stoi(choose) && products[stoi(choose)].category == "Medicine") {
+    } else if (checkInput(choose) == "number" && products.size() > stoi(choose) && stoi(choose) < 0 && products[stoi(choose)].category == "Medicine") {
         viewItem(stoi(choose));
 
     } else {
         invalidInput();
 
-        homeCustomer();
+        medicine();
     }
 }
 
@@ -1278,8 +1313,8 @@ bool contains(const string& str, const string& searchProd) {
     return str.find(searchProd) != string::npos;
 }
 
-template <typename T>
-typename enable_if<is_same<T, Product>::value, vector<T>>::type
+template <typename T> // template for struct
+typename enable_if<is_same<T, Product>::value, vector<T>>::type // setting template to struct Product
 search(const vector<T>& items, const string& SearchTerm) {
     vector<T> results;
 
@@ -1311,7 +1346,7 @@ search(const vector<T>& items, const string& SearchTerm) {
 }
 
 template <typename T>
-typename enable_if<is_same<T, Account>::value, vector<T>>::type
+typename enable_if<is_same<T, Account>::value, vector<T>>::type // setting template to struct Account
 search(const vector<T>& items, const string& SearchTerm) {
     vector<T> results;
 
