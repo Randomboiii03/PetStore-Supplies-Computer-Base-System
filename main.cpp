@@ -12,6 +12,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <iterator>
+#include <type_traits>
 
 using namespace std;
 
@@ -40,10 +41,10 @@ string loginEmail = "";
 
 //declaration of functions
 void displayMenu();
-void menuAdmin(string choose);
 void login();
 void registration();
 void accountProfile();
+void menuAdmin(string choose);
 void homeAdmin();
 void searchAdmin();
 void searchAcc();
@@ -56,7 +57,6 @@ void editItem(int p_num);
 void viewCheckouts();
 void menuCustomer(string choose);
 void homeCustomer();
-void searchCustomer();
 void foods();
 void equipments();
 void medicine();
@@ -69,13 +69,17 @@ int getRandomNumber(const vector<Product>& vec);
 void invalidInput();
 bool contains(const string& str, const string& searchProd);
 template <typename T>
-vector<T> search(const vector<T>& products, const string& searchProd);
+typename enable_if<is_same<T, Product>::value, vector<T>>::type
+search(const vector<T>& items, const string& SearchTerm);
+template <typename T>
+typename enable_if<is_same<T, Account>::value, vector<T>>::type
+search(const vector<T>& items, const string& SearchTerm);
 
 int main() {
 
     // Add the admin account to the vector
     accounts.push_back({"admin", "admin", "admin", "Active"});
-    accounts.push_back({"gab", "gabrielleramos@gmail.com", "gab", "Active"});
+    accounts.push_back({"gabrielle", "gabrielleramos@gmail.com", "gab", "Active"});
 
     // Add products for "cat" to the vector
     products.push_back({"Maxime (1 kilo)", "Food", "Cat", "5-6 weeks old higher", 90, 30, "Display"});
@@ -154,7 +158,6 @@ int main() {
     products.push_back({"Bird cage", "Equipment", "Bird", "protects bird from getting out", 500, 30, "Display"});
     products.push_back({"Bird feeder", "Equipment", "Bird", "equipment for placing bird food", 113, 30, "Display"});
 
-
     homeCustomer();
 }
 
@@ -206,7 +209,7 @@ void login() {
     cout << "|\t\t\t\t\t\tLOGIN\t\t\t\t\t\t|" << endl;
     cout << "+-----------------------------------------------------------------------------------------------+" << endl;
 
-    cout << "\t\t\t\t(action) Email: ";
+    cout << "\t\t\t\t[action] Email: ";
     cin >> email;
 
     if (email == "R" || email == "r") {
@@ -226,15 +229,15 @@ void login() {
         cout << "\t\t\t\t  Input action: ";
         cin >> choose;
 
-        //check if string is inputted in an int variable
+        // check if string is inputted in an int variable
         if (cin.fail()) {
             invalidInput();
 
             cout << "Clearing fields...";
             Sleep(2000);
 
-            cin.clear();//clear input
-            cin.ignore(LONG_MAX, '\n');//ignore any error
+            cin.clear();// clear input
+            cin.ignore(LONG_MAX, '\n');// ignore any error
 
             login();
 
@@ -339,15 +342,15 @@ void registration() {
 
         cout << "+-----------------------------------------------------------------------------------------------+" << endl;
 
-        //check if string is inputted in an int variable
+        // check if string is inputted in an int variable
         if (cin.fail()) {
             invalidInput();
             
             cout << "Clearing fields...";
             Sleep(2000);
 
-            cin.clear();//clear input
-            cin.ignore(LONG_MAX, '\n');//ignore any error
+            cin.clear();// clear input
+            cin.ignore(LONG_MAX, '\n');// ignore any error
 
             registration();
 
@@ -412,7 +415,7 @@ void accountProfile() {
     displayMenu();
 
     cout << "|\t\t\t\t\t\tPROFILE\t\t\t\t\t\t|" << endl;
-    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
 
     for (int i = 0; i < accounts.size(); i++) {
         if (loginEmail == accounts[i].email) {
@@ -426,21 +429,21 @@ void accountProfile() {
         }
     }
     
-    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
 
     if (loginEmail == "admin") cout << "|\t\t\t\t\t    [L] Logout    \t\t\t\t\t|" << endl;
     else cout << "|\t\t  [+] Add In-Store Money  \t\t|\t\t  [L] Logout  \t\t|" << endl;
 
-    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
 
     cout << "\t\t\t\t Input action: ";
     cin >> choose;
 
     if (loginEmail != "admin" || choose == "+") {
-        //add in-store money
+        // add in-store money
         
     } else if (checkInput(choose) == "alpha" && choose.length() == 1) {
-        if (choose == "L" || choose == "l") {//logout
+        if (choose == "L" || choose == "l") {// logout
             cout << "Logging out...";
             Sleep(3000);
 
@@ -457,7 +460,7 @@ void accountProfile() {
         }
 
     } else if (checkInput(choose) == "number" && stoi(choose) <= 1 && stoi(choose) >= 0) {
-        cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+        cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
 
         switch(stoi(choose)) {
             case 0:
@@ -475,23 +478,23 @@ void accountProfile() {
 
         cin >> temp;
 
-        cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+        cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
         cout << "\t\t [1] Save \t [0] Cancel" << endl;
 
         cout << "\t\t\t\t Input action: ";
         cin >> choose1;
 
-        cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+        cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
 
-        //check if string is inputted in an int variable
+        // check if string is inputted in an int variable
         if (cin.fail()) {
             invalidInput();
             
             cout << "Canceling process...";
             Sleep(2000);
 
-            cin.clear();//clear input
-            cin.ignore(LONG_MAX, '\n');//ignore any error
+            cin.clear();// clear input
+            cin.ignore(LONG_MAX, '\n');// ignore any error
 
             accountProfile();
 
@@ -506,11 +509,11 @@ void accountProfile() {
                 
                 case 1:
                     if (stoi(choose) == 0) {
-                        //change username
+                        // change username
                         accounts[accNumber].username = temp;
 
                     } else if (stoi(choose) == 1) {
-                        //change password
+                        // change password
                         accounts[accNumber].password = temp;
                     }
 
@@ -565,7 +568,7 @@ void homeAdmin() {
 }
 
 void searchAdmin() {
-    int opt = 0;
+    int choose;
     string searchTerm;
     
     displayMenu();
@@ -578,60 +581,120 @@ void searchAdmin() {
     cout << "+-----------------------------------------------------------------------------------------------+" << endl;
 
     cout << "\t\t\t\t Action: ";
-    cin >> opt;
-    switch (opt){
-        case 1: searchAcc();
-        case 2: searchProducts();
-        case 3: login();
-        default:
-            cout << "Input Invalid !";
-             
-            searchAdmin();
+    cin >> choose;
+
+    if (cin.fail()) {
+        invalidInput();
+
+        cout << "Clearing fields...";
+        Sleep(2000);
+
+        cin.clear();//clear input
+        cin.ignore(LONG_MAX, '\n');//ignore any error
+
+        login();
+
+    } else {
+        switch (choose){
+            case 1: searchAcc();
+            case 2: searchProducts();
+            case 3: login();
+            default:
+                cout << "Input Invalid !";
+                
+                searchAdmin();
+        }
     }
 
 }
 
-void searchAcc(){
-    string searchTerm;
-    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
-                cout << "\t\t\t Enter a Search Term:  ";
-                cin >> searchTerm;
-                vector<Account> results = search(accounts, searchTerm);
+void searchAcc() {
+    string searchTerm, choose;
+    
+    cout << "\t\t\t Enter a Search Term:  ";
+    cin >> searchTerm;
+    vector<Account> results = search<Account>(accounts, searchTerm);
                 
-                cout << "Search results:" << endl;
-                cout << "+-----------------------------------------------------------------------------------------------+" << endl;
-                cout << "|\tUsername\t\t|\tEmail\t\t\t|\t\tStatus\t\t|" << endl;
-                //looping for result
-                for (const auto& account : results) {
-                cout << "|\t" << account.username << "\t\t|\t\t" <<account.email << "\t|\t" << account.status << "\t\t|" << endl;
-                    }
-                         cout << "+-----------------------------------------------------------------------------------------------+" << endl;
-                        
+    cout << "Search results:" << endl;
+    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+    cout << "|\tUsername\t\t|\tEmail\t\t\t|\t\tStatus\t\t|" << endl;
+    //looping for result
+    for (const auto& account : results) {
+        if (account.email != "admin") {
+            cout << "|\t" << account.username << "\t\t|\t\t" <<account.email << "\t|\t" << account.status << "\t\t|" << endl;
+        }
+    }
+    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+
+    cout << "\t\t\t\tInput action: ";
+    cin >> choose;
+
+    if (loginEmail == "admin") menuAdmin(choose);
+    else menuCustomer(choose);
 }
 
-void searchProducts(){
-    string searchProd;
-        cout << "+-----------------------------------------------------------------------------------------------+" << endl;
-        cout << "\t\t\t Enter a Search Term:  ";
-        cin >> searchProd;
-        vector<Product> results = search(products, searchProd);
+void searchProducts() {
+    string searchTerm, choose;
 
-        cout << "Search results:" << endl;
-        cout << "+-----------------------------------------------------------------------------------------------+" << endl;
-        cout << "|\t\tName\t\t\t|\tCategory\t|\tAnimal\t\t|\tPrice\t\t|";
-       
-        for (int i = 0; i < results.size(); i++){
-
-            if (results[i].name.length() <= 1) cout << "\t\t";
-            else if (results[i].name.length() <= 19 && i < 10) cout << "\t";
-            else if (results[i].name.length() <= 18 && i >= 10) cout << "\t";
-            
-            cout << endl;
-            cout << "|\t" << results[i].name << "\t\t|\t" << results[i].category << "\t\t|\t" << results[i].animal << "\t\t|\t" << results[i].price << " php\t\t|" << endl;
-        }
+    displayMenu();
     
-             cout << "+-----------------------------------------------------------------------------------------------+" << endl;
-            
+    cout << "\t\tEnter a search term:  ";
+    cin >> searchTerm;
+
+    vector<Product> results = search<Product>(products, searchTerm);
+
+    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+    cout << "┃\t\t\tProduct Name\t\t\t┃\t\tCategory\t\t┃\t  Animal      \t┃\t  Price      \t┃" << endl;
+    
+    if (!results.empty()) {
+        cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+        cout << "┃\t\t\t\t\t\t\t┃\t\t\t\t\t┃\t\t\t┃\t\t\t┃" << endl;
+       
+        for (int i = 0; i < results.size(); i++) {
+            for (int j = 0; j < products.size(); j++) {
+                if (results[i].name == products[j].name) {
+                    cout << "┃\t\t[" << j << "] " << results[i].name << "\t\t";
+
+                    if (results[i].name.length() <= 10) cout << "\t\t";
+                    else if (results[i].name.length() <= 19 && j < 10) cout << "\t";
+                    else if (results[i].name.length() <= 18 && j >= 10) cout << "\t";
+                    break;
+                }
+            }
+
+            cout << "┃\t\t" << results[i].category;
+
+            if (results[i].category == "Food") cout << "\t";
+
+            cout << "\t\t┃\t   " << results[i].animal << "     \t┃\t  ₱ " << products[i].price << "      \t┃" << endl;
+        }
+        
+        cout << "┃\t\t\t\t\t\t\t┃\t\t\t\t\t┃\t\t\t┃\t\t\t┃" << endl;
+        cout << "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
+
+    } else {
+        cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+        cout << "┃\t\t\t\t\t\t\t\tNo result for: " << searchTerm << "\t\t\t\t\t\t\t\t┃" << endl;
+        cout << "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
+    }
+
+    cout << "\t\t\t\tInput action: ";
+    cin >> choose;
+
+    if (checkInput(choose) == "alpha" && choose.length() == 1) {
+        if (loginEmail == "admin") menuAdmin(choose);
+        else menuCustomer(choose);
+
+        searchProducts();
+
+    } else if (checkInput(choose) == "number" && products.size() > stoi(choose)) {
+        viewItem(stoi(choose));
+
+    } else {
+        invalidInput();
+
+        searchProducts();
+    }       
 }
 
 void viewAccounts() {
@@ -639,24 +702,33 @@ void viewAccounts() {
 
     displayMenu();
 
-    cout << "|\t\t\t\t\tLIST OF ACCOUNTS\t\t\t\t\t|" << endl;
-    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
-    cout << "|\t\t\tEmail\t\t\t|\t\t\tStatus\t\t\t|" << endl;
-    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+    cout << "┃\t\t\t\t\t\t\t\tLIST OF ACCOUNTS\t\t\t\t\t\t\t\t┃" << endl;
+    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+    cout << "┃\t\t\tUsername\t\t\t┃\t\t\t    Email    \t\t\t┃\t      Status  \t\t┃" << endl;
+    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+    cout << "┃\t\t\t\t\t\t\t┃\t\t\t\t\t\t\t┃\t\t\t\t┃" << endl;
 
     if (accounts.size() > 1) {
+        //displaying accounts
         for (int i = 1; i < accounts.size(); i++) {
-            cout << "|\t[" << i << "] " << accounts[i].email << "\t\t|\t\t\t" << accounts[i].status << "\t\t\t|" << endl;
+            cout << "┃\t\t    [" << i << "] " << accounts[i].username << "    \t";
+
+            if (accounts[i].username.length() <= 10) cout << "\t\t";
+            else if (accounts[i].username.length() <= 19 && i < 10) cout << "\t";
+            else if (accounts[i].username.length() <= 18 && i >= 10) cout << "\t";
+            
+            cout << "┃\t\t" << accounts[i].email << "\t\t┃\t      " << accounts[i].status << "  \t\t┃" << endl;
         }
 
     } else {
         cout << "No account is registered yet!" << endl;
     }
 
-    cout << "+-----------------------------------------------------------------------------------------------+" << endl;
+    cout << "┃\t\t\t\t\t\t\t┃\t\t\t\t\t\t\t┃\t\t\t\t┃" << endl;
+    cout << "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
 
-    cout << "\t\t\t\t*To edit account, choose a number.\t\t\t\t" << endl;
-    cout << "\t\t\t\t Input action: ";
+    cout << "\t\t✎ To edit account, choose a number.\t\t\t\t" << endl;
+    cout << "\t\t☛ Input action: ";
     cin >> choose;
 
     if (checkInput(choose) == "alpha" && choose.length() == 1) {
@@ -911,7 +983,7 @@ void menuCustomer(string choose) {
         homeCustomer();
 
     } else if (choose == "S" || choose == "s") {
-        searchCustomer();
+        searchProducts();
 
     } else if (choose == "A" || choose == "a") {
         if (!loginStatus) login();
@@ -935,12 +1007,6 @@ void menuCustomer(string choose) {
     }
 }
 
-void searchCustomer() {
-    displayMenu();
-
-    searchProducts();
-}
-
 void homeCustomer() {
     string choose;
 
@@ -949,13 +1015,11 @@ void homeCustomer() {
     srand(time(nullptr));
     set<int> selected;
 
-    cout << "┃\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t┃" << endl;
     cout << "┃\t\t\t\t\t\t\t\t      HOME          \t\t\t\t\t\t\t\t┃" << endl;
-    cout << "┃\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t┃" << endl;
-    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
-    cout << "┃\t\t\t\tProduct Name\t\t\t\t┃\t\t  Animal      \t\t┃\t      Price  \t\t┃" << endl;
-    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
-    cout << "┃\t\t\t\t\t\t\t\t\t┃\t\t\t\t\t┃\t\t\t\t┃" << endl;
+    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+    cout << "┃\t\t\tProduct Name\t\t\t┃\t\tCategory\t\t┃\t  Animal      \t┃\t  Price      \t┃" << endl;
+    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+    cout << "┃\t\t\t\t\t\t\t┃\t\t\t\t\t┃\t\t\t┃\t\t\t┃" << endl;
 
     for (int i = 0; i < 10; ++i) {
         int index = getRandomNumber(products);
@@ -964,21 +1028,27 @@ void homeCustomer() {
             index = getRandomNumber(products);
         }
 
+        // inseting random number in set
         selected.insert(index);
 
+        // displaying products
         if (products[index].status == "Display") {
-            cout << "┃\t\t\t[" << index << "] " << products[index].name << "\t\t\t";
+            cout << "┃\t\t[" << index << "] " << products[index].name << "\t\t";
 
             if (products[index].name.length() <= 10) cout << "\t\t";
             else if (products[index].name.length() <= 19 && index < 10) cout << "\t";
             else if (products[index].name.length() <= 18 && index >= 10) cout << "\t";
 
-            cout << "┃\t\t   " << products[index].animal << "     \t\t┃\t      ₱ " << products[index].price << "  \t\t┃" << endl;
+            cout << "┃\t\t" << products[index].category;
+
+            if (products[index].category == "Food") cout << "\t";
+
+            cout << "\t\t┃\t   " << products[index].animal << "     \t┃\t  ₱ " << products[index].price << "      \t┃" << endl;
         }
     }
 
-    cout << "┃\t\t\t\t\t\t\t\t\t┃\t\t\t\t\t┃\t\t\t\t┃" << endl;
-    cout << "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
+    cout << "┃\t\t\t\t\t\t\t┃\t\t\t\t\t┃\t\t\t┃\t\t\t┃" << endl;
+    cout << "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
 
     cout << "\t\t\t\t Input action: ";
     cin >> choose;
@@ -1198,15 +1268,16 @@ bool contains(const string& str, const string& searchProd) {
 }
 
 template <typename T>
-vector<T> search(const vector<T>& products, const string& searchProd) {
+typename enable_if<is_same<T, Product>::value, vector<T>>::type
+search(const vector<T>& items, const string& SearchTerm) {
+    vector<T> results;
 
-     // Convert the search term to lower case
-    string lowerCaseSearchProd = searchProd;
-    transform(lowerCaseSearchProd.begin(), lowerCaseSearchProd.end(), lowerCaseSearchProd.begin(), ::tolower);
-    
-    for (const auto& product : products) {
+    string lowerCaseSearchTerm = SearchTerm;
+    transform(lowerCaseSearchTerm.begin(), lowerCaseSearchTerm.end(), lowerCaseSearchTerm.begin(), ::tolower);
+        
+    for (const auto& product : items) {
 
-        // Convert the products name, category,animals, and description to lower case
+        // Convert the products name, category, animals, and description to lower case
         string lowerCaseName = product.name;
         transform(lowerCaseName.begin(), lowerCaseName.end(), lowerCaseName.begin(), ::tolower);
         string lowerCaseCategory = product.category;
@@ -1217,11 +1288,41 @@ vector<T> search(const vector<T>& products, const string& searchProd) {
         transform(lowerCaseDescription.begin(), lowerCaseDescription.end(), lowerCaseDescription.begin(), ::tolower);
 
         // Search the lower case version of the product  name, category,animals, and description
-        if (contains(lowerCaseName, lowerCaseSearchProd) ||
-            contains(lowerCaseCategory, lowerCaseSearchProd) ||
-            contains(lowerCaseAnimal, lowerCaseSearchProd) ||
-            contains(lowerCaseDescription, lowerCaseSearchProd)) {
+        if (contains(lowerCaseName, lowerCaseSearchTerm) ||
+            contains(lowerCaseCategory, lowerCaseSearchTerm) ||
+            contains(lowerCaseAnimal, lowerCaseSearchTerm) ||
+            contains(lowerCaseDescription, lowerCaseSearchTerm)) {
             results.push_back(product);
+        }
+    }
+
+    return results;
+}
+
+template <typename T>
+typename enable_if<is_same<T, Account>::value, vector<T>>::type
+search(const vector<T>& items, const string& SearchTerm) {
+    vector<T> results;
+
+    // Convert the search term to lower case
+    string lowerCaseSearchTerm = SearchTerm;
+    transform(lowerCaseSearchTerm.begin(), lowerCaseSearchTerm.end(), lowerCaseSearchTerm.begin(), ::tolower);
+        
+    for (const auto& account : items) {
+
+        // Convert the accounts username, email and status to lower case
+        string lowerCaseUsername = account.username;
+        transform(lowerCaseUsername.begin(), lowerCaseUsername.end(), lowerCaseUsername.begin(), ::tolower);
+        string lowerCaseEmail = account.email;
+        transform(lowerCaseEmail.begin(), lowerCaseEmail.end(), lowerCaseEmail.begin(), ::tolower);
+        string lowerCaseStatus = account.status;
+        transform(lowerCaseStatus.begin(), lowerCaseStatus.end(), lowerCaseStatus.begin(), ::tolower);
+
+        // Search the lower case version of the account username, email and status
+        if (contains(lowerCaseUsername, lowerCaseSearchTerm) ||
+            contains(lowerCaseEmail, lowerCaseSearchTerm) ||
+            contains(lowerCaseStatus, lowerCaseSearchTerm)) {
+            results.push_back(account);
         }
     }
 
