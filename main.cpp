@@ -7,15 +7,16 @@
 #include <cctype>
 #include <set>
 #include <type_traits>
+#include <time.h>
 
 using namespace std;
 
 struct Cart {
-    string cart;
+    
     string email;
     vector<double> prices;
     vector<int> quantities;
-//vector<Product>& products;
+
 };
 
 struct Account {
@@ -33,7 +34,6 @@ struct Product {
     double price;
     int stock;
     string status;
-    int index;
 };
 
 vector<Account> accounts;
@@ -1491,16 +1491,15 @@ void viewItem(int p_num) {
 
 void cart() {
     string choose;
-    //int index;
 
     displayMenu();
-
     cout << "┃\t\t\t\t\t\t\t\t     Cart --        \t\t\t\t\t\t\t\t┃" << endl;
     cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
     cout << "┃\t\t\t\tYour Cart   \t\t\t\t┃\t\t              \t\t \t             \t\t" << endl;
     cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
     cout << "┃\t\t\t\t\t\t\t\t\t┃\t\t\t\t\t┃\t\t\t\t┃" << endl;
 
+    Cart cart;
     Account account;
     Product product;
 
@@ -1510,10 +1509,8 @@ void cart() {
     cout << "┃Products: " << endl;
 
         for(int i = 0; i < products.size(); i++) {
-            cout << "┃\t\t   " << products[i].name << "     \t\t┃\t      ₱ " << products[i].price << products[i].stock << "  \t\t┃" << endl;
+           cout << "┃  " << products[i].name << " x " << cart.quantities[i] << " - " << cart.prices[i] << endl;
         }
-
-  
     cout << "┃\t\t\t\t\t\t\t\t\t┃\t\t\t\t\t┃\t\t\t\t┃" << endl;
     cout << "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
     cout << "\t\t\t\t Input action: ";
@@ -1536,7 +1533,6 @@ void cart() {
         
     }
 
-    
 
 }
 
