@@ -10,7 +10,8 @@
         "initializer_list": "cpp",
         "xtree": "cpp",
         "xutility": "cpp",
-        "xiosbase": "cpp"
+        "xiosbase": "cpp",
+        "system_error": "cpp"
     },
     "debug.terminal.clearBeforeReusing": true,
     "editor.fontFamily": "Consolas, 'Courier New', monospace, Segoe UI Emoji"

@@ -7,16 +7,9 @@
 #include <cctype>
 #include <set>
 #include <type_traits>
+#include <time.h>
 
 using namespace std;
-
-struct Cart {
-    string cart;
-    string email;
-    vector<double> prices;
-    vector<int> quantities;
-//vector<Product>& products;
-};
 
 struct Account {
     string username;
@@ -36,11 +29,19 @@ struct Product {
     int index;
 };
 
+struct Cart {
+    string email;
+    int product;
+    int quantity;
+    int status;
+};
+
 vector<Account> accounts;
 vector<Product> products;
+vector<Cart> carts;
 
 bool loginStatus = false;
-string loginEmail = "";
+string loginEmail = "admin";
 
 //declaration of functions
 void displayMenu();
@@ -1495,49 +1496,76 @@ void cart() {
 
     displayMenu();
 
-    cout << "┃\t\t\t\t\t\t\t\t     Cart --        \t\t\t\t\t\t\t\t┃" << endl;
+    cout << "┃\t\t\t\t\t\t\t\t      Cart        \t\t\t\t\t\t\t\t┃" << endl;
     cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
-    cout << "┃\t\t\t\tYour Cart   \t\t\t\t┃\t\t              \t\t \t             \t\t" << endl;
-    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
-    cout << "┃\t\t\t\t\t\t\t\t\t┃\t\t\t\t\t┃\t\t\t\t┃" << endl;
+    cout << "┃\t\t\t\tProduct Name\t\t\t\t┃\t\t  Price      \t\t┃\t    Quantity  \t\t┃" << endl;
+    
+    // check if user has any product in cart
+    auto it = std::find_if(carts.begin(), carts.end(), [&](const Cart& c) {
+        return c.email == loginEmail;
+    });
 
-    Account account;
-    Product product;
+    if (it != carts.end()) {
+    
+        cout << "┣━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+        cout << "┃\t┃\t\t\t\t\t\t\t\t┃\t\t\t\t\t┃\t\t\t\t┃" << endl;
 
-    account.email = loginEmail; 
+        for (int i = 0; i < carts.size(); i++) {
+            if (carts[i].email == loginEmail) {
 
-    cout << "┃Email: " << account.email << endl;
-    cout << "┃Products: " << endl;
+                int p_num = carts[i].product;
 
-        for(int i = 0; i < products.size(); i++) {
-            cout << "┃\t\t   " << products[i].name << "     \t\t┃\t      ₱ " << products[i].price << products[i].stock << "  \t\t┃" << endl;
+                if (carts[i].status == 0) cout << "┃   ☐";
+                else cout << "┃  ✅";
+
+                cout << "   ┃\t\t[" << p_num << "] " << products[p_num].name << "\t\t\t";
+
+                if (products[p_num].name.length() <= 10) cout << "\t\t";
+                else if (products[p_num].name.length() <= 19 && p_num < 10) cout << "\t";
+                else if (products[p_num].name.length() <= 18 && p_num >= 10) cout << "\t";
+
+                cout << "┃\t\t   ₱ " << products[p_num].price << "     \t\t┃\t       " << carts[i].quantity << "  \t\t┃" << endl;
+
+                string details = products[p_num].animal + "\'s " + products[p_num].category;
+
+                cout << "┃       ┃\t\t  ✱  " << details << "     \t\t";
+
+                if (details.length() <= 10) cout << "\t\t";
+                else if (details.length() <= 18 && p_num >= 10) cout << "\t";
+
+                cout << "┃\t\t\t\t\t┃\t\t\t\t┃" << endl;
+            }
         }
+    
+        cout << "┃\t┃\t\t\t\t\t\t\t\t┃\t\t\t\t\t┃\t\t\t\t┃" << endl;
+        cout << "┣━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
 
-  
-    cout << "┃\t\t\t\t\t\t\t\t\t┃\t\t\t\t\t┃\t\t\t\t┃" << endl;
-    cout << "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
-    cout << "\t\t\t\t Input action: ";
+    } else {
+        cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+        cout << "┃\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t┃" << endl;
+        cout << "┃\t\t\t\t\t\t\t\tNo product in cart yet!\t\t\t\t\t\t\t\t┃" << endl;
+        cout << "┃\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t┃" << endl;
+        cout << "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
+    }
+
+    cout << "\t\t☛ Input [action]: ";
     cin >> choose; 
 
-    cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
+    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
  
      if (checkInput(choose) == "alpha" && choose.length() == 1) {
         if (loginEmail == "admin") menuAdmin(choose);
         else menuCustomer(choose);
 
+        cart();
         
-
     } else if (checkInput(choose) == "number" && products.size() > stoi(choose) && stoi(choose) < 0 && products[stoi(choose)].category == "Medicine") {
         viewItem(stoi(choose));
 
     } else {
         invalidInput();
-
-        
+        cart();
     }
-
-    
-
 }
 
 void checkout() {
