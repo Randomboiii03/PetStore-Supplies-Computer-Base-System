@@ -8,6 +8,7 @@
 #include <set>
 #include <type_traits>
 #include <time.h>
+#include <cstdlib>
 
 using namespace std;
 
@@ -64,6 +65,7 @@ void homeCustomer();
 void foods();
 void equipments();
 void medicine();
+void chooseProduct();
 void viewItem(int p_num);
 void cart();
 void checkout();
@@ -563,6 +565,9 @@ void menuAdmin(string choose) {
 
     if (choose == "S" || choose == "s") {
         searchAdmin();
+    
+    }else if (choose == "-"){
+        chooseProduct();
 
     } else if (choose == "A" || choose == "a") {
         accountProfile();
@@ -973,6 +978,9 @@ void viewInventory() {
 
     if (choose == "+") {
         addItem();
+    
+    }else if (choose == "-"){
+        chooseProduct();
 
     } else if (checkInput(choose) == "alpha" && choose.length() == 1) {
         menuAdmin(choose);
@@ -984,6 +992,32 @@ void viewInventory() {
     } else {
         invalidInput();
         viewInventory();
+    }
+}
+
+void chooseProduct() {
+    int index;
+    cout << "Enter product number: ";
+    cin >> index;
+
+    // Check that the index is valid
+    if (index >= 0 && index < products.size()) {
+        // Retrieve the product from the vector
+        const Product& product = products[index];
+
+        // Print out the product details
+        cout << "Product Name: " << product.name << endl;
+        cout << "Category: " << product.category << endl;
+        cout << "Animal: " << product.animal << endl;
+        cout << "Description: " << product.description << endl;
+        cout << "Price: " << product.price << endl;
+        cout << "Stock: " << product.stock << endl;
+        cout << "Status: " << product.status << endl;
+        cout << "Press any key to continue..."; 
+        system("pause");
+    }
+    else {
+        cout << "Invalid product number!" << endl;
     }
 }
 
