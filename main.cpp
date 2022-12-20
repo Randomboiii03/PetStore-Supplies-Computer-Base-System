@@ -1330,7 +1330,7 @@ void homeCustomer() {
 
         homeCustomer();
 
-    } else if (checkInput(choose) == "number" && products.size() > stoi(choose) && stoi(choose) < 0) {
+    } else if (checkInput(choose) == "number" && products.size() > stoi(choose) && stoi(choose) >= 0) {
         viewItem(stoi(choose));
 
     } else {
@@ -1376,7 +1376,7 @@ void foods() {
 
         foods();
 
-    } else if (checkInput(choose) == "number" && products.size() > stoi(choose) && stoi(choose) < 0 && products[stoi(choose)].category == "Food") {
+    } else if (checkInput(choose) == "number" && products.size() > stoi(choose) && stoi(choose) >= 0 && products[stoi(choose)].category == "Food") {
         viewItem(stoi(choose));
 
     } else {
@@ -1422,7 +1422,7 @@ void equipments() {
         
         equipments();
 
-    } else if (checkInput(choose) == "number" && products.size() > stoi(choose) && stoi(choose) < 0 && products[stoi(choose)].category == "Equipment") {
+    } else if (checkInput(choose) == "number" && products.size() > stoi(choose) && stoi(choose) >= 0 && products[stoi(choose)].category == "Equipment") {
         viewItem(stoi(choose));
 
     } else {
@@ -1468,7 +1468,7 @@ void medicine() {
 
         medicine();
 
-    } else if (checkInput(choose) == "number" && products.size() > stoi(choose) && stoi(choose) < 0 && products[stoi(choose)].category == "Medicine") {
+    } else if (checkInput(choose) == "number" && products.size() > stoi(choose) && stoi(choose) >= 0 && products[stoi(choose)].category == "Medicine") {
         viewItem(stoi(choose));
 
     } else {
@@ -1492,7 +1492,6 @@ void viewItem(int p_num) {
 
 void cart() {
     string choose;
-    //int index;
 
     displayMenu();
 
@@ -1539,6 +1538,7 @@ void cart() {
     
         cout << "┃\t┃\t\t\t\t\t\t\t\t┃\t\t\t\t\t┃\t\t\t\t┃" << endl;
         cout << "┣━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+        cout << "\t\t✎ To view/edit/delete product in cart, choose the product's number.\t\t\t\t" << endl;
 
     } else {
         cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
@@ -1552,14 +1552,16 @@ void cart() {
     cin >> choose; 
 
     cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+
+    it = std::find_if(carts.begin(), carts.end(), [&](const Cart& c) {
+        return c.product == stoi(choose);
+    });
  
      if (checkInput(choose) == "alpha" && choose.length() == 1) {
-        if (loginEmail == "admin") menuAdmin(choose);
-        else menuCustomer(choose);
-
+        menuCustomer(choose);
         cart();
         
-    } else if (checkInput(choose) == "number" && products.size() > stoi(choose) && stoi(choose) < 0 && products[stoi(choose)].category == "Medicine") {
+    } else if (checkInput(choose) == "number" && products.size() > stoi(choose) && stoi(choose) >= 0 && it != carts.end()) {
         viewItem(stoi(choose));
 
     } else {
