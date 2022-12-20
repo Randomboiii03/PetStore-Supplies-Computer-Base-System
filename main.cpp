@@ -10,6 +10,14 @@
 
 using namespace std;
 
+struct Cart {
+    string cart;
+    string email;
+    vector<double> prices;
+    vector<int> quantities;
+//vector<Product>& products;
+};
+
 struct Account {
     string username;
     string email;
@@ -25,6 +33,7 @@ struct Product {
     double price;
     int stock;
     string status;
+    int index;
 };
 
 vector<Account> accounts;
@@ -1481,9 +1490,53 @@ void viewItem(int p_num) {
 }
 
 void cart() {
+    string choose;
+    //int index;
+
     displayMenu();
 
-    cout << "cart"; 
+    cout << "┃\t\t\t\t\t\t\t\t     Cart --        \t\t\t\t\t\t\t\t┃" << endl;
+    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+    cout << "┃\t\t\t\tYour Cart   \t\t\t\t┃\t\t              \t\t \t             \t\t" << endl;
+    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+    cout << "┃\t\t\t\t\t\t\t\t\t┃\t\t\t\t\t┃\t\t\t\t┃" << endl;
+
+    Account account;
+    Product product;
+
+    account.email = loginEmail; 
+
+    cout << "┃Email: " << account.email << endl;
+    cout << "┃Products: " << endl;
+
+        for(int i = 0; i < products.size(); i++) {
+            cout << "┃\t\t   " << products[i].name << "     \t\t┃\t      ₱ " << products[i].price << products[i].stock << "  \t\t┃" << endl;
+        }
+
+  
+    cout << "┃\t\t\t\t\t\t\t\t\t┃\t\t\t\t\t┃\t\t\t\t┃" << endl;
+    cout << "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
+    cout << "\t\t\t\t Input action: ";
+    cin >> choose; 
+
+    cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
+ 
+     if (checkInput(choose) == "alpha" && choose.length() == 1) {
+        if (loginEmail == "admin") menuAdmin(choose);
+        else menuCustomer(choose);
+
+        
+
+    } else if (checkInput(choose) == "number" && products.size() > stoi(choose) && stoi(choose) < 0 && products[stoi(choose)].category == "Medicine") {
+        viewItem(stoi(choose));
+
+    } else {
+        invalidInput();
+
+        
+    }
+
+    
 
 }
 
