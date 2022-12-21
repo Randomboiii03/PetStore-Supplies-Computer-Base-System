@@ -42,7 +42,7 @@ vector<Product> products;
 vector<Cart> carts;
 
 bool loginStatus = false;
-string loginEmail = "";
+string loginEmail = "admin";
 
 //declaration of functions
 void displayMenu();
@@ -163,8 +163,7 @@ int main() {
     products.push_back({"Bird cage", "Equipment", "Bird", "protects bird from getting out", 500, 30, "Display"});
     products.push_back({"Bird feeder", "Equipment", "Bird", "equipment for placing bird food", 113, 30, "Display"});
 
-    // homeCustomer();
-    viewItem(12);
+    homeCustomer();
 }
 
 void displayMenu() {
@@ -1232,7 +1231,7 @@ void editItem(int p_num) {
 
         switch(stoi(choose)) {
             case 1:
-                    cout << "┃\t\t\t\t\t\t\t\tEDIT PRODUCT NAME\t\t\t\t\t\t\t\t\t┃" << endl;
+                    cout << "┃\t\t\t\t\t\t\t      EDIT PRODUCT NAME  \t\t\t\t\t\t\t\t┃" << endl;
                     cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl << endl;
 
                     cout << "\t\t\t\t\t\t\tOld product name: " << products[p_num].name << endl;
@@ -1245,7 +1244,7 @@ void editItem(int p_num) {
                     cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl << endl;
 
                     cout << "\t\t\t\t\t\t\tOld category: " << products[p_num].category << endl;
-                    cout << "\t⟶   [1] Food   [2] Equipment   [3] Medicine  ⟵" << endl;
+                    cout << "\t\t\t\t\t\t⟶   [1] Food   [2] Equipment   [3] Medicine  ⟵" << endl;
                     cout << "\t\t\t\t\t\t  Enter new category: ";
                     cin >> temp;
 
@@ -1287,7 +1286,7 @@ void editItem(int p_num) {
                     cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl << endl;
 
                     cout << "\t\t\t\t\t\t\tOld animal: " << products[p_num].animal << endl;
-                    cout << "\t⟶   [1] Dog   [2] Cat   [3] Fish   [4] Bird  ⟵" << endl;
+                    cout << "\t\t\t\t\t\t⟶   [1] Dog   [2] Cat   [3] Fish   [4] Bird  ⟵" << endl;
                     cout << "\t\t\t\t\t\t  Enter new animal: ";
                     cin >> temp;
 
@@ -1329,7 +1328,7 @@ void editItem(int p_num) {
                     }
                     break;
             case 4:
-                    cout << "┃\t\t\t\t\t\t\t\tEDIT DESCRIPTION\t\t\t\t\t\t\t\t\t┃" << endl;
+                    cout << "┃\t\t\t\t\t\t\t      EDIT DESCRIPTION  \t\t\t\t\t\t\t\t┃" << endl;
                     cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl << endl;
 
                     cout << "\t\t\t\t\t\t\tOld description: " << products[p_num].description << endl;
@@ -1350,7 +1349,7 @@ void editItem(int p_num) {
 
                     if (checkInput(temp) == "number" && stoi(temp) <= 0) {
                         cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
-                        cout << "\t\tPrice must not less than 1.";
+                        cout << "\t\tPrice must not less than 1." << endl;
                         Sleep(3000);
                                 
                         cout << "\t\tCanceling process...";
@@ -1378,7 +1377,7 @@ void editItem(int p_num) {
 
                     if (checkInput(temp) == "number" && stoi(temp) <= 0) {
                         cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
-                        cout << "\t\tStock must not less than 1.";
+                        cout << "\t\tStock must not less than 1." << endl;
                         Sleep(3000);
                                 
                         cout << "\t\tCanceling process...";
@@ -1399,12 +1398,12 @@ void editItem(int p_num) {
             case 7:
                     cout << "┃\t\t\t\t\t\t\t\tEDIT STATUS\t\t\t\t\t\t\t\t\t┃" << endl;
                     cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl << endl;
-                    cout << "\t\t\t\t\t\t\tStatus: " << products[p_num].status << endl;
+                    cout << "\t\t\t\t\t\t\tStatus: " << products[p_num].status;
 
                     if (products[p_num].status == "Display") temp = "Not Display";
                     else temp = "Display";
 
-                    cout << " ⟶ " << temp << "  \t\t\t\t|" << endl;
+                    cout << " ⟶   " << temp << "  \t\t\t\t" << endl;
 
                     break;
         }
