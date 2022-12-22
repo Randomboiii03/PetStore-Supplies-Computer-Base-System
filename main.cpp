@@ -41,8 +41,8 @@ vector<Account> accounts;
 vector<Product> products;
 vector<Cart> carts;
 
-bool loginStatus = true;
-string loginEmail = "gabrielleramos@gmail.com";
+bool loginStatus = false;
+string loginEmail = "";
 
 //declaration of functions
 void displayMenu();
@@ -164,9 +164,7 @@ int main() {
     products.push_back({"Bird cage", "Equipment", "Bird", "protects bird from getting out", 500, 30, "Display"});
     products.push_back({"Bird feeder", "Equipment", "Bird", "equipment for placing bird food", 113, 30, "Display"});
 
-    // homeCustomer();
-
-    menuCart(12);
+    homeCustomer();
 }
 
 void displayMenu() {
