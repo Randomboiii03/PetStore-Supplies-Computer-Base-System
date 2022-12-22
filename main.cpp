@@ -41,8 +41,8 @@ vector<Account> accounts;
 vector<Product> products;
 vector<Cart> carts;
 
-bool loginStatus = false;
-string loginEmail = "admin";
+bool loginStatus = true;
+string loginEmail = "gabrielleramos@gmail.com";
 
 //declaration of functions
 void displayMenu();
@@ -67,6 +67,7 @@ void equipments();
 void medicine();
 void viewItem(int p_num);
 void cart();
+void menuCart(int p_num);
 void checkout();
 void invalidInput();
 bool checkAccount(string accountType);
@@ -163,7 +164,9 @@ int main() {
     products.push_back({"Bird cage", "Equipment", "Bird", "protects bird from getting out", 500, 30, "Display"});
     products.push_back({"Bird feeder", "Equipment", "Bird", "equipment for placing bird food", 113, 30, "Display"});
 
-    homeCustomer();
+    // homeCustomer();
+
+    menuCart(12);
 }
 
 void displayMenu() {
@@ -216,12 +219,16 @@ void login() {
     cout << "\t\t\t\t\t\t\t[action] Email: ";
     cin >> email;
 
-    if (email == "R" || email == "r") {
-        registration();
+    if (checkInput(email) == "alpha" && email.length() == 1) {
+        transform(email.begin(), email.end(), email.begin(), ::tolower);
 
-    } else if (email.length() == 1) {
-        menuCustomer(email);
-        login();
+        if (email == "R" || email == "r") {
+            registration();
+
+        } else {
+            menuCustomer(email);
+            login();
+        }
 
     } else {
         cout << "\t\t\t\t\t\t\t      Password: ";
@@ -327,7 +334,9 @@ void registration() {
     cout << "\t\t\t\t\t\t[action] Username: ";
     cin >> username;
 
-    if (username.length() == 1) {
+    if (checkInput(username) == "alpha" && username.length() == 1) {
+        transform(username.begin(), username.end(), username.begin(), ::tolower);
+
         menuCustomer(username);
         registration();
 
@@ -456,9 +465,9 @@ void accountProfile() {
         // add in-store money
         
     } else if (checkInput(choose) == "alpha" && choose.length() == 1) {
+        transform(choose.begin(), choose.end(), choose.begin(), ::tolower);
 
-        // logout
-        if (choose == "L" || choose == "l") {
+        if (choose == "l") { // logout
             cout << "Logging out...";
             Sleep(3000);
 
@@ -562,19 +571,19 @@ void accountProfile() {
 
 void menuAdmin(string choose) {
 
-    if (choose == "S" || choose == "s") {
+    if (choose == "s") {
         searchAdmin();
     
-    } else if (choose == "A" || choose == "a") {
+    } else if (choose == "a") {
         accountProfile();
 
-    } else if (choose == "C" || choose == "c") {
+    } else if (choose == "c") {
         viewAccounts();
 
-    } else if (choose == "I" || choose == "i") {
+    } else if (choose == "i") {
         viewInventory();
 
-    } else if (choose == "O" || choose == "o") {
+    } else if (choose == "o") {
         viewCheckouts();
 
     } else {
@@ -673,6 +682,8 @@ void searchProducts() {
     cin >> choose;
 
     if (checkInput(choose) == "alpha" && choose.length() == 1) {
+        transform(choose.begin(), choose.end(), choose.begin(), ::tolower);
+
         if (loginEmail == "admin") menuAdmin(choose);
         else menuCustomer(choose);
 
@@ -731,6 +742,8 @@ void searchAcc() {
     cin >> choose;
 
     if (checkInput(choose) == "alpha" && choose.length() == 1) {
+        transform(choose.begin(), choose.end(), choose.begin(), ::tolower);
+
         menuAdmin(choose);
         searchAcc();
 
@@ -780,6 +793,8 @@ void viewAccounts() {
     cin >> choose;
 
     if (checkInput(choose) == "alpha" && choose.length() == 1) {
+        transform(choose.begin(), choose.end(), choose.begin(), ::tolower);
+
         menuAdmin(choose);
         viewAccounts();
 
@@ -807,12 +822,14 @@ void editAccount(int accNumber) {
     cout << "\t\t\t\t[3]   Status: " << accounts[accNumber].status << endl << endl;
     cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
 
-    cout << "\t\t☛ Input action: ";
+    cout << "\t\t☛ Input [action]: ";
     cin >> choose;
 
     cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
 
     if (checkInput(choose) == "alpha" && choose.length() == 1) {
+        transform(choose.begin(), choose.end(), choose.begin(), ::tolower);
+
         menuAdmin(choose);
         editAccount(accNumber);
 
@@ -977,6 +994,8 @@ void viewInventory() {
         addItem();
     
     } else if (checkInput(choose) == "alpha" && choose.length() == 1) {
+        transform(choose.begin(), choose.end(), choose.begin(), ::tolower);
+
         menuAdmin(choose);
         viewInventory();
 
@@ -1002,6 +1021,8 @@ void addItem() {
     cin >> name;
 
     if (checkInput(name) == "alpha" && name.length() == 1) {
+        transform(name.begin(), name.end(), name.begin(), ::tolower);
+
         menuAdmin(name);
         viewInventory();
 
@@ -1223,6 +1244,8 @@ void editItem(int p_num) {
     cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
 
     if (checkInput(choose) == "alpha" && choose.length() == 1) {
+        transform(choose.begin(), choose.end(), choose.begin(), ::tolower);
+
         menuAdmin(choose);
         viewInventory();
 
@@ -1519,13 +1542,13 @@ void viewCheckouts() {
 
 void menuCustomer(string choose) {
 
-    if (choose == "H" || choose == "h") {
+    if (choose == "h") {
         homeCustomer();
 
-    } else if (choose == "S" || choose == "s") {
+    } else if (choose == "s") {
         searchProducts();
 
-    } else if (choose == "A" || choose == "a") {
+    } else if (choose == "a") {
         if (!loginStatus) {
             cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
             cout << "No account logged in yet, redirecting to LOGIN";
@@ -1534,7 +1557,7 @@ void menuCustomer(string choose) {
         }
         else accountProfile();
 
-    } else if (choose == "C" || choose == "c") {
+    } else if (choose == "c") {
         if (!loginStatus) {
             cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
             cout << "No account logged in yet, redirecting to LOGIN";
@@ -1543,13 +1566,13 @@ void menuCustomer(string choose) {
         }
         else cart();
 
-    } else if (choose == "F" || choose == "f") {
+    } else if (choose == "f") {
         foods();
 
-    } else if (choose == "Q" || choose == "q") {
+    } else if (choose == "q") {
         equipments();
 
-    } else if (choose == "M" || choose == "m") {
+    } else if (choose == "m") {
         medicine();
 
     } else {
@@ -1606,9 +1629,9 @@ void homeCustomer() {
     cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
 
     if (checkInput(choose) == "alpha" && choose.length() == 1) {
-        if (loginEmail == "admin") menuAdmin(choose);
-        else menuCustomer(choose);
+        transform(choose.begin(), choose.end(), choose.begin(), ::tolower);
 
+        menuCustomer(choose);
         homeCustomer();
 
     } else if (checkInput(choose) == "number" && products.size() > stoi(choose) && stoi(choose) >= 0) {
@@ -1652,9 +1675,9 @@ void foods() {
     cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
 
     if (checkInput(choose) == "alpha" && choose.length() == 1) {
-        if (loginEmail == "admin") menuAdmin(choose);
-        else menuCustomer(choose);
+        transform(choose.begin(), choose.end(), choose.begin(), ::tolower);
 
+        menuCustomer(choose);
         foods();
 
     } else if (checkInput(choose) == "number" && products.size() > stoi(choose) && stoi(choose) >= 0 && products[stoi(choose)].category == "Food") {
@@ -1698,9 +1721,9 @@ void equipments() {
     cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
 
     if (checkInput(choose) == "alpha" && choose.length() == 1) {
-        if (loginEmail == "admin") menuAdmin(choose);
-        else menuCustomer(choose);
-        
+        transform(choose.begin(), choose.end(), choose.begin(), ::tolower);
+
+        menuCustomer(choose);
         equipments();
 
     } else if (checkInput(choose) == "number" && products.size() > stoi(choose) && stoi(choose) >= 0 && products[stoi(choose)].category == "Equipment") {
@@ -1744,9 +1767,9 @@ void medicine() {
     cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
 
     if (checkInput(choose) == "alpha" && choose.length() == 1) {
-        if (loginEmail == "admin") menuAdmin(choose);
-        else menuCustomer(choose);
-
+        transform(choose.begin(), choose.end(), choose.begin(), ::tolower);
+        
+        menuCustomer(choose);
         medicine();
 
     } else if (checkInput(choose) == "number" && products.size() > stoi(choose) && stoi(choose) >= 0 && products[stoi(choose)].category == "Medicine") {
@@ -1791,17 +1814,43 @@ void viewItem(int p_num) {
             cin >> choose;
 
             if (checkInput(choose) == "alpha" && choose.length() == 1) {
+                transform(choose.begin(), choose.end(), choose.begin(), ::tolower);
+
                 if (loginStatus) {
-                    if (choose == "T" || choose == "t") {
-                        carts.push_back({loginEmail, p_num, quantity, 0});
+                    if (choose == "t") {
+                        // check if user has the product in cart
+                        auto it = find_if(carts.begin(), carts.end(), [&](const Cart& c) {
+                            return c.email == loginEmail && c.product == p_num;
+                        });
 
                         cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
-                        cout << "\t\tProduct: " << products[p_num].name << " is added in your cart";
+
+                        // system will attempt to add quantity to existing product in cart
+                        if (it != carts.end()) { 
+                            for(int i = 0; i < carts.size(); i++) {
+                                if(carts[i].email == loginEmail && carts[i].product == p_num) {
+                                    // user cannot add more when quantity in cart and new quantity added is more than stock of product
+                                    if (carts[i].quantity + quantity > products[p_num].stock) cout << "Cannot add more because of limited stock, please try again." << endl;
+                                    else { // user added quantity for the product in cart
+                                        carts[i].quantity += quantity;
+
+                                        cout << "\t\tProduct: " << products[p_num].name << " is already in the cart, and " << quantity << " more is added.";
+                                    }
+                                    break;
+                                }
+                            }
+                            
+                        } else { // user add product in cart if not exist
+                            carts.push_back({loginEmail, p_num, quantity, 0});
+
+                            cout << "\t\tProduct: " << products[p_num].name << " is added in your cart.";
+                        }
+
                         Sleep(3000);
 
                         cart();
 
-                    } else if (choose == "B" || choose == "b") {
+                    } else if (choose == "b") {
                         // add push_back for checkout
                         checkout();
 
@@ -1847,7 +1896,7 @@ void cart() {
     cout << "┃\t\t\t\tProduct Name\t\t\t\t┃\t\t  Price      \t\t┃\t    Quantity  \t\t┃" << endl;
     
     // check if user has any product in cart
-    auto it = std::find_if(carts.begin(), carts.end(), [&](const Cart& c) {
+    auto it = find_if(carts.begin(), carts.end(), [&](const Cart& c) {
         return c.email == loginEmail;
     });
 
@@ -1885,7 +1934,8 @@ void cart() {
     
         cout << "┃\t┃\t\t\t\t\t\t\t\t┃\t\t\t\t\t┃\t\t\t\t┃" << endl;
         cout << "┣━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
-        cout << "\t\t✎ To view/edit/delete product in cart, choose the product's number.\t\t\t\t" << endl;
+        cout << "\t\t[O] Checkout" << endl;
+        cout << "\t\t✎ To de/select, edit or delete product in cart, choose the product's number.\t\t\t\t" << endl;
 
     } else {
         cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
@@ -1897,24 +1947,103 @@ void cart() {
 
     cout << "\t\t☛ Input [action]: ";
     cin >> choose; 
+    
+    if (checkInput(choose) == "alpha" && choose.length() == 1) {
+        transform(choose.begin(), choose.end(), choose.begin(), ::tolower);
 
-    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
-
-    it = std::find_if(carts.begin(), carts.end(), [&](const Cart& c) {
-        return c.product == stoi(choose);
-    });
- 
-     if (checkInput(choose) == "alpha" && choose.length() == 1) {
-        menuCustomer(choose);
-        cart();
+        if (choose == "o") {
+            checkout();
+            
+        } else {
+            menuCustomer(choose);
+            cart();
+        }
         
-    } else if (checkInput(choose) == "number" && products.size() > stoi(choose) && stoi(choose) >= 0 && it != carts.end()) {
-        viewItem(stoi(choose));
+    } else if (checkInput(choose) == "number" && products.size() > stoi(choose) && stoi(choose) >= 0) {
+        // check if user has the product in cart
+        it = find_if(carts.begin(), carts.end(), [&](const Cart& c) {
+            return c.email == loginEmail && c.product == stoi(choose);
+        });
+
+        if (it != carts.end()) menuCart(stoi(choose));
+        else {
+            cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+            invalidInput();
+
+            cout << "No product exist in your cart";
+            Sleep(2000);
+
+            cart();
+        }
 
     } else {
+        cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
         invalidInput();
         cart();
     }
+}
+
+void menuCart(int p_num) {
+    string choose;
+    int quantity;
+    displayMenu();
+
+    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+    cout << "┃\t\t[O] De/Select for Checkout\t\t┃\t\t    [D] Delete    \t\t┃\t\t    [E] Edit    \t\t┃" << endl;
+    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+
+    cout << "\t\t☛ Input action: ";
+    cin >> choose; 
+
+    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+
+    if (choose == "o") {
+        for(int i = 0; i < carts.size(); i++) {
+            if(carts[i].email == loginEmail && carts[i].product == p_num) {
+                cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+                cout << "Product: " << products[p_num].name;
+
+                if (carts[i].status == 1) {
+                    carts[i].status = 0;
+                    cout << " is deselected for checkout." << endl;
+                } else {
+                    carts[i].status = 1;
+                    cout << " is selected for checkout." << endl;
+                }
+                break;
+            }
+        }
+
+    } else if (choose == "d") {
+        carts.erase(remove_if(carts.begin(), carts.end(), [&](const Cart& c) {
+            return c.email == loginEmail && c.product == p_num;
+        }), carts.end());
+
+        cout << "Product: " << products[p_num].name << " is deleted in your cart.";
+
+    } else if (choose == "e") {
+        for(int i = 0; i < carts.size(); i++) {
+            if(carts[i].email == loginEmail && carts[i].product == p_num) {
+                cout << "\t\t\t\t\t\t\tOld quantity: " << carts[i].quantity << endl;
+                cout << "\t\t\t\t\t\tEnter new quantity: ";
+                cin >> quantity;
+
+                cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+                
+                if (quantity > products[p_num].stock) cout << "Cannot edit quantity because of limited stock, please try again." << endl;
+                else { // user edit quantity for the product
+                    carts[i].quantity = quantity;
+
+                    cout << "\t\tEditing product successful.";
+                }
+                break;
+            }
+        }
+    } else {
+        invalidInput();
+    }
+
+    cart();
 }
 
 void checkout() {
