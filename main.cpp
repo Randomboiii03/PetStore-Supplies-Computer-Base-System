@@ -16,6 +16,8 @@ struct Account {
     string username;
     string email;
     string password;
+    double money;
+    double notApproved;
     string status;
 };
 
@@ -84,10 +86,10 @@ search(const vector<T>& items, const string& SearchTerm);
 int main() {
 
     // admin's account
-    accounts.push_back({"admin", "admin", "admin", "Active"});
+    accounts.push_back({"admin", "admin", "admin", 0, 0, "Active"});
 
     // customer's account
-    accounts.push_back({"gabrielle", "gabrielleramos@gmail.com", "gab", "Active"});
+    accounts.push_back({"gabrielle", "gabrielleramos@gmail.com", "gab", 1000, 0, "Active"});
 
     // add more account for test and presentation here
 
@@ -404,7 +406,7 @@ void registration() {
 
                         if (!found) {
                             // Add the user's information to the vector
-                            accounts.push_back({username, email, password, "Active"});
+                            accounts.push_back({username, email, password, 0, 0, "Active"});
 
                             cout << "\t\tRegistration successful!";
                             Sleep(2000);
@@ -434,6 +436,7 @@ void registration() {
 void accountProfile() {
     string choose, temp;
     int accNumber, choose1;
+    double money;
 
     displayMenu();
 
@@ -446,7 +449,8 @@ void accountProfile() {
 
             cout << "\t\t\t\t\t\t\t       Email: " << accounts[i].email << endl;
             cout << "\t\t\t\t\t\t\t[1] Username: " << accounts[i].username << endl;
-            cout << "\t\t\t\t\t\t\t[2] Password: " << accounts[i].password << endl << endl;
+            cout << "\t\t\t\t\t\t\t[2] Password: " << accounts[i].password << endl;
+            cout << "\t\t\t\t\t\t\t     Petcoin: " << accounts[i].money << endl << endl;
 
             accNumber = i;
             break;
@@ -460,7 +464,7 @@ void accountProfile() {
 
     } else {
         cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
-        cout << "┃\t\t\t  [+] Add In-Store Money  \t\t\t┃\t\t\t\t  [L] Logout  \t\t\t\t┃" << endl;
+        cout << "┃\t\t\t\t[+] Add Petcoin\t\t\t\t┃\t\t\t\t  [L] Logout  \t\t\t\t┃" << endl;
         cout << "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
     }
 
@@ -470,7 +474,93 @@ void accountProfile() {
     cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
 
     if (loginEmail != "admin" && choose == "+") {
-        // add in-store money
+
+        cout << "┃\t\t\t\t\t\t\t\tADD PETCOIN\t\t\t\t\t\t\t\t\t┃" << endl;
+        cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl << endl;
+
+        if (accounts[accNumber].notApproved != 0) {
+            cout << "You still have " << accounts[accNumber].notApproved << " Petcoin still in queue for approval." << endl;
+            Sleep(3000);
+
+            accountProfile();
+
+        } else {
+            cout << "\t\t\t\t\t\t\tHow much : ";
+            cin >> money;
+        }
+
+        // check if string is inputted in an int variable
+        if (cin.fail()) {
+            invalidInput();
+            
+            cout << "\t\tCanceling process...";
+            Sleep(2000);
+
+            cin.clear(); // clear input
+            cin.ignore(LONG_MAX, '\n'); // ignore any error
+
+            accountProfile();
+
+        } else if (money > 0) {
+
+            cout << endl;
+            cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+            cout << "┃\t\t\t\t[1] Save\t\t\t\t┃\t\t\t\t[0] Cancel\t\t\t\t┃" << endl;
+            cout << "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
+
+            cout << "\t\t☛ Input action: ";
+            cin >> choose1;
+
+            cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
+
+            // check if string is inputted in an int variable
+            if (cin.fail()) {
+                invalidInput();
+                
+                cout << "\t\tCanceling process...";
+                Sleep(2000);
+
+                cin.clear(); // clear input
+                cin.ignore(LONG_MAX, '\n'); // ignore any error
+
+                accountProfile();
+
+            } else {
+                switch(choose1) {
+                    case 0:
+                        cout << "\t\tCanceling process...";
+                        Sleep(3000);
+
+                        accountProfile();
+                        break;
+                    
+                    case 1:
+                        accounts[accNumber].notApproved = money;
+
+                        cout << "\t\tPetcoin will be added in your account, please wait for approval";
+                        Sleep(3000);
+
+                        accountProfile();
+                        break;
+                    
+                    default:
+                        invalidInput();
+
+                        cout << "\t\tCanceling process...";
+                        Sleep(2000);
+
+                        accountProfile();
+                        break;
+                }
+            }
+
+        } else {
+            cout << "\t\tMoney must not less than 0.";
+            Sleep(2000);
+            
+            cout << "\t\tCanceling process...";
+            Sleep(2000);
+        }
         
     } else if (checkInput(choose) == "alpha" && choose.length() == 1) {
         transform(choose.begin(), choose.end(), choose.begin(), ::tolower);
@@ -809,7 +899,7 @@ void viewAccounts() {
         menuAdmin(choose);
         viewAccounts();
 
-    } else if (checkInput(choose) == "number" && stoi(choose) < accounts.size() && stoi(choose) > 1) {
+    } else if (checkInput(choose) == "number" && stoi(choose) < accounts.size() && stoi(choose) > 0) {
 
         editAccount(stoi(choose));
 
@@ -826,16 +916,21 @@ void editAccount(int accNumber) {
     displayMenu();
 
     cout << endl;
-    cout << "\t\tEditing account with an email: " << accounts[accNumber].email << endl << endl;
-    cout << "\t\t\t\t[1] Username: " << accounts[accNumber].username << endl;
-    cout << "\t\t\t\t[2] Password: " << accounts[accNumber].password << endl;
-    cout << "\t\t\t\t[3]   Status: " << accounts[accNumber].status << endl << endl;
+    cout << "\t\t\t\t\tEditing account with an email: " << accounts[accNumber].email << endl << endl;
+    cout << "\t\t\t\t\t\t\t[1] Username: " << accounts[accNumber].username << endl;
+    cout << "\t\t\t\t\t\t\t[2] Password: " << accounts[accNumber].password << endl;
+    cout << "\t\t\t\t\t\t\t[3]   Status: " << accounts[accNumber].status << endl;
+    cout << "\t\t\t\t\t\t\t[4]  Petcoin: " << accounts[accNumber].money;
+
+    if (accounts[accNumber].notApproved != 0) cout << "\t\tNeed approval: " << accounts[accNumber].notApproved << " Petcoin" << endl << endl;
+    else cout << endl << endl;
+
     cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
 
     cout << "\t\t☛ Input [action]: ";
     cin >> choose;
 
-    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+    cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
 
     if (checkInput(choose) == "alpha" && choose.length() == 1) {
         transform(choose.begin(), choose.end(), choose.begin(), ::tolower);
@@ -843,7 +938,14 @@ void editAccount(int accNumber) {
         menuAdmin(choose);
         editAccount(accNumber);
 
-    } else if (checkInput(choose) == "number" && stoi(choose) <= 3 && stoi(choose) >= 1) {
+    } else if (checkInput(choose) == "number" && stoi(choose) <= 4 && stoi(choose) >= 1) {
+        if (accounts[accNumber].notApproved == 0) {
+            cout << "\t\tThere is no Petcoin in queue for approval.";
+            Sleep(3000);
+
+            editAccount(accNumber);
+        }
+
         displayMenu();
 
         switch(stoi(choose)) {
@@ -879,6 +981,14 @@ void editAccount(int accNumber) {
 
                 break;
 
+            case 4:
+                
+                cout << "┃\t\t\t\t\t\t\t\tNEED APPROVAL\t\t\t\t\t\t\t\t\t┃" << endl;
+                cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl << endl;
+                cout << "\t\t\t\t\t\t\t\tPetcoin: " << accounts[accNumber].notApproved << endl;
+
+                break;
+
             default:
                 invalidInput();
                 
@@ -891,13 +1001,16 @@ void editAccount(int accNumber) {
 
         cout << endl;
         cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
-        cout << "┃\t\t\t\t[1] Save\t\t\t\t┃\t\t\t\t[0] Cancel\t\t\t\t┃" << endl;
-        cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+        
+        if (stoi(choose) == 4) cout << "┃\t\t\t\t[1] Approved\t\t\t\t┃\t\t\t\t[0] Not Approved\t\t\t\t┃" << endl;
+        else cout << "┃\t\t\t\t[1] Save\t\t\t\t┃\t\t\t\t[0] Cancel\t\t\t\t┃" << endl;
 
-        cout << "\t\t\t\tInput action: ";
+        cout << "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
+
+        cout << "\t\t☛ Input action: ";
         cin >> choose1;
 
-        cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+        cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
 
         //check if string is inputted in an int variable
         if (cin.fail()) {
@@ -914,10 +1027,13 @@ void editAccount(int accNumber) {
         } else {
             switch(choose1) {
                 case 0:
-                    cout << "\t\tCanceling process...";
-                    Sleep(3000);
+                    if (stoi(choose) == 4) accounts[accNumber].notApproved = 0;
+                    else {
+                        cout << "\t\tCanceling process...";
+                        Sleep(3000);
 
-                    viewAccounts();
+                        viewAccounts();
+                    }
                     break;
                 
                 case 1:
@@ -932,6 +1048,11 @@ void editAccount(int accNumber) {
 
                         case 3: // edit user's status
                             accounts[accNumber].status = temp;
+                            break;
+
+                        case 4: // edit user's status
+                            accounts[accNumber].money += accounts[accNumber].notApproved;
+                            accounts[accNumber].notApproved = 0;
                             break;
                     }
 
