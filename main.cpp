@@ -41,20 +41,20 @@ struct Cart {
     bool status;
 };
 
-// struct Checkout {
-//     string email;
-//     int product;
-//     int quantity;
-//     string date;
-// };
+struct Checkout {
+    string email;
+    int product;
+    int quantity;
+    string date;
+};
 
 vector<Account> accounts;
 vector<Product> products;
 vector<Cart> carts;
-// vector<Checkout> checkouts;
+vector<Checkout> checkouts;
 
-bool loginStatus = false;
-string loginEmail = "";
+bool loginStatus = true;
+string loginEmail = "gabrielleramos@gmail.com";
 
 //declaration of functions
 void displayMenu();
@@ -81,10 +81,12 @@ void viewItem(int p_num);
 void cart();
 void menuCart(int p_num);
 void checkout();
+void deleteProduct();
 void invalidInput();
 bool checkAccount(string accountType);
 string checkInput(string choose);
 int getRandomNumber(const vector<Product>& vec);
+string getCurrentTime();
 bool contains(const string& str, const string& searchProd);
 template <typename T>
 typename enable_if<is_same<T, Product>::value, vector<T>>::type
@@ -688,6 +690,7 @@ void menuAdmin(string choose) {
         viewCheckouts();
 
     } else {
+        cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
         invalidInput();
     }
 }
@@ -950,7 +953,7 @@ void editAccount(int accNumber) {
     if (accounts[accNumber].notApproved != 0) cout << "\t\tNeed approval: " << accounts[accNumber].notApproved << " Petcoin" << endl << endl;
     else cout << endl << endl;
 
-    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+    cout << "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
 
     cout << "\t\t☛ Input [action]: ";
     cin >> choose;
@@ -1132,13 +1135,13 @@ void viewInventory() {
     cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
 
     cout << "┃\t\t\t\t\t\t\t\t    [+] ADD PRODUCT    \t\t\t\t\t\t\t\t┃" << endl;
-    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+    cout << "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
 
     cout << "\t\t✎ To edit account, choose a number.\t\t\t\t" << endl;
     cout << "\t\t☛ Input [action]: ";
     cin >> choose;
 
-    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+    cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
 
     if (choose == "+") {
         addItem();
@@ -1177,7 +1180,7 @@ void addItem() {
         viewInventory();
 
     } else if (name.length() == 1) {
-        cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+        cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
         invalidInput();
             
         cout << "\t\tCanceling process...";
@@ -1189,7 +1192,7 @@ void addItem() {
     cin >> temp;
 
     if (cin.fail() || temp > 3 || temp <= 0) {
-        cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+        cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
         invalidInput();
             
         cout << "\t\tCanceling process...";
@@ -1201,7 +1204,7 @@ void addItem() {
         viewInventory();
 
     } else if (temp > 3 || temp <= 0) {
-        cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+        cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
         invalidInput();
             
         cout << "\t\tCanceling process...";
@@ -1226,7 +1229,7 @@ void addItem() {
     cin >> animal;
 
     if (cin.fail()) {
-        cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+        cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
         invalidInput();
             
         cout << "\t\tCanceling process...";
@@ -1238,7 +1241,7 @@ void addItem() {
         viewInventory();
 
     } else if (temp > 4 || temp <= 0) {
-        cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+        cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
         invalidInput();
             
         cout << "\t\tCanceling process...";
@@ -1273,7 +1276,7 @@ void addItem() {
     cin >> price;
 
     if (cin.fail()) {
-        cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+        cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
         invalidInput();
             
         cout << "\t\tCanceling process...";
@@ -1284,7 +1287,7 @@ void addItem() {
 
         viewInventory();
     } else if (price <= 0) {
-        cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+        cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
         cout << "\tPrice must not less than 1.";
         Sleep(3000);
             
@@ -1309,7 +1312,7 @@ void addItem() {
 
         viewInventory();
     } else if (stock <= 0) {
-        cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+        cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
         cout << "\t\tStock must not less than 1.";
         Sleep(3000);
         
@@ -1323,12 +1326,12 @@ void addItem() {
     cout << endl;
     cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
     cout << "┃\t\t\t\t[1] Save\t\t\t\t┃\t\t\t\t[0] Cancel\t\t\t\t┃" << endl;
-    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+    cout << "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
     
     cout << "\t\t☛ Input action: ";
     cin >> choose;
 
-    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+    cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
 
     if (cin.fail()) {
         invalidInput();
@@ -1389,12 +1392,12 @@ void editItem(int p_num) {
     if (products[p_num].status) cout << "Displayed" << endl << endl;
     else cout << "Not Displayed" << endl << endl;
 
-    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+    cout << "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
 
     cout << "\t\t☛ Input [action]: ";
     cin >> choose;
 
-    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+    cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
 
     if (checkInput(choose) == "alpha" && choose.length() == 1) {
         transform(choose.begin(), choose.end(), choose.begin(), ::tolower);
@@ -1427,7 +1430,7 @@ void editItem(int p_num) {
 
                 if (checkInput(temp) == "number") {
                     if (stoi(temp) > 3 || stoi(temp) <= 0) {
-                        cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+                        cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
                         invalidInput();
                                 
                         cout << "\t\tCanceling process...";
@@ -1448,7 +1451,7 @@ void editItem(int p_num) {
                     }
 
                 } else {
-                    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+                    cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
                     invalidInput();
                                 
                     cout << "\t\tCanceling process...";
@@ -1470,7 +1473,7 @@ void editItem(int p_num) {
 
                 if (checkInput(temp) == "number") {
                     if (stoi(temp) > 4 || stoi(temp) <= 0) {
-                        cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+                        cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
                         invalidInput();
                                 
                         cout << "\t\tCanceling process...";
@@ -1496,7 +1499,7 @@ void editItem(int p_num) {
                     }
 
                 } else {
-                    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+                    cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
                     invalidInput();
                                 
                     cout << "\t\tCanceling process...";
@@ -1528,7 +1531,7 @@ void editItem(int p_num) {
                 cin >> temp;
 
                 if (checkInput(temp) == "number" && stoi(temp) <= 0) {
-                    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+                    cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
                     cout << "\t\tPrice must not less than 1." << endl;
                     Sleep(3000);
                                 
@@ -1538,7 +1541,7 @@ void editItem(int p_num) {
                     viewInventory();
 
                 } else {
-                    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+                    cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
                     invalidInput();
                                 
                     cout << "\t\tCanceling process...";
@@ -1557,7 +1560,7 @@ void editItem(int p_num) {
                 cin >> temp;
 
                 if (checkInput(temp) == "number" && stoi(temp) <= 0) {
-                    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+                    cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
                     cout << "\t\tStock must not less than 1." << endl;
                     Sleep(3000);
                                 
@@ -1567,7 +1570,7 @@ void editItem(int p_num) {
                     viewInventory();
 
                 } else {
-                    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+                    cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
                     invalidInput();
                                 
                     cout << "\t\tCanceling process...";
@@ -1590,12 +1593,12 @@ void editItem(int p_num) {
         cout << endl;
         cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
         cout << "┃\t\t\t\t[1] Save\t\t\t\t┃\t\t\t\t[0] Cancel\t\t\t\t┃" << endl;
-        cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+        cout << "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
 
         cout << "\t\t☛ Input action: ";
         cin >> choose1;
 
-        cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+        cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
 
         if (cin.fail()) {
             invalidInput();
@@ -1707,7 +1710,7 @@ void menuCustomer(string choose) {
 
     } else if (choose == "a") {
         if (!loginStatus) {
-            cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+            cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
             cout << "\t\tNo account logged in yet, redirecting to LOGIN";
 
             login();
@@ -1716,7 +1719,7 @@ void menuCustomer(string choose) {
 
     } else if (choose == "c") {
         if (!loginStatus) {
-            cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+            cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
             cout << "\t\tNo account logged in yet, redirecting to LOGIN";
 
             login();
@@ -1733,6 +1736,7 @@ void menuCustomer(string choose) {
         medicine();
 
     } else {
+        cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
         invalidInput();
     }
 }
@@ -2012,8 +2016,12 @@ void viewItem(int p_num) {
 
                         cart();
 
-                    } else if (choose == "b") {
-                        // add push_back for checkout
+                    } else if (choose == "b") { // direct to checkout
+                        string currentTime = getCurrentTime();
+
+                        checkouts.clear(); // clear checkout everytime user checkouts
+
+                        checkouts.push_back({loginEmail, p_num, quantity, currentTime});
                         checkout();
 
                     } else {
@@ -2056,7 +2064,7 @@ void cart() {
 
     cout << "┃\t\t\t\t\t\t\t\t      Cart        \t\t\t\t\t\t\t\t┃" << endl;
     cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
-    cout << "┃\t\t\t\tProduct Name\t\t\t\t┃\t\t  Price      \t\t┃\t    Quantity  \t\t┃" << endl;
+    cout << "┃\t\t\t\tProduct Name\t\t\t\t┃\t\t  Quantity      \t┃\t      Price  \t\t┃" << endl;
     
     // check if user has any product in cart
     auto it = find_if(carts.begin(), carts.end(), [&](const Cart& c) {
@@ -2092,7 +2100,7 @@ void cart() {
                 else if (products[p_num].name.length() <= 19 && p_num < 10) cout << "\t";
                 else if (products[p_num].name.length() <= 18 && p_num >= 10) cout << "\t";
 
-                cout << "┃\t\t   ₱ " << products[p_num].price << "     \t\t┃\t       " << carts[i].quantity << "  \t\t┃" << endl;
+                cout << "┃\t\t     " << carts[i].quantity << "   \t\t┃\t      ₱ " << products[p_num].price << "   \t\t┃" << endl;
 
                 string details = products[p_num].animal + "\'s " + products[p_num].category;
 
@@ -2109,7 +2117,7 @@ void cart() {
                 // separation for multiple product in cart
                 if (count > 0 && p_count != count) {
                     cout << "┃\t┃\t\t\t\t\t\t\t\t┃\t\t\t\t\t┃\t\t\t\t┃" << endl;
-                    cout << "┣━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+                    cout << "┃━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┃" << endl;
                     cout << "┃\t┃\t\t\t\t\t\t\t\t┃\t\t\t\t\t┃\t\t\t\t┃" << endl;
                 }
             }
@@ -2131,7 +2139,7 @@ void cart() {
         cout << "┃\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t┃" << endl;
         cout << "┃\t\t\t\t\t\t\t\tNo product in cart yet!\t\t\t\t\t\t\t\t┃" << endl;
         cout << "┃\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t┃" << endl;
-        cout << "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
+        cout << "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
     }
 
     cout << "\t\t☛ Input [action]: ";
@@ -2141,7 +2149,22 @@ void cart() {
         transform(choose.begin(), choose.end(), choose.begin(), ::tolower);
 
         if (choose == "o") {
-            checkout();
+            string currentTime = getCurrentTime();
+
+            checkouts.clear();
+
+            for (int i = 0; i < carts.size(); i++) {
+                if (carts[i].email == loginEmail && carts[i].status) checkouts.push_back({loginEmail, carts[i].product, carts[i].quantity, currentTime});
+            }
+
+            if (checkouts.size() > 0) checkout();
+            else {
+                cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
+                cout << "No product/s is selected in cart yet";
+                Sleep(3000);
+
+                cart();
+            }
             
         } else {
             menuCustomer(choose);
@@ -2235,9 +2258,181 @@ void menuCart(int p_num) {
 }
 
 void checkout() {
-    displayMenu();
+    string choose;
+    int p_count = 0, count = 0, choose1;
+    double total = 0, money;
 
-    cout << "checkout"; 
+    displayMenu();
+    
+    cout << "┃\t\t\t\t\t\t\t\t      Checkout        \t\t\t\t\t\t\t\t┃" << endl;
+    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+    cout << "┃\t\t\t\tProduct Name\t\t\t\t┃\t\t  Quantity      \t┃\t      Price  \t\t┃" << endl;
+    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+    cout << "┃\t\t\t\t\t\t\t\t\t┃\t\t\t\t\t┃\t\t\t\t┃" << endl;
+
+    // counter for number of product in user's cart
+    for (int j = 0; j < checkouts.size(); j++) {
+        p_count++;
+    }
+
+    // display user's product in cart
+    for (int i = 0; i < checkouts.size(); i++) {
+        int p_num = checkouts[i].product;
+
+        total += (products[p_num].price * checkouts[i].quantity);
+
+        cout << "┃\t\t\t[" << p_num << "] " << products[p_num].name << "\t\t\t";
+
+        if (products[p_num].name.length() <= 10) cout << "\t\t";
+        else if (products[p_num].name.length() <= 19 && p_num < 10) cout << "\t";
+        else if (products[p_num].name.length() <= 18 && p_num >= 10) cout << "\t";
+
+        cout << "┃\t\t     " << checkouts[i].quantity << "   \t\t┃\t      ₱ " << products[p_num].price << "   \t\t┃" << endl;
+
+        string details = products[p_num].animal + "\'s " + products[p_num].category;
+
+        cout << "┃\t\t\t  ✱  " << details << "     \t\t";
+
+        if (details.length() <= 10) cout << "\t\t";
+        else if (details.length() <= 18 && p_num >= 10) cout << "\t";
+
+        cout << "┃\t\t\t\t\t┃\t\t\t\t┃" << endl;
+                
+        // increment for separation line
+        count++;
+                
+        // separation for multiple product in cart
+        if (count > 0 && p_count != count) {
+            cout << "┃\t\t\t\t\t\t\t\t\t┃\t\t\t\t\t┃\t\t\t\t┃" << endl;
+            cout << "┃━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┃" << endl;
+            cout << "┃\t\t\t\t\t\t\t\t\t┃\t\t\t\t\t┃\t\t\t\t┃" << endl;
+        }
+    }
+
+    total += 10; // add system fee to total price
+
+    cout << "┃\t\t\t\t\t\t\t\t\t┃\t\t\t\t\t┃\t\t\t\t┃" << endl;
+    cout << "┃━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┃" << endl;
+    cout << "┃\t\t\t\t\t\t\t\t\t┃\t\t\t\t\t┃\t\t\t\t┃" << endl;
+    cout << "┃\t\t\t\tSystem Fee\t\t\t\t┃\t\t\t\t┃\t      ₱ 10   \t\t┃" << endl;
+    cout << "┃\t\t\t\t\t\t\t\t\t┃\t\t\t\t\t┃\t\t\t\t┃" << endl;
+    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+    cout << "┃\t\t\t" << checkouts[0].date << "\t\t\t\t\t\t\tTotal:\t\t┃\t     ₱ " << total << "  \t\t┃" << endl;
+    cout << "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl << endl;
+
+    cout << "┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓" << endl;
+    cout << "┃\t\t\t\t\t\t\t\t  MODE OF PAYMENT      \t\t\t\t\t\t\t\t┃" << endl;
+    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+    cout << "┃\t\t\t\t[1] CASH\t\t\t\t┃\t\t\t\t[2] PETCOIN\t\t\t\t┃" << endl;
+    cout << "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
+
+    cout << "\t\t☛ Input [action]: ";
+    cin >> choose;
+
+    // check if string is inputted in an int variable
+    if (checkInput(choose) == "alpha" && choose.length() == 1) {
+        menuCustomer(choose);
+        checkout();
+
+    } else if (checkInput(choose) == "number" && stoi(choose) >= 1 && stoi(choose) <= 2) {
+        
+        cout << "┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓" << endl;
+        cout << "┃\t\t\t\t[1] Checkout\t\t\t\t┃\t\t\t\t[0] Cancel\t\t\t\t┃" << endl;
+        cout << "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
+
+        cout << "\t\t☛ Input action: ";
+        cin >> choose1;
+
+        cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
+
+        if(cin.fail()) {
+            invalidInput();
+
+            cout << "\t\tCanceling process...";
+            Sleep(2000);
+
+            cin.clear(); // clear input
+            cin.ignore(LONG_MAX, '\n'); // ignore any error
+
+            cart();
+
+        } else {
+            switch(choose1) {
+                case 0:
+                    cout << "\t\tCanceling process...";
+                    break;
+
+                case 1:
+                    cout << "\t\tProcessing transaction..." << endl;
+                    Sleep(3000);
+
+                    switch(stoi(choose)) {
+                        case 1:
+                            cout << "\t\tHow much is your cash onhand? ";
+                            cin >> money;
+
+                            if (money >= total) {
+                                deleteProduct();
+                                money -= total;
+
+                                if (money != 0) cout << "\t\tYour change is ₱ " << money << endl;
+                                Sleep(1000);
+
+                                cout << "\t\tThanks for purchasing!";
+
+                            } else cout << "\t\tYour money is not enough for the total price you checkout, please try again.";
+
+                            break;
+
+                        case 2:
+                            for(int i = 1; i < accounts.size(); i++) {
+                                if (accounts[i].email == loginEmail) {
+                                    if (accounts[i].money >= total) {
+                                        cout << "\t\tThanks for purchasing!";
+
+                                        deleteProduct();
+                                        accounts[i].money -= total; // dedacting total price from petcoin
+
+                                    } else cout << "\t\tYour Petcoin is not enough for the total price you checkout, cash in to use Petcoin.";
+                                }
+                            }
+                            break;
+                    }
+
+                    break;
+
+                default:
+                    invalidInput();
+
+                    cout << "\t\tCanceling process...";
+                    break;
+            }
+
+            Sleep(2000);
+            cart();
+        }
+
+    } else {
+        cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
+        invalidInput();
+
+        cout << "\t\tReseting process...";
+        Sleep(2000);
+
+        checkout();
+    }
+}
+
+// delete products that has been checkout
+void deleteProduct() {
+    for (const auto& checkout : checkouts) {
+        for (auto it = carts.begin(); it != carts.end(); ++it) {
+            if (it -> product == checkout.product) {
+                carts.erase(it);
+                break;
+            }
+        }
+    }
 }
 
 void invalidInput() {
@@ -2262,6 +2457,23 @@ string checkInput(string choose) {
 // generate random number base on count of product
 int getRandomNumber(const vector<Product>& vec) {
     return rand() % vec.size();
+}
+
+string getCurrentTime() {
+    // get current time
+    time_t t = time(nullptr);
+    tm tm = *localtime(&t);
+
+    // create a stringstream to hold the formatted time
+    stringstream ss;
+
+    // format the time using put_time and write it to the stringstream
+    ss << put_time(&tm, "%Y-%m-%d %H:%M:%S");
+
+    // extract the formatted time from the stringstream as a string
+    string dateTime = ss.str();
+
+    return dateTime;
 }
 
 // check if searchTerm is in any searchable lists
