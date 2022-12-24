@@ -53,8 +53,8 @@ vector<Product> products;
 vector<Cart> carts;
 vector<Checkout> checkouts;
 
-bool loginStatus = true;
-string loginEmail = "gabrielleramos@gmail.com";
+bool loginStatus = false;
+string loginEmail = "";
 
 //declaration of functions
 void displayMenu();
@@ -101,7 +101,7 @@ int main() {
     accounts.push_back({"admin", "admin", "admin", 0, 0, false});
 
     // customer's account
-    accounts.push_back({"gabrielle", "gabrielleramos@gmail.com", "gab", 1000, 0, false});
+    accounts.push_back({"gabrielle", "gabrielleramos@gmail.com", "gab", 10000, 0, false});
 
     // add more account for test and presentation here
 
@@ -2057,7 +2057,7 @@ void viewItem(int p_num) {
 
 void cart() {
     string choose;
-    int p_count = 0, count = 0, check_count = 0;
+    int p_count = 0, count = 0, check_count = 0, s_count = 0;
     double total = 0;
 
     displayMenu();
@@ -2153,13 +2153,22 @@ void cart() {
 
             checkouts.clear();
 
+            cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
+
             for (int i = 0; i < carts.size(); i++) {
                 if (carts[i].email == loginEmail && carts[i].status) checkouts.push_back({loginEmail, carts[i].product, carts[i].quantity, currentTime});
+                if (carts[i].quantity > products[carts[i].product].stock) {
+                    cout << "\t\tProduct: " << products[carts[i].product].name << " has " << products[carts[i].product].stock << " piece/s stock available." << endl;
+                    s_count++;
+                }
             }
 
             if (checkouts.size() > 0) checkout();
-            else {
-                cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
+            else if (s_count > 0) {
+                Sleep(3000);
+                cart();
+
+            } else {
                 cout << "No product/s is selected in cart yet";
                 Sleep(3000);
 
@@ -2314,7 +2323,7 @@ void checkout() {
     cout << "┃\t\t\t\t\t\t\t\t\t┃\t\t\t\t\t┃\t\t\t\t┃" << endl;
     cout << "┃━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┃" << endl;
     cout << "┃\t\t\t\t\t\t\t\t\t┃\t\t\t\t\t┃\t\t\t\t┃" << endl;
-    cout << "┃\t\t\t\tSystem Fee\t\t\t\t┃\t\t\t\t┃\t      ₱ 10   \t\t┃" << endl;
+    cout << "┃\t\t\t\tSystem Fee\t\t\t\t┃\t\t\t\t\t┃\t      ₱ 10   \t\t┃" << endl;
     cout << "┃\t\t\t\t\t\t\t\t\t┃\t\t\t\t\t┃\t\t\t\t┃" << endl;
     cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
     cout << "┃\t\t\t" << checkouts[0].date << "\t\t\t\t\t\t\tTotal:\t\t┃\t     ₱ " << total << "  \t\t┃" << endl;
@@ -2426,12 +2435,15 @@ void checkout() {
 // delete products that has been checkout
 void deleteProduct() {
     for (const auto& checkout : checkouts) {
-        for (auto it = carts.begin(); it != carts.end(); ++it) {
-            if (it -> product == checkout.product) {
-                carts.erase(it);
+        for (int i = 0; i < carts.size(); i++) {
+            if (carts[i].product == checkout.product && carts[i].email == loginEmail) {
+                carts.erase(carts.begin() + i);
+                Sleep(5000);
                 break;
             }
         }
+
+        products[checkout.product].stock -= checkout.quantity;
     }
 }
 
