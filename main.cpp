@@ -9,6 +9,9 @@
 #include <type_traits>
 #include <time.h>
 #include <cstdlib>
+#include <iomanip>
+#include <ctime>
+#include <sstream>
 
 using namespace std;
 
@@ -39,9 +42,17 @@ struct Cart {
     int status;
 };
 
+// struct Checkout {
+//     string email;
+//     int product;
+//     int quantity;
+//     string date;
+// };
+
 vector<Account> accounts;
 vector<Product> products;
 vector<Cart> carts;
+// vector<Checkout> checkouts;
 
 bool loginStatus = false;
 string loginEmail = "";
@@ -2022,7 +2033,8 @@ void viewItem(int p_num) {
 
 void cart() {
     string choose;
-    int count = 0, couunt = 0;
+    int p_count = 0, count = 0, check_count = 0;
+    double total = 0;
 
     displayMenu();
 
@@ -2042,7 +2054,7 @@ void cart() {
 
         // counter for number of product in user's cart
         for (int j = 0; j < carts.size(); j++) {
-            if (carts[j].email == loginEmail) count++;
+            if (carts[j].email == loginEmail) p_count++;
         }
 
         // display user's product in cart
@@ -2052,7 +2064,11 @@ void cart() {
                 int p_num = carts[i].product;
 
                 if (carts[i].status == 0) cout << "┃   ☐";
-                else cout << "┃  ✅";
+                else {
+                    cout << "┃  ✅";
+                    check_count++;
+                    total += (products[p_num].price * carts[i].quantity);
+                }
 
                 cout << "   ┃\t\t[" << p_num << "] " << products[p_num].name << "\t\t\t";
 
@@ -2071,11 +2087,11 @@ void cart() {
 
                 cout << "┃\t\t\t\t\t┃\t\t\t\t┃" << endl;
                 
-                // increment for if need separation
-                couunt++;
+                // increment for separation line
+                count++;
                 
                 // separation for multiple product in cart
-                if (couunt > 0 && count != couunt) {
+                if (count > 0 && p_count != count) {
                     cout << "┃\t┃\t\t\t\t\t\t\t\t┃\t\t\t\t\t┃\t\t\t\t┃" << endl;
                     cout << "┣━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
                     cout << "┃\t┃\t\t\t\t\t\t\t\t┃\t\t\t\t\t┃\t\t\t\t┃" << endl;
@@ -2084,8 +2100,15 @@ void cart() {
         }
     
         cout << "┃\t┃\t\t\t\t\t\t\t\t┃\t\t\t\t\t┃\t\t\t\t┃" << endl;
-        cout << "┗━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
-        cout << "\t\t✎ To de/select, edit or delete product in cart, choose the product's number.\t\t\t[O] Checkout" << endl;
+        
+        if (check_count == 0) cout << "┗━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
+        else {
+            cout << "┣━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+            cout << "┃\t\t\t\t[O] Checkout\t\t\t\t\t\t\tTotal:\t\t┃\t     ₱ " << total << "  \t\t┃" << endl;
+            cout << "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
+        }
+
+        cout << "\t\t✎ To de/select, edit or delete product in cart, choose the product's number." << endl;
 
     } else {
         cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;

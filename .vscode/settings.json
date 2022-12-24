@@ -11,7 +11,11 @@
         "xtree": "cpp",
         "xutility": "cpp",
         "xiosbase": "cpp",
-        "system_error": "cpp"
+        "system_error": "cpp",
+        "iterator": "cpp",
+        "xmemory": "cpp",
+        "cstdlib": "cpp",
+        "ctime": "cpp"
     },
     "debug.terminal.clearBeforeReusing": true,
     "editor.fontFamily": "Consolas, 'Courier New', monospace, Segoe UI Emoji"
