@@ -19,6 +19,6 @@ We welcome any contributions to the PetStore Supplies Computer Base System. If y
   <li>Describe the issue or improvement you are suggesting.</li>
   <li>Click "Submit new issue" to open the issue.</li>
 </ol>
-[I'm an inline-style link](https://www.google.com)
+
 <h2>Code of Conduct</h2>
-We expect all contributors to the PetStore Supplies Computer Base System to follow the [Code of Conduct](https://github.com/Randomboiii03/PetStore-Supplies-Computer-Base-System/blob/ec7a5037e566b9708c7b3e159b002056974ee49e/CODE_OF_CONDUCT.md). Please make sure to read and follow these guidelines in order to ensure a respectful and welcoming environment for all contributors.
+We expect all contributors to the PetStore Supplies Computer Base System to follow the <a href = "CODE_OF_CONDUCT.md">Code of Conduct</a>. Please make sure to read and follow these guidelines in order to ensure a respectful and welcoming environment for all contributors.
