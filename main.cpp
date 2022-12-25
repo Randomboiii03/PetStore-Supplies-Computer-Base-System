@@ -1120,10 +1120,10 @@ void viewInventory() {
     displayMenu();
 
     cout << "|\t\t\t\t\t\t\t\tLIST OF PRODUCTS\t\t\t\t\t\t\t\t┃" << endl;
-    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
-    cout << "┃\t\t\tProduct Name\t\t\t┃\t\tCategory\t\t┃\t  Animal      \t┃\t  Price      \t┃" << endl;
-    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
-    cout << "┃\t\t\t\t\t\t\t┃\t\t\t\t\t┃\t\t\t┃\t\t\t┃" << endl;
+    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┫" << endl;
+    cout << "┃\t\t\tProduct Name\t\t\t┃\tCategory\t┃\t  Animal\t┃\t  Price \t┃      Stock   \t┃" << endl;
+    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━┫" << endl;
+    cout << "┃\t\t\t\t\t\t\t┃\t\t\t┃\t\t\t┃\t\t\t┃\t\t┃" << endl;
 
     // displaying all products
     for (int i = 0; i < products.size(); ++i) {
@@ -1133,15 +1133,19 @@ void viewInventory() {
         else if (products[i].name.length() <= 19 && i < 10) cout << "\t";
         else if (products[i].name.length() <= 18 && i >= 10) cout << "\t";
 
-        cout << "┃\t\t" << products[i].category;
+        cout << "┃\t" << products[i].category << "\t"; 
 
         if (products[i].category == "Food") cout << "\t";
 
-        cout << "\t\t┃\t   " << products[i].animal << "     \t┃\t  ₱ " << products[i].price << "      \t┃" << endl;
+        cout << "┃\t   " << products[i].animal << "   \t";
+
+        cout << "┃\t ₱ " << products[i].price << "\t\t";
+
+        cout << "┃      " << products[i].stock << "\t┃" << endl;
     }
 
-    cout << "┃\t\t\t\t\t\t\t┃\t\t\t\t\t┃\t\t\t┃\t\t\t┃" << endl;
-    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+    cout << "┃\t\t\t\t\t\t\t┃\t\t\t┃\t\t\t┃\t\t\t┃\t\t┃" << endl;
+    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━┫" << endl;
 
     cout << "┃\t\t\t\t\t\t\t\t    [+] ADD PRODUCT    \t\t\t\t\t\t\t\t┃" << endl;
     cout << "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
