@@ -297,38 +297,34 @@ void login() {
                         Sleep(3000);
 
                         // iterate over registered users to find a match
-                        bool found = false;
-                        bool status;
                         for (const auto& account : accounts) {
                             if (email == account.email && password == account.password) {
-                                found = true;
-                                status = account.status; // check account's status
+
+                                if (account.status) { // if true user's account is banned
+                                    cout << "\t\tCannot login, your account is banned." << endl;
+                                    Sleep(2000);
+
+                                    login();
+
+                                } else {
+                                    loginStatus = true;
+                                    loginEmail = email;
+
+                                    cout << "\t\tLogin successful!";
+                                    Sleep(2000);
+
+                                    if (loginEmail == "admin") homeAdmin();
+                                    else homeCustomer();
+                                }
                                 break;
                             }
                         }
 
-                        if (!found) { // user's credentials did not match any registered users
-                            cout << "\t\tInvalid email address or password." << endl;
-                            Sleep(2000);
+                        // user's credentials did not match any registered users
+                        cout << "\t\tInvalid email address or password." << endl;
+                        Sleep(2000);
 
-                            login();
-
-                        } else if (status) { // user's account is banned
-                            cout << "\t\tCannot login, your account is banned." << endl;
-                            Sleep(2000);
-
-                            login();
-                            
-                        } else {
-                            loginStatus = true;
-                            loginEmail = email;
-
-                            cout << "\t\tLogin successful!";
-                            Sleep(2000);
-
-                            if (loginEmail == "admin") homeAdmin();
-                            else homeCustomer();
-                        }
+                        login();
                     }
                     break;
                     
@@ -415,28 +411,22 @@ void registration() {
                         Sleep(3000);
 
                         // Check if the email address is already registered
-                        bool found = false;
                         for (const auto& account : accounts) {
-                            if (email == account.email) {
-                                // Email address is already registered
+                            if (email == account.email) { // Email address is already registered
                                 cout << "\t\tThat email address is already registered. Please try again." << endl;
-                                found = true;
-                                break;
+                                Sleep(2000);
+
+                                registration();
+
+                            } else { // Add the user's information to the vector
+                                accounts.push_back({username, email, password, 0, 0, false});
+
+                                cout << "\t\tRegistration successful!";
+                                Sleep(2000);
+
+                                login();
                             }
-                        }
-
-                        if (!found) {
-                            // Add the user's information to the vector
-                            accounts.push_back({username, email, password, 0, 0, false});
-
-                            cout << "\t\tRegistration successful!";
-                            Sleep(2000);
-
-                            login();
-
-                        } else {
-                            Sleep(2000);
-                            registration();
+                            break;
                         }
                     }
                     break;
@@ -471,7 +461,6 @@ void accountProfile() {
             cout << "\t\t\t\t\t\t\t       Email: " << accounts[i].email << endl;
             cout << "\t\t\t\t\t\t\t[1] Username: " << accounts[i].username << endl;
             cout << "\t\t\t\t\t\t\t[2] Password: " << accounts[i].password << endl;
-            cout << "\t\t\t\t\t\t\t     Petcoin: " << accounts[i].money << endl << endl;
 
             accNumber = i;
             break;
@@ -484,6 +473,8 @@ void accountProfile() {
         cout << "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
 
     } else {
+        cout << "\t\t\t\t\t\t\t     Petcoin: " << accounts[accNumber].money << endl << endl;
+
         cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
         cout << "┃\t\t\t\t[+] Add Petcoin\t\t\t\t┃\t\t\t\t  [L] Logout  \t\t\t\t┃" << endl;
         cout << "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
@@ -558,7 +549,7 @@ void accountProfile() {
                     case 1:
                         accounts[accNumber].notApproved = money;
 
-                        cout << "\t\tPetcoin will be added in your account, please wait for approval";
+                        cout << "\t\tPetcoin will be added in your account, please wait for approval.";
                         Sleep(3000);
 
                         accountProfile();
@@ -683,22 +674,12 @@ void accountProfile() {
 
 void menuAdmin(string choose) {
 
-    if (choose == "s") {
-        searchAdmin();
-    
-    } else if (choose == "a") {
-        accountProfile();
-
-    } else if (choose == "c") {
-        viewAccounts();
-
-    } else if (choose == "i") {
-        viewInventory();
-
-    } else if (choose == "o") {
-        viewCheckouts();
-
-    } else {
+    if (choose == "s") searchAdmin();
+    else if (choose == "a") accountProfile();
+    else if (choose == "c") viewAccounts();
+    else if (choose == "i") viewInventory();
+    else if (choose == "o") viewCheckouts();
+    else {
         cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
         invalidInput();
     }
@@ -761,10 +742,10 @@ void searchProducts() {
         cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
         cout << "┃\t\t\t\t\t\t\t┃\t\t\t\t\t┃\t\t\t┃\t\t\t┃" << endl;
        
-        //displaying search results
+        // displaying search results
         for (int i = 0; i < results.size(); i++) {
             for (int j = 0; j < products.size(); j++) {
-                if (results[i].name == products[j].name) {
+                if (results[i].name == products[j].name && results[i].status) {
                     cout << "┃\t\t[" << j << "] " << results[i].name << "\t\t";
 
                     if (results[i].name.length() <= 10) cout << "\t\t";
@@ -933,7 +914,6 @@ void viewAccounts() {
         viewAccounts();
 
     } else if (checkInput(choose) == "number" && stoi(choose) < accounts.size() && stoi(choose) > 0) {
-
         editAccount(stoi(choose));
 
     } else {
@@ -1137,11 +1117,7 @@ void viewInventory() {
 
         if (products[i].category == "Food") cout << "\t";
 
-        cout << "┃\t   " << products[i].animal << "   \t";
-
-        cout << "┃\t ₱ " << products[i].price << "\t\t";
-
-        cout << "┃      " << products[i].stock << "\t┃" << endl;
+        cout << "┃\t   " << products[i].animal << "   \t" << "┃\t ₱ " << products[i].price << "\t\t" << "┃      " << products[i].stock << "\t┃" << endl;
     }
 
     cout << "┃\t\t\t\t\t\t\t┃\t\t\t┃\t\t\t┃\t\t\t┃\t\t┃" << endl;
@@ -1299,6 +1275,7 @@ void addItem() {
         cin.ignore(LONG_MAX, '\n'); // ignore any error
 
         viewInventory();
+
     } else if (price <= 0) {
         cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
         cout << "\tPrice must not less than 1.";
@@ -1308,7 +1285,6 @@ void addItem() {
         Sleep(2000);
 
         viewInventory();
-
     } 
 
     cout << "\t\t\t\t\t\t  Stock: ";
@@ -1324,6 +1300,7 @@ void addItem() {
         cin.ignore(LONG_MAX, '\n'); // ignore any error
 
         viewInventory();
+
     } else if (stock <= 0) {
         cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
         cout << "\t\tStock must not less than 1.";
@@ -1355,15 +1332,11 @@ void addItem() {
         cin.clear(); // clear input
         cin.ignore(LONG_MAX, '\n'); // ignore any error
 
-        viewInventory();
-
     } else {
         switch(choose) {
             case 0:
                 cout << "\t\tCanceling process...";
                 Sleep(3000);
-
-                viewInventory();
                 break;
                 
             case 1: // adding product in the vector
@@ -1371,8 +1344,6 @@ void addItem() {
 
                 cout << "\t\tAdding product...";
                 Sleep(3000);
-
-                viewInventory();
                 break;
                 
             default:
@@ -1380,11 +1351,11 @@ void addItem() {
 
                 cout << "\t\tCanceling process...";
                 Sleep(2000);
-
-                viewInventory();
                 break;
         }
     }
+
+    viewInventory();
 }
 
 void editItem(int p_num) {
@@ -1739,7 +1710,7 @@ void viewCheckouts() {
 
             cout << "┃\t\t\t┃\t\t┃" << endl;
 
-            // display total and divider if there is more than 1 email with different date
+            // display total and divider if there is multiple checkouts
             if ((receipts[i].email != receipts[i + 1].email || receipts[i].date != receipts[i + 1].date) && i != receipts.size() - 1) {
                 cout << "┃\t\t\t┃\t\t\t\t\t┃\t\t\t\t\t┣━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━┫" << endl;
                 cout << "┃\t\t\t┃\t\t\t\t\t┃\t\t\t\t\t┃\t   Total     \t┃    ₱ " << total << "  \t┃" << endl;
@@ -1762,7 +1733,7 @@ void viewCheckouts() {
     } else {
         cout << "┣━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━┫" << endl;
         cout << "┃\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t┃" << endl;
-        cout << "┃\t\t\t\t\t\t\t\tNo checkouts record yet!\t\t\t\t\t\t\t\t┃" << endl;
+        cout << "┃\t\t\t\t\t\t\t\tNo checkouts record yet!\t\t\t\t\t\t\t┃" << endl;
         cout << "┃\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t┃" << endl;
         cout << "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
     }
@@ -1784,16 +1755,13 @@ void viewCheckouts() {
 
 void menuCustomer(string choose) {
 
-    if (choose == "h") {
-        homeCustomer();
-
-    } else if (choose == "s") {
-        searchProducts();
-
-    } else if (choose == "a") {
+    if (choose == "h") homeCustomer();
+    else if (choose == "s") searchProducts();
+    else if (choose == "a") {
         if (!loginStatus) {
             cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
             cout << "\t\tNo account logged in yet, redirecting to LOGIN";
+            Sleep(3000);
 
             login();
         }
@@ -1803,21 +1771,16 @@ void menuCustomer(string choose) {
         if (!loginStatus) {
             cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
             cout << "\t\tNo account logged in yet, redirecting to LOGIN";
+            Sleep(3000);
 
             login();
         }
         else cart();
 
-    } else if (choose == "f") {
-        foods();
-
-    } else if (choose == "q") {
-        equipments();
-
-    } else if (choose == "m") {
-        medicine();
-
-    } else {
+    } else if (choose == "f") foods();
+    else if (choose == "q") equipments();
+    else if (choose == "m") medicine();
+    else {
         cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
         invalidInput();
     }
@@ -1839,13 +1802,11 @@ void homeCustomer() {
     for (int i = 0; i < 10; ++i) {
         int index = getRandomNumber(products);
         
-        // check if the generated number has been already selected
-        while (selected.count(index) > 0) {
+        while (selected.count(index) > 0) { // check if the generated number has been already selected
             index = getRandomNumber(products);
         }
 
-        // inserting random number in set
-        selected.insert(index);
+        selected.insert(index); // inserting random number in set
 
         // displaying products base on numbers in set
         if (products[index].status) {
@@ -2112,6 +2073,9 @@ void viewItem(int p_num) {
                     }
 
                 } else {
+                    cout << "\t\tNo account logged in yet, redirecting to LOGIN";
+                    Sleep(3000);
+
                     login();
                 }
 
@@ -2233,13 +2197,13 @@ void cart() {
         if (choose == "o") {
             string currentTime = getCurrentTime();
 
-            checkouts.clear();
+            checkouts.clear(); // clear checkout everytime user checkouts
 
             cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
 
             for (int i = 0; i < carts.size(); i++) {
                 if (carts[i].email == loginEmail && carts[i].status) checkouts.push_back({loginEmail, carts[i].product, carts[i].quantity, currentTime});
-                if (carts[i].quantity > products[carts[i].product].stock) {
+                if (carts[i].quantity > products[carts[i].product].stock) { // product has zero or less stock than the quantity to checkout
                     cout << "\t\tProduct: " << products[carts[i].product].name << " has " << products[carts[i].product].stock << " piece/s stock available." << endl;
                     s_count++;
                 }
@@ -2299,7 +2263,7 @@ void menuCart(int p_num) {
 
     cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
 
-    if (choose == "o") { //select or deselect product for checkout
+    if (choose == "o") { //select or deselect product for checkout in user's cart
         for(int i = 0; i < carts.size(); i++) {
             if(carts[i].email == loginEmail && carts[i].product == p_num) {
                 cout << "\t\tProduct: " << products[p_num].name;
@@ -2315,14 +2279,14 @@ void menuCart(int p_num) {
             }
         }
 
-    } else if (choose == "d") { // delete product in cart
+    } else if (choose == "d") { // delete product in user's cart
         carts.erase(remove_if(carts.begin(), carts.end(), [&](const Cart& c) {
             return c.email == loginEmail && c.product == p_num;
         }), carts.end());
 
         cout << "Product: " << products[p_num].name << " is deleted in your cart.";
 
-    } else if (choose == "e") { // edit quantity for the product in cart
+    } else if (choose == "e") { // edit quantity for the product in user's cart
         for(int i = 0; i < carts.size(); i++) {
             if(carts[i].email == loginEmail && carts[i].product == p_num) {
                 cout << "\t\t\t\t\t\t\tOld quantity: " << carts[i].quantity << endl;
@@ -2340,9 +2304,8 @@ void menuCart(int p_num) {
                 break;
             }
         }
-    } else {
-        invalidInput();
-    }
+
+    } else invalidInput();
 
     Sleep(2000);
     cart();
@@ -2388,8 +2351,7 @@ double checkoutList() {
 
         cout << "┃\t\t\t\t\t┃\t\t\t\t┃" << endl;
                 
-        // increment for separation line
-        count++;
+        count++; // increment for separation line
                 
         // separation for multiple product in cart
         if (count > 0 && p_count != count) {
@@ -2454,12 +2416,9 @@ void checkout() {
             invalidInput();
 
             cout << "\t\tCanceling process...";
-            Sleep(2000);
 
             cin.clear(); // clear input
             cin.ignore(LONG_MAX, '\n'); // ignore any error
-
-            cart();
 
         } else {
             switch(choose1) {
@@ -2503,7 +2462,6 @@ void checkout() {
                             }
                             break;
                     }
-
                     break;
 
                 default:
@@ -2512,10 +2470,10 @@ void checkout() {
                     cout << "\t\tCanceling process...";
                     break;
             }
-
-            Sleep(2000);
-            cart();
         }
+
+        Sleep(2000);
+        cart();
 
     } else {
         cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
@@ -2538,10 +2496,10 @@ void dedactProduct() {
                 break;
             }
         }
+
         receipts.push_back({loginEmail, checkout.product, checkout.quantity, checkout.date}); // insert in reciept vector
         products[checkout.product].stock -= checkout.quantity; // dedacting stocks
     }
-
 }
 
 void invalidInput() {
