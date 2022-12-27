@@ -11,7 +11,16 @@ To get started with the PetStore Supplies Computer Base System, you will need th
 
 To install MinGW-x64, follow the instructions provided by the <a href="https://code.visualstudio.com/docs/languages/cpp" target="_blank">VS Code documentation</a>.
 
-Once you have these tools installed, you can clone the repository to your local machine and open it in Visual Studio Code. You can then compile and run the program using the MinGW-x64 compiler.
+Once you have these tools installed, you can clone the repository to your local machine and open it in Visual Studio Code.
+
+To run the program in the terminal, use the following format:
+
+```
+cd "c:\...\Project\codes\" # change this path to the location of your cloned repository 
+if ($?) { g++ *.cpp -o main } 
+if ($?) { .\main }
+```
+To build the program into an .exe file, go to the terminal and run the task "build" to build the project.
 
 <h2>Usage</h2>
 To use the PetStore Supplies Computer Base System, follow the prompts in the program. You can add items to the inventory, process customer orders, and view the store's sales data.
@@ -20,7 +29,7 @@ To use the PetStore Supplies Computer Base System, follow the prompts in the pro
 We welcome any contributions to the PetStore Supplies Computer Base System. If you have any ideas for improvements or spot any bugs, please open an issue in the repository or submit a pull request.
 
 <h2>Credits</h2>
-This project was created by <b><i>BSInfoTech 301 B of CvSU-CCAT Batch(2020-2014)</i></b> from <b><i>08 December 2022</i></b> to <b><i>N/A</i></b>.
+This project was created by <b><i>BSInfoTech 301 B of CvSU-CCAT Batch(2020-2024)</i></b> from <b><i>08 December 2022</i></b> to <b><i>N/A</i></b>.
 
 <h2>References</h2>
 Some code in this project was inspired by or adapted from the following sources:
