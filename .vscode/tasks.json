@@ -1,0 +1,19 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+    {
+        "label": "build",
+        "type": "shell",
+        "command": "g++",
+        "args": [
+            "-o",
+            "petshop.exe",
+            "C:\\Users\\dandy\\Desktop\\C++ Project\\Project\\codes\\*.cpp"
+        ],
+        "group": {
+            "kind": "build",
+            "isDefault": true
+        }
+    }
+    ]
+}
