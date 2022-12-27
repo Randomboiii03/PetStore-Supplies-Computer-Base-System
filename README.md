@@ -28,16 +28,12 @@ To use the PetStore Supplies Computer Base System, follow the prompts in the pro
 <h2>Contributing</h2>
 We welcome any contributions to the PetStore Supplies Computer Base System. If you have any ideas for improvements or spot any bugs, please open an issue in the repository or submit a pull request.
 
-<h2>Credits</h2>
-This project was created by <b><i>BSInfoTech 301 B of CvSU-CCAT Batch(2020-2024)</i></b> from <b><i>08 December 2022</i></b> to <b><i>N/A</i></b>.
-
 <h2>References</h2>
 Some code in this project was inspired by or adapted from the following sources:
 
 <ul>
-  <li><a href=https://chat.openai.com/" target="_blank">ChatGPT</a></li>
   <li><a href=https://stackoverflow.com/" target="_blank">StackOverflow</a></li>
 </ul>
 
 <h2>Support</h2>
-If you like this project and found it useful, you can support the owner by donating through <b><i>GCASH</b></i> through this number <b><i>09611215124</b></i>. Every little bit helps and we appreciate your support!
+If you like this project and found it useful, you can support the owner by donating through <b><i>GCASH</b></i>. Every little bit helps and we appreciate your support!
