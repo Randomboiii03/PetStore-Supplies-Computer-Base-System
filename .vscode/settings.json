@@ -18,7 +18,9 @@
         "ctime": "cpp",
         "set": "cpp",
         "xtr1common": "cpp",
-        "type_traits": "cpp"
+        "type_traits": "cpp",
+        "ios": "cpp",
+        "istream": "cpp"
     },
     "debug.terminal.clearBeforeReusing": true,
     "editor.fontFamily": "Consolas, 'Courier New', monospace, Segoe UI Emoji"

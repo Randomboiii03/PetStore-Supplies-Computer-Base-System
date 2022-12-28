@@ -17,8 +17,11 @@ void searchAccounts() {
 
     displayMenu();
 
+    cin.clear(); // clear input
+    cin.ignore(LONG_MAX, '\n'); // ignore any error
+    
     cout << "\t\tEnter a search term:  ";
-    cin >> searchTerm;
+    getline(cin, searchTerm);
 
     vector<Account> results = search<Account>(accounts, searchTerm);
                 

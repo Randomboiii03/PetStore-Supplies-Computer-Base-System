@@ -62,7 +62,7 @@ void homeCustomer() {
         menuCustomer(choose);
         homeCustomer();
 
-    } else if (checkInput(choose) == "number" && products.size() > stoi(choose) && stoi(choose) >= 0) {
+    } else if (checkInput(choose) == "number" && products.size() > stoi(choose) && stoi(choose) >= 0 && products[stoi(choose)].status) {
         viewItem(stoi(choose));
 
     } else {

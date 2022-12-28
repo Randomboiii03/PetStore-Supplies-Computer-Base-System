@@ -16,9 +16,12 @@ void searchProducts() {
     string searchTerm, choose;
 
     displayMenu();
+
+    cin.clear(); // clear input
+    cin.ignore(LONG_MAX, '\n'); // ignore any error
     
     cout << "\t\tEnter a search term:  ";
-    cin >> searchTerm;
+    getline(cin, searchTerm);
 
     vector<Product> results = search<Product>(products, searchTerm);
 
@@ -76,7 +79,10 @@ void searchProducts() {
 
     } else if (checkInput(choose) == "number" && products.size() > stoi(choose) && stoi(choose) >= 0) {
         if (loginEmail == "admin") editItem(stoi(choose));
-        else viewItem(stoi(choose));
+        else if (products[stoi(choose)].status) viewItem(stoi(choose));
+
+        invalidInput();
+        searchProducts();
 
     } else {
         invalidInput();

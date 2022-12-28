@@ -43,7 +43,7 @@ void medicine() {
         menuCustomer(choose);
         medicine();
 
-    } else if (checkInput(choose) == "number" && products.size() > stoi(choose) && stoi(choose) >= 0 && products[stoi(choose)].category == "Medicine") {
+    } else if (checkInput(choose) == "number" && products.size() > stoi(choose) && stoi(choose) >= 0 && products[stoi(choose)].category == "Medicine" && products[stoi(choose)].status) {
         viewItem(stoi(choose));
 
     } else {

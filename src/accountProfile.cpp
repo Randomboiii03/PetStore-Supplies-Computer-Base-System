@@ -154,6 +154,7 @@ void accountProfile() {
             if (loginEmail == "admin") menuAdmin(choose);
             else menuCustomer(choose);
 
+            invalidInput();
             accountProfile();
         }
 

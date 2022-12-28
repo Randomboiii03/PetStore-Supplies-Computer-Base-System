@@ -43,7 +43,7 @@ void equipments() {
         menuCustomer(choose);
         equipments();
 
-    } else if (checkInput(choose) == "number" && products.size() > stoi(choose) && stoi(choose) >= 0 && products[stoi(choose)].category == "Equipment") {
+    } else if (checkInput(choose) == "number" && products.size() > stoi(choose) && stoi(choose) >= 0 && products[stoi(choose)].category == "Equipment" && products[stoi(choose)].status) {
         viewItem(stoi(choose));
 
     } else {

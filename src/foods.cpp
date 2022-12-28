@@ -43,7 +43,7 @@ void foods() {
         menuCustomer(choose);
         foods();
 
-    } else if (checkInput(choose) == "number" && products.size() > stoi(choose) && stoi(choose) >= 0 && products[stoi(choose)].category == "Food") {
+    } else if (checkInput(choose) == "number" && products.size() > stoi(choose) && stoi(choose) >= 0 && products[stoi(choose)].category == "Food" && products[stoi(choose)].status) {
         viewItem(stoi(choose));
 
     } else {
