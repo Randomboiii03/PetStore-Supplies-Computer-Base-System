@@ -9,6 +9,7 @@ using namespace std;
 bool loginStatus = false;
 string loginEmail = "";
 
+// initialize accounts
 vector<Account> accounts = {
     {"admin", "admin", "admin", 0, 0, false}, // admin's account
     {"gabrielle", "gabrielleramos@gmail.com", "gab", 10000, 0, false} // customer's account
