@@ -20,7 +20,7 @@ cd "c:\...\Project\codes\" # change this path to the location of your cloned rep
 if ($?) { g++ *.cpp -o main } 
 if ($?) { .\main }
 ```
-To build the program into an .exe file, go to the terminal and run the task "build" to build the project.
+To build an .exe file, change the path in task.json to the location of your cloned repository, then go to the terminal in Visual Studio Code and run the task "build exe."
 
 <h2>Usage</h2>
 To use the PetStore Supplies Computer Base System, follow the prompts in the program. You can add items to the inventory, process customer orders, and view the store's sales data.
