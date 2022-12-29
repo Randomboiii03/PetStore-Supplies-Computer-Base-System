@@ -57,6 +57,7 @@ extern vector<Receipt> receipts;
 extern bool loginStatus;
 extern string loginEmail;
 
+void loading();
 void displayMenu();
 void login();
 void registration();
