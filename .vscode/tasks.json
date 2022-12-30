@@ -8,7 +8,8 @@
         "args": [
             "-o",
             "petshop.exe",
-            "C:\\Users\\dandy\\Desktop\\C++ Project\\Project\\src\\*.cpp"
+            "C:\\Users\\dandy\\Desktop\\C++ Project\\Project\\src\\*.cpp",
+            "-static"
         ],
         "group": {
             "kind": "build",
