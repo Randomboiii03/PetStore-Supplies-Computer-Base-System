@@ -12,7 +12,7 @@ void viewAccounts() {
 
     displayMenu();
 
-    cout << "┃\t\t\t\t\t\t\t\tLIST OF ACCOUNTS\t\t\t\t\t\t\t\t┃" << endl;
+    cout << "┃\t\t\t\t\t\t\t𝗟 𝗜 𝗦 𝗧  𝗢 𝗙  𝗔 𝗖 𝗖 𝗢 𝗨 𝗡 𝗧 𝗦\t\t\t\t\t\t┃" << endl;
     cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
     cout << "┃\t\t\tUsername\t\t\t┃\t\t\t    Email    \t\t\t┃\t      Status  \t\t┃" << endl;
 
@@ -46,7 +46,7 @@ void viewAccounts() {
     }
 
     cout << "\t\t✎ To edit account, choose a number.\t\t\t\t" << endl;
-    cout << "\t\t☛ Input [action]: ";
+    cout << "\t\t☛ Input [option]: ";
     cin >> choose;
 
     if (checkInput(choose) == "alpha" && choose.length() == 1) {

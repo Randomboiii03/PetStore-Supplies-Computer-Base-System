@@ -19,7 +19,7 @@ void viewItem(int p_num) {
     cout << "\t\t\t\t\t\t\t       Price: ₱ " << products[p_num].price << endl;
     cout << "\t\t\t\t\t\t\t       Stock: " << products[p_num].stock << " pieces" << endl << endl;
 
-    cout << "\t\t\t\t\t\t   [action] Quantity: ";
+    cout << "\t\t\t\t\t\t   [option] Quantity: ";
     cin >> choose; 
 
     cout << endl;
@@ -36,7 +36,7 @@ void viewItem(int p_num) {
             cout << "┃\t\t\t\t[T] Add to Cart\t\t\t\t┃\t\t\t\t[B] Buy Now\t\t\t\t┃" << endl;
             cout << "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
 
-            cout << "\t\t☛ Input [action]: ";
+            cout << "\t\t☛ Input [option]: ";
             cin >> choose;
 
             cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
