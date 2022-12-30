@@ -24,7 +24,19 @@ void displayMenu() {
         cout << "┃\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t┃" << endl;
         cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
         cout << "┃\t\t\t\t\t\t\t\t\t┃\t\t\t\t\t\t\t\t\t┃" << endl;
-        cout << "┃\t\t\t[S] Search\t[A] Account\t\t\t┃\t\t[C] Accounts\t[I] Products\t[O] Checkouts\t\t┃" << endl;
+        cout << "┃\t\t\t[S] Search\t[A] ";
+
+        if (loginStatus) {
+             for (int i = 0; i < accounts.size(); i++) {
+                if (loginEmail == accounts[i].email) {
+                    cout << accounts[i].username;
+                    break;
+                }
+             }
+
+        } else cout << "Account";
+
+        cout << "\t\t\t┃\t\t[C] Accounts\t[I] Products\t[O] Checkouts\t\t┃" << endl;
         cout << "┃\t\t\t\t\t\t\t\t\t┃\t\t\t\t\t\t\t\t\t┃" << endl;
         cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
         

@@ -68,7 +68,7 @@ void loading() {
 
     cin.get(); // Wait for user to press enter
 
-    Sleep(2000);
+    Sleep(1000);
 }
 
 void title() {
