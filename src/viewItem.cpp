@@ -19,97 +19,95 @@ void viewItem(int p_num) {
     cout << "\t\t\t\t\t\t\t       Price: ₱ " << products[p_num].price << endl;
     cout << "\t\t\t\t\t\t\t       Stock: " << products[p_num].stock << " pieces" << endl << endl;
 
-    cout << "\t\t\t\t\t\t   [option] Quantity: ";
-    cin >> choose; 
+    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+    cout << "┃\t\t\t\t[T] Add to Cart\t\t\t\t┃\t\t\t\t[B] Buy Now\t\t\t\t┃" << endl;
+    cout << "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
 
-    cout << endl;
+    cout << "\t\t☛ Input [option]: ";
+    cin >> choose;
+
+    cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
 
     if (checkInput(choose) == "alpha" && choose.length() == 1) {
-        menuCustomer(choose);
-        viewItem(p_num);
+        transform(choose.begin(), choose.end(), choose.begin(), ::tolower);
 
-    } else if (checkInput(choose) == "number") {
-        if (stoi(choose) > 0 && products[p_num].stock >= stoi(choose)) {
-            quantity = stoi(choose);
+        if (loginStatus) {
+            if (choose == "t" || choose == "b") {
+                cout << "\t\t\t\t\t\t\t    Quantity: ";
+                cin >> quantity;
 
-            cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
-            cout << "┃\t\t\t\t[T] Add to Cart\t\t\t\t┃\t\t\t\t[B] Buy Now\t\t\t\t┃" << endl;
-            cout << "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
+                cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
 
-            cout << "\t\t☛ Input [option]: ";
-            cin >> choose;
+                if (cin.fail()) {
+                    invalidInput();
+                    
+                    cout << "\t\tCanceling process...";
+                    Sleep(2000);
 
-            cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
+                    cin.clear(); // clear input
+                    cin.ignore(LONG_MAX, '\n'); // ignore any error
 
-            if (checkInput(choose) == "alpha" && choose.length() == 1) {
-                transform(choose.begin(), choose.end(), choose.begin(), ::tolower);
+                    viewItem(p_num);
 
-                if (loginStatus) {
-                    if (choose == "t") {
-                        // check if user has the product in cart
-                        auto it = find_if(carts.begin(), carts.end(), [&](const Cart& c) {
-                            return c.email == loginEmail && c.product == p_num;
-                        });
+                } else if (products[p_num].stock < quantity || quantity < 0) {
+                    invalidInput();
 
-                        // system will attempt to add quantity to existing product in cart
-                        if (it != carts.end()) { 
-                            for(int i = 0; i < carts.size(); i++) {
-                                if(carts[i].email == loginEmail && carts[i].product == p_num) {
-                                    // user cannot add more when quantity in cart and new quantity added is more than stock of product
-                                    if (carts[i].quantity + quantity > products[p_num].stock) cout << "Cannot add more because of limited stock, please try again." << endl;
-                                    else { // user added quantity for the product in cart
-                                        carts[i].quantity += quantity;
+                    cout << "\t\tQuantity must not less than 0 or higher than stock number!";
+                    Sleep(2000);
 
-                                        cout << "\t\tProduct: " << products[p_num].name << " is already in the cart, and " << quantity << " more is added.";
-                                    }
-                                    break;
-                                }
+                    viewItem(p_num);
+                }
+            }
+
+            if (choose == "t") {
+                // check if user has the product in cart
+                auto it = find_if(carts.begin(), carts.end(), [&](const Cart& c) {
+                    return c.email == loginEmail && c.product == p_num;
+                });
+
+                // system will attempt to add quantity to existing product in cart
+                if (it != carts.end()) { 
+                    for(int i = 0; i < carts.size(); i++) {
+                        if(carts[i].email == loginEmail && carts[i].product == p_num) {
+                            // user cannot add more when quantity in cart and new quantity added is more than stock of product
+                            if (carts[i].quantity + quantity > products[p_num].stock) cout << "Cannot add more because of limited stock, please try again." << endl;
+                            else { // user added quantity for the product in cart
+                                carts[i].quantity += quantity;
+
+                                cout << "\t\tProduct: " << products[p_num].name << " is already in the cart, and " << quantity << " more is added.";
                             }
-                            
-                        } else { // user add product in cart if not exist
-                            carts.push_back({loginEmail, p_num, quantity, false});
-
-                            cout << "\t\tProduct: " << products[p_num].name << " is added in your cart.";
+                            break;
                         }
-
-                        Sleep(3000);
-
-                        cart();
-
-                    } else if (choose == "b") { // direct to checkout
-                        string currentTime = getCurrentTime();
-
-                        checkouts.clear(); // clear checkout everytime user checkouts
-
-                        checkouts.push_back({loginEmail, p_num, quantity, currentTime});
-                        checkout();
-
-                    } else {
-                        menuCustomer(choose);
-                        viewItem(p_num);
                     }
+                            
+                } else { // user add product in cart if not exist
+                    carts.push_back({loginEmail, p_num, quantity, false});
 
-                } else {
-                    cout << "\t\tNo account logged in yet, redirecting to LOGIN";
-                    Sleep(3000);
-
-                    login();
+                    cout << "\t\tProduct: " << products[p_num].name << " is added in your cart.";
                 }
 
+                Sleep(3000);
+
+                cart();
+
+            } else if (choose == "b") { // direct to checkout
+                string currentTime = getCurrentTime();
+
+                checkouts.clear(); // clear checkout everytime user checkouts
+
+                checkouts.push_back({loginEmail, p_num, quantity, currentTime});
+                checkout();
+
             } else {
-                cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
-                invalidInput();
+                menuCustomer(choose);
                 viewItem(p_num);
             }
 
         } else {
-            cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
-            invalidInput();
+            cout << "\t\tNo account logged in yet, redirecting to LOGIN";
+            Sleep(3000);
 
-            cout << "\t\tQuantity must not less than 0 or higher than stock number!";
-            Sleep(2000);
-
-            viewItem(p_num);
+            login();
         }
 
     } else {
