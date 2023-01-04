@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <windows.h>
+#include <iterator>
 
 #include "petshop.h"
 
@@ -8,6 +9,7 @@ void menuCart(int p_num) {
     string choose;
     int quantity;
 
+    cout << endl;
     cout << "┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓" << endl;
     cout << "┃           [O] De/Select for Checkout          ┃                  [D] Delete                   ┃                   [E] Edit                    ┃" << endl;
     cout << "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;

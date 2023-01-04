@@ -2,13 +2,14 @@
 #include <string>
 #include <windows.h>
 #include <algorithm>
+#include <regex>
 
 #include "petshop.h"
 
 using namespace std;
 
 void registration() {
-    string email, username, password;
+    string email, username, password, cpassword;
     int choose;
 
     cout << username;
@@ -18,7 +19,7 @@ void registration() {
     cout << "┃\t\t\t\t\t\t\t    𝗥 𝗘 𝗚 𝗜 𝗦 𝗧 𝗥 𝗔 𝗧 𝗜 𝗢 𝗡  \t\t\t\t\t\t┃" << endl;
     cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl << endl;
 
-    cout << "\t\t\t\t\t\t[option] Username: ";
+    cout << "\t\t        [option] Username (must be at least 8 char): ";
     cin >> username;
 
     if (checkInput(username) == "alpha" && username.length() == 1) {
@@ -27,18 +28,60 @@ void registration() {
         menuCustomer(username);
         registration();
 
-    } else {
-        // add validation for username here
+    } else if (username.length() < 8) {
+        cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
+        cout << "\t\tUsername must be at least 8 characters." << endl;
+        Sleep(2000);
 
-        cout << "\t\t\t\t\t\t\t    Email: ";
+        registration();
+
+    } else {
+        cout << "\t\t\t\t\t\t\t      Email: ";
         cin >> email;
 
-        // add validation for email here
+        regex emailRegex("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}"); // regex pattern for email address
 
-        cout << "\t\t\t\t\t\t\t Password: ";
+        // Validate email using a regular expression
+        if (!regex_match(email, emailRegex)) {
+            cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
+            cout << "\t\tInvalid email address." << endl;
+            Sleep(2000);
+
+            registration();
+        }
+
+        cout << "\t\tPassword (must be at least 6 char and alphanumeric): ";
         cin >> password;
 
-        // add validation for password & confirm password here
+        // Validate password length
+        if (password.length() < 6) {
+            cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
+            cout << "\t\tPassword must be at least 6 characters." << endl;
+            Sleep(2000);
+
+            registration();
+        }
+
+        // Validate password for alphanumeric characters
+        if (checkInput(password) != "invalid") {
+            cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
+            cout << "\t\tPassword must contain only alphanumeric characters." << endl;
+            Sleep( 2000);
+
+            registration();
+        }
+
+        cout << "\t\t\t\t\t\t   Confirm Password: ";
+        cin >> cpassword;
+
+        // Validate password and confirm password if same
+        if (password != cpassword) {
+            cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
+            cout << "\t\tPassword is not same with confirm password." << endl;
+            Sleep(2000);
+
+            registration();
+        }
         
         cout << endl;
         cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;

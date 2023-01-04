@@ -66,7 +66,8 @@
         "xlocmon": "cpp",
         "xlocnum": "cpp",
         "xloctime": "cpp",
-        "xstddef": "cpp"
+        "xstddef": "cpp",
+        "regex": "cpp"
     },
     "debug.terminal.clearBeforeReusing": true,
     "editor.fontFamily": "Consolas, 'Courier New', monospace, Segoe UI Emoji"

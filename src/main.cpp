@@ -11,8 +11,8 @@ string loginEmail = "";
 
 // initialize accounts
 vector<Account> accounts = {
-    {"admin", "admin", "admin", 0, 0, false}, // admin's account
-    {"gabrielle", "gabrielleramos@gmail.com", "gab", 10000, 0, false} // customer's account
+    {"admin", "admin", "admin123", 0, 0, false}, // admin's account
+    {"gabrielle", "gabrielleramos@gmail.com", "gabrielle123", 10000, 0, false} // customer's account
 };
 
 // initialize products
