@@ -16,9 +16,7 @@ Once you have these tools installed, you can clone the repository to your local 
 To run the program in the terminal, use the following format:
 
 ```
-cd "c:\...\Project\codes\" # change this path to the location of your cloned repository 
-if ($?) { g++ *.cpp -o main } 
-if ($?) { .\main }
+cd "<absolute-path-of-src-folder>" if ($?) { g++ *.cpp -o main } if ($?) { .\main }
 ```
 To build an .exe file, change the path in task.json to the location of your cloned repository, then go to the terminal in Visual Studio Code and run the task "build exe."
 
