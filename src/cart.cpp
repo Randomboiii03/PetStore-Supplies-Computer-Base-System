@@ -108,7 +108,7 @@ void cart() {
             for (int i = 0; i < carts.size(); i++) {
                 if (carts[i].email == loginEmail && carts[i].status) checkouts.push_back({loginEmail, carts[i].product, carts[i].quantity, currentTime});
                 if (carts[i].quantity > products[carts[i].product].stock) { // product has zero or less stock than the quantity to checkout
-                    cout << "\t\tProduct: " << products[carts[i].product].name << " has " << products[carts[i].product].stock << " piece/s stock available." << endl;
+                    cout << "\t\tProduct: " << products[carts[i].product].name << " has " << products[carts[i].product].stock << " piece/s stock left." << endl;
                     s_count++;
                 }
             }

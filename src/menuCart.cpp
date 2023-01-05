@@ -51,7 +51,7 @@ void menuCart(int p_num) {
 
                 cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
                 
-                if (quantity > products[p_num].stock) cout << "Cannot edit quantity because of limited stock, please try again." << endl;
+                if (quantity > products[p_num].stock) cout << "Cannot edit quantity because there is "<< products[p_num].stock << " piece/s stock left, please try again." << endl;
                 else { // user edit quantity for the product
                     carts[i].quantity = quantity;
 

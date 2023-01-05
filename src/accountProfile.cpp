@@ -51,8 +51,9 @@ void accountProfile() {
     cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
 
     if (loginEmail != "admin" && choose == "+") {
+        displayMenu();
 
-        cout << "┃\t\t\t\t\t\t\t\tADD PETCOIN\t\t\t\t\t\t\t\t\t┃" << endl;
+        cout << "┃\t\t\t\t\t\t\t\t𝗔 𝗗 𝗗  𝗣 𝗘 𝗧 𝗖 𝗢 𝗜 𝗡\t\t\t\t\t\t\t┃" << endl;
         cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl << endl;
 
         if (accounts[accNumber].notApproved != 0) {
@@ -62,7 +63,8 @@ void accountProfile() {
             accountProfile();
 
         } else {
-            cout << "\t\t\t\t\t\t\tHow much : ";
+            cout << "\t\t\t\t\t\t\t Petcoin: " << accounts[accNumber].money << endl;
+            cout << "\t\t\t\t\t\tHow much to cash in: ";
             cin >> money;
         }
 
@@ -78,7 +80,7 @@ void accountProfile() {
 
             accountProfile();
 
-        } else if (money > 0) {
+        } else if (money > 0 && money <= 100000 && (money + accounts[accNumber].money) <= 100000) {
 
             cout << endl;
             cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
@@ -132,11 +134,14 @@ void accountProfile() {
             }
 
         } else {
-            cout << "\t\tMoney must not less than 0.";
+            cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
+            cout << "\t\tMoney must not less than 0 or greater than 100k." << endl;
             Sleep(2000);
             
             cout << "\t\tCanceling process...";
             Sleep(2000);
+
+            accountProfile();
         }
         
     } else if (checkInput(choose) == "alpha" && choose.length() == 1) {
@@ -164,16 +169,16 @@ void accountProfile() {
 
         switch(stoi(choose)) {
             case 1:
-                cout << "┃\t\t\t\t\t\t\t\tEDIT USERNAME\t\t\t\t\t\t\t\t\t┃" << endl;
+                cout << "┃\t\t\t\t\t\t\t\t𝗘 𝗗 𝗜 𝗧  𝗨 𝗦 𝗘 𝗥 𝗡 𝗔 𝗠 𝗘\t\t\t\t\t\t┃" << endl;
                 cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl << endl;
-                cout << "\t\t\t\t\t\t\tOld username: " << accounts[accNumber].username << endl;
+                cout << "\t\t\t      Old username (must be at least 8 char): " << accounts[accNumber].username << endl;
                 cout << "\t\t\t\t\t\t  Enter new username: ";
                 break;
 
             case 2:
-                cout << "┃\t\t\t\t\t\t\t\tEDIT PASSWORD\t\t\t\t\t\t\t\t\t┃" << endl;
+                cout << "┃\t\t\t\t\t\t\t\t𝗘 𝗗 𝗜 𝗧  𝗣 𝗔 𝗦 𝗦 𝗪 𝗢 𝗥 𝗗\t\t\t\t\t\t┃" << endl;
                 cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl << endl;
-                cout << "\t\t\t\t\t\t\tOld password: " << accounts[accNumber].password << endl;
+                cout << "\t     Old Password (must be at least 6 char and alphanumeric): " << accounts[accNumber].password << endl;
                 cout << "\t\t\t\t\t\t  Enter new password: ";
                 break;
         }
@@ -206,30 +211,41 @@ void accountProfile() {
             switch(choose1) {
                 case 0:
                     cout << "\t\tCanceling process...";
-                    Sleep(3000);
-
-                    accountProfile();
                     break;
                 
                 case 1:
-                    if (stoi(choose) == 0) accounts[accNumber].username = temp; // change username
-                    else if (stoi(choose) == 1) accounts[accNumber].password = temp; // change password
+                    if (stoi(choose) == 1) {
+                        if (temp.length() < 8) {
+                            cout << "\t\tUsername must be at least 8 characters." << endl;
 
-                    cout << "\t\tApplying changes...";
-                    Sleep(3000);
+                        } else { // change username
+                            cout << "\t\tApplying changes...";
+                            accounts[accNumber].username = temp;
+                        }
 
-                    accountProfile();
+                    } else if (stoi(choose) == 2) { 
+                        if (temp.length() < 6) { // Validate password length
+                            cout << "\t\tPassword must be at least 6 characters." << endl;
+
+                        } else if (checkInput(temp) != "invalid") { // Validate password for alphanumeric characters
+                            cout << "\t\tPassword must contain only alphanumeric characters." << endl;
+                        
+                        } else { // change password
+                            accounts[accNumber].password = temp;
+                            cout << "\t\tApplying changes...";
+                        }
+                    }
                     break;
                 
                 default:
                     invalidInput();
 
                     cout << "\t\tCanceling process...";
-                    Sleep(2000);
-
-                    accountProfile();
                     break;
             }
+
+            Sleep(2000);
+            accountProfile();
         }
 
     } else {
