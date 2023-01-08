@@ -88,6 +88,8 @@ void viewCheckouts() {
 
     cout << "\t\t☛ Input [option]: ";
     cin >> choose;
+
+    cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
     
     if (checkInput(choose) == "alpha" && choose.length() == 1) {
         transform(choose.begin(), choose.end(), choose.begin(), ::tolower);

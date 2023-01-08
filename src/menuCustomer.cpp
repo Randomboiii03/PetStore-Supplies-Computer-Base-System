@@ -31,8 +31,5 @@ void menuCustomer(string choose) {
     } else if (choose == "f") foods();
     else if (choose == "q") equipments();
     else if (choose == "m") medicine();
-    else {
-        cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
-        invalidInput();
-    }
+    else invalidInput();
 }

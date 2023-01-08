@@ -26,6 +26,7 @@ void registration() {
         transform(username.begin(), username.end(), username.begin(), ::tolower);
 
         menuCustomer(username);
+        cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
         registration();
 
     } else if (username.length() < 8) {
@@ -60,10 +61,8 @@ void registration() {
             Sleep(2000);
 
             registration();
-        }
-
-        // Validate password for alphanumeric characters
-        if (checkInput(password) != "invalid") {
+            
+        } else if (checkInput(password) != "invalid") { // Validate password for alphanumeric characters
             cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
             cout << "\t\tPassword must contain only alphanumeric characters." << endl;
             Sleep( 2000);

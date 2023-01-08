@@ -90,6 +90,8 @@ void checkout() {
                                         accounts[i].money -= total; // dedacting total price from petcoin
 
                                     } else cout << "\t\tYour Petcoin is not enough for the total price you checkout, cash in to use Petcoin.";
+
+                                    break;
                                 }
                             }
                             break;

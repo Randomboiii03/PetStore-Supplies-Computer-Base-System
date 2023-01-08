@@ -12,8 +12,5 @@ void menuAdmin(string choose) {
     else if (choose == "c") viewAccounts();
     else if (choose == "i") viewInventory();
     else if (choose == "o") viewCheckouts();
-    else {
-        cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
-        invalidInput();
-    }
+    else invalidInput();
 }

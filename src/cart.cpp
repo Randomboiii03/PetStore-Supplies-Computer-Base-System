@@ -40,7 +40,7 @@ void cart() {
                 if (!carts[i].status) cout << "┃   ☐";
                 else {
                     cout << "┃  ✅";
-                    check_count++;
+                    check_count++; // count for product that will be checkout for total price
                     total += (products[p_num].price * carts[i].quantity);
                 }
 
@@ -109,7 +109,7 @@ void cart() {
                 if (carts[i].email == loginEmail && carts[i].status) checkouts.push_back({loginEmail, carts[i].product, carts[i].quantity, currentTime});
                 if (carts[i].quantity > products[carts[i].product].stock) { // product has zero or less stock than the quantity to checkout
                     cout << "\t\tProduct: " << products[carts[i].product].name << " has " << products[carts[i].product].stock << " piece/s stock left." << endl;
-                    s_count++;
+                    s_count++; // count if a product has no stock left
                 }
             }
 

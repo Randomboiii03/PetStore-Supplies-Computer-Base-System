@@ -23,13 +23,7 @@ void addItem() {
         transform(name.begin(), name.end(), name.begin(), ::tolower);
 
         menuAdmin(name);
-        viewInventory();
-
-    } else if (name.length() == 1) {
         cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
-        invalidInput();
-            
-        cout << "\t\tCanceling process...";
         viewInventory();
     }
 
@@ -37,7 +31,7 @@ void addItem() {
     cout << "\t\t\t\t\tChoose category: ";
     cin >> temp;
 
-    if (cin.fail() || temp > 3 || temp <= 0) {
+    if (cin.fail()) {
         cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
         invalidInput();
             
@@ -167,7 +161,6 @@ void addItem() {
         Sleep(2000);
 
         viewInventory();
-
     } 
 
     cout << endl;
@@ -200,6 +193,7 @@ void addItem() {
                 products.push_back({name, category, animal, description, price, stock, true});
 
                 cout << "\t\tAdding product...";
+                cout << "\t\tProduct succesfully added!";
                 Sleep(3000);
                 break;
                 

@@ -8,7 +8,6 @@ using namespace std;
 
 void searchAdmin() {
     int choose;
-    string searchTerm;
     
     displayMenu();
 
