@@ -2,6 +2,7 @@
 #include <string>
 #include <windows.h>
 #include <iterator>
+#include <algorithm>
 
 #include "petshop.h"
 
@@ -36,7 +37,7 @@ void menuCart(int p_num) {
         }
 
     } else if (choose == "d") { // delete product in user's cart
-        carts.erase(remove_if(carts.begin(), carts.end(), [&](const Cart& c) {
+        carts.erase(std::remove_if(carts.begin(), carts.end(), [&](const Cart& c) -> bool {
             return c.email == loginEmail && c.product == p_num;
         }), carts.end());
 
