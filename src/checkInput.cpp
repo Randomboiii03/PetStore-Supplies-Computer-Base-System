@@ -13,8 +13,8 @@ string checkInput(string choose) {
         else if (isdigit(c)) only_digit = true;  // the character is not a digit
     }
 
-    if (only_alpha) return "alpha";
-    else if (only_digit) return "number";
+    if (only_alpha && !only_digit) return "alpha";
+    else if (only_digit && !only_alpha) return "number";
 
     return "invalid";
 }
