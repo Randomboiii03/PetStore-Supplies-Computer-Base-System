@@ -45,9 +45,9 @@ void viewCheckouts() {
             else if (products[p_num].name.length() <= 20) cout << "\t\t";
             else cout << "\t";
 
-            cout << "┃\t     " << receipts[i].quantity << "   \t┃    ₱ " << products[p_num].price << "  \t┃" << endl;
+            cout << "┃\t     " << receipts[i].quantity << "   \t┃    ₱ " << receipts[i].price << "  \t┃" << endl;
 
-            total += (receipts[i].quantity * products[p_num].price);
+            total += (receipts[i].quantity * receipts[i].price);
 
             string details = products[p_num].animal + "\'s " + products[p_num].category;
 

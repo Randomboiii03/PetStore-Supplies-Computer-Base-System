@@ -14,7 +14,7 @@ void dedactProduct() {
             }
         }
 
-        receipts.push_back({loginEmail, checkout.product, checkout.quantity, checkout.date}); // insert in reciept vector
+        receipts.push_back({loginEmail, checkout.product, products[checkout.product].price, checkout.quantity, checkout.date}); // insert in reciept vector
         products[checkout.product].stock -= checkout.quantity; // dedacting stocks
     }
 }

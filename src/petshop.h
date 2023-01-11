@@ -44,6 +44,7 @@ struct Checkout {
 struct Receipt {
     string email;
     int product;
+    double price;
     int quantity;
     string date;
 };
