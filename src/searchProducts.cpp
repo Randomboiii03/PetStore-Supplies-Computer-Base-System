@@ -20,7 +20,7 @@ void searchProducts() {
     cin.clear(); // clear input
     cin.ignore(LONG_MAX, '\n'); // ignore any error
     
-    cout << "\t\tEnter a search term:  ";
+    cout << "\t\t🔎 Enter a search term:  ";
     getline(cin, searchTerm);
 
     vector<Product> results = search<Product>(products, searchTerm);
