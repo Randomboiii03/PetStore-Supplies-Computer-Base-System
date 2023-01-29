@@ -51,15 +51,11 @@ double checkoutList() {
         // separation for multiple product in cart
         if (count > 0 && p_count != count) {
             cout << "┃\t\t\t\t\t\t\t\t\t┃\t\t\t┃\t\t\t┃\t\t\t┃" << endl;
-            cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
-            cout << "┃\t\t\t\t\t\t\t\t\t┃\t\t\t┃\t\t\t┃\t\t\t┃" << endl;
         }
     }
 
     total += 10; // add system fee to total price
 
-    cout << "┃\t\t\t\t\t\t\t\t\t┃\t\t\t┃\t\t\t┃\t\t\t┃" << endl;
-    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
     cout << "┃\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t┃\t\t\t┃" << endl;
     cout << "┃\t\t\t\tSystem Fee\t\t\t\t\t\t\t\t\t\t┃\t₱ 10\t\t┃" << endl;
     cout << "┃\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t┃\t\t\t┃" << endl;
