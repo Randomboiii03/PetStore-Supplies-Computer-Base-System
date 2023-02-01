@@ -42,13 +42,13 @@ void searchAccounts() {
                     else if (accounts[j].username.length() <= 19 && j < 10) cout << "\t";
                     else if (accounts[j].username.length() <= 18 && j >= 10) cout << "\t";
                     
-                    cout << "┃\t\t" << accounts[i].email;
+                    cout << "┃\t\t" << accounts[j].email;
 
-                    if (accounts[i].email.length() < 24) cout << "\t\t\t";
-                    else if (accounts[i].email.length() < 32) cout << "\t\t";
+                    if (accounts[j].email.length() < 24) cout << "\t\t\t";
+                    else if (accounts[j].email.length() < 32) cout << "\t\t";
                     else cout << "\t";
 
-                    if (accounts[i].status) cout << "┃\t  Banned\t┃";
+                    if (accounts[j].status) cout << "┃\t  Banned\t┃";
                     else cout << "┃\t  Active\t┃";
 
                     if (accounts[j].money == 100000) cout << "\t" << accounts[j].money;

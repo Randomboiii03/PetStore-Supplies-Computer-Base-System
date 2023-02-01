@@ -57,8 +57,8 @@ void cart() {
 
                 cout << "┃       ┃\t\t  ✱  " << details << "     \t\t";
 
-                if (details.length() <= 10) cout << "\t\t";
-                else if (details.length() <= 18 && p_num >= 10) cout << "\t";
+                if (details.length() <= 12) cout << "\t\t";
+                else cout << "\t";
 
                 cout << "┃\t\t\t┃\t\t\t┃\t\t\t┃" << endl;
                 

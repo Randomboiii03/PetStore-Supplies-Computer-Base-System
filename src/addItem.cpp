@@ -66,7 +66,7 @@ void addItem() {
 
     cout << "\t⟶   [1] Dog   [2] Cat   [3] Fish   [4] Bird  ⟵" << endl;
     cout << "\t\t\t\t\t  Choose animal: ";
-    cin >> animal;
+    cin >> temp;
 
     if (cin.fail()) {
         cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
@@ -92,16 +92,16 @@ void addItem() {
     } else {
         switch(temp) {
             case 1:
-                category = "Dog";
+                animal = "Dog";
                 break;
             case 2:
-                category = "Cat";
+                animal = "Cat";
                 break;
             case 3:
-                category = "Fish";
+                animal = "Fish";
                 break;
             case 4:
-                category = "Bird";
+                animal = "Bird";
                 break;
         }
     }

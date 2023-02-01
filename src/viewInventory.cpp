@@ -54,7 +54,7 @@ void viewInventory() {
         menuAdmin(choose);
         viewInventory();
 
-    } else if (checkInput(choose) == "number" && stoi(choose) < products.size() && stoi(choose) <= 0) {
+    } else if (checkInput(choose) == "number" && stoi(choose) < products.size() && stoi(choose) >= 0) {
         editItem(stoi(choose));
 
     } else {

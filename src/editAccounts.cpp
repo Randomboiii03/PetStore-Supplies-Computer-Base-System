@@ -41,12 +41,6 @@ void editAccount(int accNumber) {
         editAccount(accNumber);
 
     } else if (checkInput(choose) == "number" && stoi(choose) <= 4 && stoi(choose) >= 1) {
-        if (accounts[accNumber].notApproved == 0) {
-            cout << "\t\tThere is no Petcoin in queue for approval.";
-            Sleep(3000);
-
-            editAccount(accNumber);
-        }
 
         displayMenu();
 
@@ -81,10 +75,17 @@ void editAccount(int accNumber) {
                 break;
 
             case 4:
-                
-                cout << "┃\t\t\t\t\t\t\t    𝗡 𝗘 𝗘 𝗗  𝗔 𝗣 𝗣 𝗥 𝗢 𝗩 𝗔 𝗟  \t\t\t\t\t\t┃" << endl;
-                cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl << endl;
-                cout << "\t\t\t\t\t\t\t\tPetcoin: " << accounts[accNumber].notApproved << endl;
+                if (accounts[accNumber].notApproved == 0) {
+                    cout << "\t\tThere is no Petcoin in queue for approval.";
+                    Sleep(3000);
+
+                    editAccount(accNumber);
+
+                } else {
+                    cout << "┃\t\t\t\t\t\t\t    𝗡 𝗘 𝗘 𝗗  𝗔 𝗣 𝗣 𝗥 𝗢 𝗩 𝗔 𝗟  \t\t\t\t\t\t┃" << endl;
+                    cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl << endl;
+                    cout << "\t\t\t\t\t\t\t\tPetcoin: " << accounts[accNumber].notApproved << endl;
+                }
 
                 break;
 

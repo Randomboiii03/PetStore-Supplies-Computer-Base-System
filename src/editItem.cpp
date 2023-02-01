@@ -245,7 +245,7 @@ void editItem(int p_num) {
             viewInventory();
 
         } else {
-            switch(stoi(choose)) {
+            switch(choose1) {
                 case 0:
                     cout << "\t\tCanceling process...";
                     Sleep(3000);
