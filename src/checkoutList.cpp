@@ -56,9 +56,9 @@ double checkoutList() {
 
     total += 10; // add system fee to total price
 
-    cout << "┃\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t┃\t\t\t┃" << endl;
-    cout << "┃\t\t\t\tSystem Fee\t\t\t\t\t\t\t\t\t\t┃\t₱ 10\t\t┃" << endl;
-    cout << "┃\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t┃\t\t\t┃" << endl;
+    cout << "┃\t\t\t\t\t\t\t\t\t┃\t\t\t┃\t\t\t┃\t\t\t┃" << endl;
+    cout << "┃\t\t\t\tSystem Fee\t\t\t\t┃\t\t\t┃\t\t\t┃\t₱ 10\t\t┃" << endl;
+    cout << "┃\t\t\t\t\t\t\t\t\t┃\t\t\t┃\t\t\t┃\t\t\t┃" << endl;
     cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
     cout << "┃\t\t\t" << checkouts[0].date << "\t\t\t\t\t\t\t\t\t\t┃\t₱ " << total << "\t\t┃" << endl;
     cout << "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━┛" << endl << endl;

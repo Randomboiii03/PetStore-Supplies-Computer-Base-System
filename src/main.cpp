@@ -16,9 +16,9 @@ vector<Account> accounts = {
     // customer's account
     {"gabrielle", "gabrielleramos@gmail.com", "gabrielle123", 10000, 0, false},
     {"joemar", "joemarbillones@gmail.com", "joemar456", 10000, 0, false},
-    {"emeline", "emelinedulce@gmail.com", "emeline789", 10000, 0, false},
-    {"vladimer", "vladimerquite@gmail.com", "vladimer012", 10000, 0, false},
-    {"yuri", "yuriromano@gmail.com", "yuri345", 10000, 0, false}
+    {"emeline", "emeline_dulce@gmail.com", "emeline789", 10000, 0, true},
+    {"vladimer", "vladimer_quite@gmail.com", "vladimer012", 10000, 0, false},
+    {"yuri", "yuri_romano@gmail.com", "yuri345", 10000, 0, true}
 };
 
 // initialize products

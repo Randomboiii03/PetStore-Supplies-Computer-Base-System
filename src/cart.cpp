@@ -66,17 +66,13 @@ void cart() {
                 count++;
                 
                 // separation for multiple product in cart
-                if (count > 0 && p_count != count) {
-                    cout << "┃\t┃\t\t\t\t\t\t\t\t┃\t\t\t┃\t\t\t┃\t\t\t┃" << endl;
-                    cout << "┣━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
-                    cout << "┃\t┃\t\t\t\t\t\t\t\t┃\t\t\t┃\t\t\t┃\t\t\t┃" << endl;
-                }
+                if (count > 0 && p_count != count) cout << "┃\t┃\t\t\t\t\t\t\t\t┃\t\t\t┃\t\t\t┃\t\t\t┃" << endl;
             }
         }
     
         cout << "┃\t┃\t\t\t\t\t\t\t\t┃\t\t\t┃\t\t\t┃\t\t\t┃" << endl;
         
-        if (check_count == 0) cout << "┗━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
+        if (check_count == 0) cout << "┗━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
         else {
             cout << "┣━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
             cout << "┃\t\t\t[O] Checkout\t\t\t\t\t\t\t\t\t\t\t┃\t₱ " << total << "\t\t┃" << endl;
@@ -86,7 +82,7 @@ void cart() {
         cout << "\t\t✎ To de/select, edit or delete product in cart, choose the product's number." << endl;
 
     } else {
-        cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
+        cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
         cout << "┃\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t┃" << endl;
         cout << "┃\t\t\t\t\t\t\t\tNo product in cart yet!\t\t\t\t\t\t\t\t┃" << endl;
         cout << "┃\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t┃" << endl;
@@ -120,7 +116,7 @@ void cart() {
                 cart();
 
             } else {
-                cout << "No product/s is selected in cart yet";
+                cout << "\t\tNo product/s is selected in cart yet";
                 Sleep(3000);
 
                 cart();

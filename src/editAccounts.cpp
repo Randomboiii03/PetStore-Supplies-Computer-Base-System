@@ -15,14 +15,14 @@ void editAccount(int accNumber) {
 
     cout << endl;
     cout << "\t\t\t\t\tEditing account with an email: " << accounts[accNumber].email << endl << endl;
-    cout << "\t\t\t\t\t\t\t[1] Username: " << accounts[accNumber].username << endl;
-    cout << "\t\t\t\t\t\t\t[2] Password: " << accounts[accNumber].password << endl;
-    cout << "\t\t\t\t\t\t\t[3]   Status: ";
+    cout << "\t\t\t\t\t\t\t [1] Username: " << accounts[accNumber].username << endl;
+    cout << "\t\t\t\t\t\t\t [2] Password: " << accounts[accNumber].password << endl;
+    cout << "\t\t\t\t\t\t\t [3]   Status: ";
 
     if (accounts[accNumber].status) cout << "Banned" << endl;
     else cout << "Active" << endl; 
 
-    cout << "\t\t\t\t\t\t\t[4]  Petcoin: " << accounts[accNumber].money;
+    cout << "\t\t\t\t\t\t\t [4]  Petcoin: " << accounts[accNumber].money;
 
     if (accounts[accNumber].notApproved != 0) cout << "\t\tNeed approval: " << accounts[accNumber].notApproved << " Petcoin" << endl << endl;
     else cout << endl << endl;

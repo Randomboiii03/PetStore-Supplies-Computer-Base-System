@@ -28,10 +28,14 @@ void viewAccounts() {
             else if (accounts[i].username.length() <= 19 && i < 10) cout << "\t";
             else if (accounts[i].username.length() <= 18 && i >= 10) cout << "\t";
             
-            cout << "┃\t\t" << accounts[i].email << "\t\t┃\t  ";
+            cout << "┃\t\t" << accounts[i].email;
 
-            if (accounts[i].status) cout << "Banned\t┃";
-            else cout << "Active\t┃";
+            if (accounts[i].email.length() < 24) cout << "\t\t\t";
+            else if (accounts[i].email.length() < 32) cout << "\t\t";
+            else cout << "\t";
+
+            if (accounts[i].status) cout << "┃\t  Banned\t┃";
+            else cout << "┃\t  Active\t┃";
 
             if (accounts[i].money == 100000) cout << "\t" << accounts[i].money;
             else cout << "\t" << accounts[i].money << "\t";
@@ -42,6 +46,7 @@ void viewAccounts() {
 
         cout << "┃\t\t\t\t\t┃\t\t\t\t\t\t\t┃\t\t\t┃\t\t\t┃" << endl;
         cout << "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
+
     } else {
         cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
         cout << "┃\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t┃" << endl;
