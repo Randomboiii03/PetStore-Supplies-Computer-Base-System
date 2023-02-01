@@ -52,11 +52,14 @@ void menuCart(int p_num) {
 
                 cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
                 
-                if (quantity > products[p_num].stock) cout << "Cannot edit quantity because there is "<< products[p_num].stock << " piece/s stock left, please try again." << endl;
-                else { // user edit quantity for the product
+                if (quantity > 0) {
                     carts[i].quantity = quantity;
+                } else {
+                    carts.erase(std::remove_if(carts.begin(), carts.end(), [&](const Cart& c) -> bool {
+                        return c.email == loginEmail && c.product == p_num;
+                    }), carts.end());
 
-                    cout << "\t\tEditing product successful.";
+                    cout << "\t\tProduct: " << products[p_num].name << " is deleted in your cart.";
                 }
                 break;
             }
