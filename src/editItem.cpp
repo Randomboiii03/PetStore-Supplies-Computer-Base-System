@@ -173,7 +173,7 @@ void editItem(int p_num) {
 
                     viewInventory();
 
-                } else {
+                } else if (checkInput(temp) != "number") {
                     cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
                     invalidInput();
                                 
@@ -202,11 +202,11 @@ void editItem(int p_num) {
 
                     viewInventory();
 
-                } else {
+                } else if (checkInput(temp) != "number") {
                     cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
                     invalidInput();
                                 
-                    cout << "\t\tCanceling process...";
+                    cout << "\t\tCanceling process..." << checkInput(temp) << "trgfg";
                     Sleep(2000);
 
                     viewInventory();

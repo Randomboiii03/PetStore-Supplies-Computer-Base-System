@@ -64,6 +64,9 @@ void viewCheckouts() {
 
             // display total and divider if there is multiple checkouts
             if ((receipts[i].email != receipts[i + 1].email || receipts[i].date != receipts[i + 1].date) && i != receipts.size() - 1) {
+                total += 10;
+                sales += 10;
+
                 cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
                 cout << "┃\t\t\t\t\t\t\t\t" << receipts[i].date << "\t\t\t\t\t┃\t₱ " << total << "\t\t┃" << endl;
                 cout << "┣ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ┳ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ┳ ━ ━ ━ ━ ━ ━ ━ ┳ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ╋ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ┫" << endl;
@@ -75,6 +78,9 @@ void viewCheckouts() {
                 cout << "┃\t\t\t\t\t┃\t\t\t\t\t┃\t\t┃\t\t\t┃\t\t\t┃" << endl;
 
             } else if (i == receipts.size() - 1) { // display total for last record
+                total += 10;
+                sales += 10;
+
                 cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━┫" << endl;
                 cout << "┃\t\t\t\t\t\t\t\t" << receipts[i].date << "\t\t\t\t\t┃\t₱ " << total << "\t\t┃" << endl;
             }
