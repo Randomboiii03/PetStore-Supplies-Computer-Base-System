@@ -218,7 +218,7 @@ void editItem(int p_num) {
                 cout << "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫" << endl << endl;
                     
                 if (products[p_num].status) cout << "\t\t\t\t\t\t\tStatus: Display ⟶   Not Display  \t\t\t\t";
-                else cout << "\t\t\t\t\t\t\tStatus: Not Display ⟶   Display  \t\t\t\t";
+                else cout << "\t\t\t\t\t\t\tStatus: Not Display ⟶   Display  \t\t\t\t" << endl;
 
                 break;
         }

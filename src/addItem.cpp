@@ -192,7 +192,7 @@ void addItem() {
             case 1: // adding product in the vector
                 products.push_back({name, category, animal, description, price, stock, true});
 
-                cout << "\t\tAdding product...";
+                cout << "\t\tAdding product..." << endl;
                 cout << "\t\tProduct succesfully added!";
                 Sleep(3000);
                 break;

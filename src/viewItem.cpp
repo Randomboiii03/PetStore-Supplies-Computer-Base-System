@@ -49,11 +49,11 @@ void viewItem(int p_num) {
 
                     viewItem(p_num);
 
-                } else if (products[p_num].stock < quantity || quantity < 0) {
+                } else if (products[p_num].stock < quantity || quantity <= 0) {
                     invalidInput();
 
                     cout << "\t\tQuantity must not less than 0 or higher than stock number!";
-                    Sleep(2000);
+                    Sleep(3000);
 
                     viewItem(p_num);
                 }
@@ -70,8 +70,13 @@ void viewItem(int p_num) {
                     for(int i = 0; i < carts.size(); i++) {
                         if(carts[i].email == loginEmail && carts[i].product == p_num) {
                             // user cannot add more when quantity in cart and new quantity added is more than stock of product
-                            if (carts[i].quantity + quantity > products[p_num].stock) cout << "Cannot add more because of limited stock, please try again." << endl;
-                            else { // user added quantity for the product in cart
+                            if (quantity > products[p_num].stock) {
+                                cout << "\t\tCannot add more because of limited stock, please try again." << endl;
+                                Sleep(3000);
+                                
+                                viewItem(p_num);
+                                
+                            } else { // user added quantity for the product in cart
                                 carts[i].quantity += quantity;
 
                                 cout << "\t\tProduct: " << products[p_num].name << " is already in the cart, and " << quantity << " more is added.";
@@ -91,6 +96,7 @@ void viewItem(int p_num) {
                 cart();
 
             } else if (choose == "b") { // direct to checkout
+
                 string currentTime = getCurrentTime();
 
                 checkouts.clear(); // clear checkout everytime user checkouts
